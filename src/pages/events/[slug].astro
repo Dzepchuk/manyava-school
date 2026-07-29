@@ -19,7 +19,12 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<BaseLayout title={`${entry.data.title} — Манявський ліцей`} description={entry.data.description}>
+<BaseLayout
+  title={`${entry.data.title} — Манявський ліцей`}
+  description={entry.data.description}
+  contentType="Подія"
+  contentDate={entry.data.startsAt}
+>
   <Container class="publication-shell">
     <PublicationPageHeader
       eyebrow="Подія"

@@ -2,7 +2,7 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 import process from 'node:process';
 
-const site = process.env.PUBLIC_SITE_URL ?? 'http://localhost:4321';
+const site = process.env.PUBLIC_SITE_URL ?? 'https://manyava-school.if.ua';
 
 export default defineConfig({
   site,

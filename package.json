@@ -15,6 +15,7 @@
     "test": "vitest run --passWithNoTests",
     "test:e2e": "playwright test --pass-with-no-tests",
     "test:performance": "lhci autorun",
+    "check:links": "node scripts/check-links.mjs",
     "validate:content": "node --experimental-strip-types scripts/validate-content.mjs",
     "validate": "astro check",
     "build:astro": "astro build",

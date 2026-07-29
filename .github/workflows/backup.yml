@@ -1,0 +1,38 @@
+name: Independent backup mirror
+
+on:
+  schedule:
+    - cron: '17 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Require independent backup destination
+        env:
+          BACKUP_REMOTE_URL: ${{ secrets.BACKUP_REMOTE_URL }}
+          BACKUP_USERNAME: ${{ secrets.BACKUP_USERNAME }}
+          BACKUP_TOKEN: ${{ secrets.BACKUP_TOKEN }}
+        run: |
+          test -n "$BACKUP_REMOTE_URL"
+          test -n "$BACKUP_USERNAME"
+          test -n "$BACKUP_TOKEN"
+      - name: Push mirror
+        env:
+          BACKUP_REMOTE_URL: ${{ secrets.BACKUP_REMOTE_URL }}
+          BACKUP_USERNAME: ${{ secrets.BACKUP_USERNAME }}
+          BACKUP_TOKEN: ${{ secrets.BACKUP_TOKEN }}
+        run: |
+          encoded_user=$(node -p "encodeURIComponent(process.env.BACKUP_USERNAME)")
+          encoded_token=$(node -p "encodeURIComponent(process.env.BACKUP_TOKEN)")
+          authenticated_url=$(node -p "new URL(process.env.BACKUP_REMOTE_URL).toString().replace('https://', 'https://' + '$encoded_user' + ':' + '$encoded_token' + '@')")
+          git remote add independent-backup "$authenticated_url"
+          git push --mirror independent-backup

@@ -1,6 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+import ApprovedImage from '../components/common/ApprovedImage.astro';
 import Container from '../components/common/Container.astro';
 import ContentMeta from '../components/common/ContentMeta.astro';
 import ExternalLink from '../components/common/ExternalLink.astro';
@@ -33,17 +34,18 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
         </p>
       </div>
 
-      <figure class="hero-photo">
-        <img
+      <div class="hero-photo">
+        <ApprovedImage
           src="/media/manyava-lyceum-building.webp"
-          width="592"
-          height="299"
+          width={592}
+          height={299}
+          sources={[{ src: '/media/manyava-lyceum-building-320.webp', width: 320 }]}
           alt="Будівля Манявського ліцею"
-          decoding="async"
+          caption="Манявський ліцей · село Манява"
+          loading="eager"
           fetchpriority="high"
         />
-        <figcaption>Манявський ліцей · село Манява</figcaption>
-      </figure>
+      </div>
     </section>
 
     <section class="facts" aria-labelledby="facts-title">

@@ -1,0 +1,81 @@
+---
+import Breadcrumbs from '../../components/common/Breadcrumbs.astro';
+import Container from '../../components/common/Container.astro';
+import SafeguardingContacts from '../../components/content/SafeguardingContacts.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Учням — Манявський ліцей"
+  description="Навчання, підтримка, учнівське життя та безпечні способи звернення для учнів Манявського ліцею."
+>
+  <Container class="page-shell">
+    <Breadcrumbs items={[{ label: 'Головна', href: '/' }, { label: 'Учням' }]} />
+    <header class="page-heading">
+      <p class="eyebrow">Учням</p>
+      <h1>Навчання, участь і підтримка</h1>
+      <p>Зрозумілі маршрути до шкільної інформації та дорослих, які можуть допомогти.</p>
+    </header>
+    <div class="link-grid">
+      <a href="/students/learning/"
+        ><strong>Навчання</strong><span>Організація освітнього процесу</span></a
+      >
+      <a href="/students/support/"
+        ><strong>Підтримка</strong><span>До кого звернутися по допомогу</span></a
+      >
+      <a href="/students/self-government/"
+        ><strong>Самоврядування</strong><span>Участь учнів у житті ліцею</span></a
+      >
+      <a href="/news/"><strong>Новини</strong><span>Події та життя шкільної спільноти</span></a>
+    </div>
+    <SafeguardingContacts />
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 5rem;
+  }
+  .page-heading {
+    max-width: 58rem;
+    margin: clamp(3rem, 8vw, 6rem) 0 2rem;
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 7vw, 6rem);
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+  }
+  .page-heading > p:last-child {
+    color: var(--color-muted);
+    font-size: 1.15rem;
+  }
+  .link-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .link-grid a {
+    display: grid;
+    gap: 0.4rem;
+    padding: 1.5rem;
+    color: inherit;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+  }
+  .link-grid strong {
+    color: var(--color-primary);
+    font-size: 1.3rem;
+  }
+  .link-grid span {
+    color: var(--color-muted);
+  }
+  @media (max-width: 40rem) {
+    .link-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

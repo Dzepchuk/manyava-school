@@ -18,6 +18,60 @@ slug:
   sanitize_replacement: '-'
 
 collections:
+  - name: site-settings
+    label: Налаштування сайту
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: official-contacts
+        label: Офіційні контакти
+        file: src/data/site.yml
+        fields:
+          - { label: Повна назва, name: officialName, widget: string }
+          - { label: Коротка назва, name: shortName, widget: string }
+          - { label: Гасло, name: tagline, widget: string }
+          - { label: Поштова адреса, name: address, widget: string }
+          - label: Телефони
+            name: phones
+            widget: list
+            min: 1
+            fields:
+              - { label: Підпис, name: label, widget: string }
+              - { label: Номер, name: value, widget: string }
+          - {
+              label: Email,
+              name: email,
+              widget: string,
+              pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', Вкажіть коректний email],
+            }
+          - { label: Години роботи, name: workingHours, widget: string }
+          - label: Публікація контактів
+            name: contactPublication
+            widget: object
+            fields:
+              - { label: Показувати адресу, name: address, widget: boolean }
+              - { label: Показувати телефони, name: phones, widget: boolean }
+              - { label: Показувати email, name: email, widget: boolean }
+              - { label: Показувати години роботи, name: workingHours, widget: boolean }
+          - { label: Адреса сайту, name: siteUrl, widget: string }
+          - {
+              label: Соціальні мережі,
+              name: socialLinks,
+              widget: list,
+              required: false,
+              default: [],
+            }
+          - label: SEO за замовчуванням
+            name: defaultSeo
+            widget: object
+            fields:
+              - { label: Заголовок, name: title, widget: string }
+              - { label: Опис, name: description, widget: text }
+          - { label: Аналітика увімкнена, name: analyticsEnabled, widget: boolean, default: false }
+          - { label: Оновлено, name: updatedAt, widget: datetime, time_format: false }
+          - { label: Затвердив, name: approvedBy, widget: string, default: director }
+
   - name: pages
     label: Сторінки
     label_singular: Сторінка
@@ -242,3 +296,136 @@ collections:
         }
       - *review
       - *safe_body
+
+  - name: documents
+    label: Документи
+    label_singular: Документ
+    folder: src/content/documents
+    create: true
+    delete: false
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    preview_path: documents/{{slug}}
+    fields:
+      - { label: Назва, name: title, widget: string }
+      - { label: Короткий опис, name: description, widget: text }
+      - { label: Дата документа, name: documentDate, widget: datetime, time_format: false }
+      - { label: Дата публікації, name: publishedAt, widget: datetime, time_format: false }
+      - label: Категорія
+        name: categoryId
+        widget: select
+        options:
+          - { label: Організаційні документи, value: organizational-documents }
+          - { label: Освітня діяльність, value: educational-activity }
+          - { label: Фінансова прозорість, value: financial-transparency }
+          - { label: Безпека, value: safety }
+      - {
+          label: ID нормативної підстави,
+          name: legalPublicationId,
+          widget: string,
+          required: false,
+        }
+      - {
+          label: Обов’язкове оприлюднення,
+          name: mandatoryPublication,
+          widget: boolean,
+          default: false,
+        }
+      - label: Статус нормативної підстави
+        name: legalPublicationStatus
+        widget: select
+        required: false
+        options:
+          - { label: Не перевірено, value: unverified }
+          - { label: Підтверджено, value: confirmed }
+          - { label: Замінено, value: superseded }
+      - { label: Номер, name: number, widget: string, required: false }
+      - { label: Видавець, name: issuer, widget: string, required: false }
+      - label: Файл
+        name: file
+        widget: object
+        fields:
+          - { label: Файл документа, name: path, widget: file, required: false }
+          - label: Тип файла
+            name: mimeType
+            widget: select
+            options:
+              - { label: PDF, value: application/pdf }
+              - { label: ODT, value: application/vnd.oasis.opendocument.text }
+              - {
+                  label: DOCX,
+                  value: application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                }
+              - {
+                  label: XLSX,
+                  value: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+                }
+              - { label: CSV, value: text/csv }
+          - { label: Розмір у байтах, name: bytes, widget: number, value_type: int, min: 1 }
+          - { label: Файл доступний, name: available, widget: boolean, default: true }
+      - { label: Доступний опис, name: accessibleSummary, widget: text }
+      - { label: ID серії, name: seriesId, widget: string, required: false }
+      - { label: Замінює документ, name: supersedes, widget: string, required: false }
+      - label: Статус версії
+        name: versionStatus
+        widget: select
+        default: current
+        options:
+          - { label: Чинна, value: current }
+          - { label: Замінена, value: superseded }
+          - { label: Відкликана, value: withdrawn }
+      - { label: Пошукові слова, name: searchKeywords, widget: list, required: false, default: [] }
+      - *review
+      - *safe_body
+
+  - name: document-reference-data
+    label: Довідники документів
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: document-categories
+        label: Категорії документів
+        file: src/data/document-categories.yml
+        fields:
+          - label: Категорії
+            name: categories
+            widget: list
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Назва, name: label, widget: string }
+              - { label: Опис, name: description, widget: text }
+              - { label: Порядок, name: order, widget: number, value_type: int, min: 0 }
+              - { label: Активна, name: active, widget: boolean, default: true }
+      - name: legal-publications
+        label: Нормативний реєстр
+        file: src/data/legal-publications.yml
+        fields:
+          - label: Публікації
+            name: publications
+            widget: list
+            required: false
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Назва, name: title, widget: string }
+              - { label: Нормативне джерело, name: sourceTitle, widget: string }
+              - { label: Офіційний URL, name: sourceUrl, widget: string }
+              - { label: Стаття або пункт, name: sourceSection, widget: string }
+              - { label: Перевірено, name: verifiedAt, widget: datetime, time_format: false }
+              - { label: Хто перевірив, name: verifiedBy, widget: string }
+              - {
+                  label: Наступна перевірка,
+                  name: reviewDueAt,
+                  widget: datetime,
+                  time_format: false,
+                }
+              - { label: Відповідальний, name: responsibleOwnerId, widget: string }
+              - { label: Шлях публікації, name: publicationPath, widget: string }
+              - label: Статус
+                name: status
+                widget: select
+                options:
+                  - { label: Не перевірено, value: unverified }
+                  - { label: Підтверджено, value: confirmed }
+                  - { label: Замінено, value: superseded }

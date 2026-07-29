@@ -6,6 +6,7 @@ import {
   newsFrontmatterSchema,
   noticeFrontmatterSchema,
 } from './lib/validation/publications';
+import { documentFrontmatterSchema } from './lib/validation/documents';
 
 const pages = defineCollection({
   loader: glob({ base: './src/content/pages', pattern: '**/*.md' }),
@@ -27,4 +28,9 @@ const events = defineCollection({
   schema: eventFrontmatterSchema,
 });
 
-export const collections = { events, news, notices, pages };
+const documents = defineCollection({
+  loader: glob({ base: './src/content/documents', pattern: '**/*.md' }),
+  schema: documentFrontmatterSchema,
+});
+
+export const collections = { documents, events, news, notices, pages };

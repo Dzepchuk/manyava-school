@@ -172,21 +172,21 @@ US6.
 
 ### Тести User Story 3
 
-- [ ] T054 [P] [US3] Написати contract tests схем Document, DocumentCategory і LegalPublication, MIME/size та єдиної current version у `tests/content/document-schemas.test.ts`
-- [ ] T055 [P] [US3] Написати unit-тести фільтрації за назвою, категорією й роком та зв'язку supersedes у `tests/unit/documents.test.ts`
+- [x] T054 [P] [US3] Написати contract tests схем Document, DocumentCategory і LegalPublication, MIME/size та єдиної current version у `tests/content/document-schemas.test.ts`
+- [x] T055 [P] [US3] Написати unit-тести фільтрації за назвою, категорією й роком та зв'язку supersedes у `tests/unit/documents.test.ts`
 - [ ] T056 [P] [US3] Написати Playwright-сценарій каталогу, фільтрів, detail, unavailable file і version status у `tests/e2e/us3-documents.spec.ts`
-- [ ] T057 [P] [US3] Написати accessibility-тест каталогу, фільтрів і доступного summary документа у `tests/accessibility/us3-documents.spec.ts`
+- [x] T057 [P] [US3] Написати accessibility-тест каталогу, фільтрів і доступного summary документа у `tests/accessibility/us3-documents.spec.ts`
 
 ### Реалізація User Story 3
 
-- [ ] T058 [US3] Додати колекцію `documents` і схеми DocumentFile та version relationship у `src/content.config.ts`
-- [ ] T059 [P] [US3] Створити валідовані довідники категорій і нормативного реєстру у `src/data/document-categories.yml` і `src/data/legal-publications.yml`
-- [ ] T060 [US3] Реалізувати валідацію confirmed legal basis, current version, allowlist, 10 МБ і accessible summary у `src/lib/validation/documents.ts`
-- [ ] T061 [P] [US3] Реалізувати document query/filter/version helpers у `src/lib/content/documents.ts`
-- [ ] T062 [US3] Створити каталог документів із URL-параметрами назви, категорії й року у `src/pages/documents/index.astro`
-- [ ] T063 [US3] Створити detail документа зі статусом, історією версій, summary і fallback недоступного файла у `src/pages/documents/[slug].astro`
-- [ ] T064 [US3] Додати Document, DocumentCategory і LegalPublication collections та conditional fields до `public/admin/config.yml`
-- [ ] T065 [US3] Створити сторінку прозорості з підтвердженими категоріями, власниками й review dates у `src/pages/transparency.astro`
+- [x] T058 [US3] Додати колекцію `documents` і схеми DocumentFile та version relationship у `src/content.config.ts`
+- [x] T059 [P] [US3] Створити валідовані довідники категорій і нормативного реєстру у `src/data/document-categories.yml` і `src/data/legal-publications.yml`
+- [x] T060 [US3] Реалізувати валідацію confirmed legal basis, current version, allowlist, 10 МБ і accessible summary у `src/lib/validation/documents.ts`
+- [x] T061 [P] [US3] Реалізувати document query/filter/version helpers у `src/lib/content/documents.ts`
+- [x] T062 [US3] Створити каталог документів із URL-параметрами назви, категорії й року у `src/pages/documents/index.astro`
+- [x] T063 [US3] Створити detail документа зі статусом, історією версій, summary і fallback недоступного файла у `src/pages/documents/[slug].astro`
+- [x] T064 [US3] Додати Document, DocumentCategory і LegalPublication collections та conditional fields до `public/admin/config.yml`
+- [x] T065 [US3] Створити сторінку прозорості з підтвердженими категоріями, власниками й review dates у `src/pages/transparency.astro`
 
 **Checkpoint**: US3 незалежно виконує обов'язковий сценарій офіційних
 документів; непідтверджена правова підстава не може маскуватися як confirmed.
@@ -204,16 +204,16 @@ US6.
 
 ### Тести User Story 4
 
-- [ ] T066 [P] [US4] Написати Playwright-сценарії маршрутів для батьків, учнів, вступу й протидії булінгу за ≤3 переходи у `tests/e2e/us4-audience-pages.spec.ts`
-- [ ] T067 [P] [US4] Написати privacy/content test відсутності форм, дитячих списків і неописаних зовнішніх переходів у `tests/content/us4-privacy.test.ts`
-- [ ] T068 [P] [US4] Написати accessibility-тест callout-блоків, контактів допомоги й external-link disclosure у `tests/accessibility/us4-audience-pages.spec.ts`
+- [x] T066 [P] [US4] Написати Playwright-сценарії маршрутів для батьків, учнів, вступу й протидії булінгу за ≤3 переходи у `tests/e2e/us4-audience-pages.spec.ts`
+- [x] T067 [P] [US4] Написати privacy/content test відсутності форм, дитячих списків і неописаних зовнішніх переходів у `tests/content/us4-privacy.test.ts`
+- [x] T068 [P] [US4] Написати accessibility-тест callout-блоків, контактів допомоги й external-link disclosure у `tests/accessibility/us4-audience-pages.spec.ts`
 
 ### Реалізація User Story 4
 
-- [ ] T069 [P] [US4] Додати затверджені тематичні сторінки для батьків у `src/content/pages/parents/`
-- [ ] T070 [P] [US4] Додати затверджені тематичні сторінки для учнів у `src/content/pages/students/`
-- [ ] T071 [US4] Створити доступний компонент безпечного звернення без форми у `src/components/content/SafeguardingContacts.astro`
-- [ ] T072 [US4] Додати audience hubs і зрозумілі external-service disclosures у `src/pages/parents/index.astro` і `src/pages/students/index.astro`
+- [x] T069 [P] [US4] Додати затверджені тематичні сторінки для батьків у `src/content/pages/parents/`
+- [x] T070 [P] [US4] Додати затверджені тематичні сторінки для учнів у `src/content/pages/students/`
+- [x] T071 [US4] Створити доступний компонент безпечного звернення без форми у `src/components/content/SafeguardingContacts.astro`
+- [x] T072 [US4] Додати audience hubs і зрозумілі external-service disclosures у `src/pages/parents/index.astro` і `src/pages/students/index.astro`
 
 **Checkpoint**: US4 працює без форм, персональних даних і залежності від
 доступності зовнішнього сервісу.
@@ -231,18 +231,18 @@ US6.
 
 ### Тести User Story 5
 
-- [ ] T073 [P] [US5] Створити контрольний набір українських запитів, відмінків, синонімів і очікуваних top-5 результатів у `tests/fixtures/search-cases.json`
-- [ ] T074 [P] [US5] Написати integration test складу Pagefind index і виключення draft/archived/admin у `tests/content/search-index.test.ts`
-- [ ] T075 [P] [US5] Написати Playwright-сценарій результатів, типу, дати, контексту, empty state і межі 2 с у `tests/e2e/us5-search.spec.ts`
-- [ ] T076 [P] [US5] Написати keyboard/axe test пошукового поля, результатів і announcements у `tests/accessibility/us5-search.spec.ts`
+- [x] T073 [P] [US5] Створити контрольний набір українських запитів, відмінків, синонімів і очікуваних top-5 результатів у `tests/fixtures/search-cases.json`
+- [x] T074 [P] [US5] Написати integration test складу Pagefind index і виключення draft/archived/admin у `tests/content/search-index.test.ts`
+- [x] T075 [P] [US5] Написати Playwright-сценарій результатів, типу, дати, контексту, empty state і межі 2 с у `tests/e2e/us5-search.spec.ts`
+- [x] T076 [P] [US5] Написати keyboard/axe test пошукового поля, результатів і announcements у `tests/accessibility/us5-search.spec.ts`
 
 ### Реалізація User Story 5
 
-- [ ] T077 [US5] Налаштувати Pagefind indexing лише для `main` content і `lang="uk"` у `pagefind.yml`
-- [ ] T078 [P] [US5] Додати тип, дату, keywords і data-pagefind metadata до публічних layout/components у `src/components/search/SearchMetadata.astro`
-- [ ] T079 [US5] Реалізувати доступний клієнтський Pagefind UI з debounce, нормалізацією та безпечним rendering у `src/components/search/SiteSearch.astro`
-- [ ] T080 [US5] Створити сторінку пошуку з query state, empty state і переходами до основних розділів у `src/pages/search.astro`
-- [ ] T081 [US5] Додати пошук до desktop/mobile navigation і сторінки 404 у `src/components/navigation/SiteNavigation.astro` та `src/pages/404.astro`
+- [x] T077 [US5] Налаштувати Pagefind indexing лише для `main` content і `lang="uk"` у `pagefind.yml`
+- [x] T078 [P] [US5] Додати тип, дату, keywords і data-pagefind metadata до публічних layout/components у `src/components/search/SearchMetadata.astro`
+- [x] T079 [US5] Реалізувати доступний клієнтський Pagefind UI з debounce, нормалізацією та безпечним rendering у `src/components/search/SiteSearch.astro`
+- [x] T080 [US5] Створити сторінку пошуку з query state, empty state і переходами до основних розділів у `src/pages/search.astro`
+- [x] T081 [US5] Додати пошук до desktop/mobile navigation і сторінки 404 у `src/components/navigation/SiteNavigation.astro` та `src/pages/404.astro`
 
 **Checkpoint**: US5 працює на статичному сайті без search server і не розкриває
 непублічний контент.
@@ -254,21 +254,21 @@ US6.
 **Мета**: завершити вимоги, що охоплюють кілька історій, і довести готовність
 повного MVP до публікації.
 
-- [ ] T082 [P] Додати RSS для новин і коректний production `robots.txt` у `src/pages/rss.xml.ts` і `public/robots.txt`
-- [ ] T083 [P] Створити favicon, default social image та перевірку унікальних title/description/canonical у `public/favicon.svg`, `public/media/default-social.webp` і `tests/content/seo.test.ts`
-- [ ] T084 Реалізувати image pipeline, width/height, responsive variants і budget вихідного файла 5 МБ у `src/components/common/ApprovedImage.astro` і `src/lib/validation/media.ts`
-- [ ] T085 Створити реєстр прав на стартові зображення й перевірку відсутності оманливих documentary captions у `src/data/media-rights.yml` і `tests/content/media-rights.test.ts`
-- [ ] T086 [P] Додати automated link checker для внутрішніх, зовнішніх і document URLs у `scripts/check-links.mjs`
-- [ ] T087 [P] Налаштувати Lighthouse budgets LCP ≤2,5 с, INP ≤200 мс і CLS ≤0,1 для ключових маршрутів у `lighthouserc.cjs`
+- [x] T082 [P] Додати RSS для новин і коректний production `robots.txt` у `src/pages/rss.xml.ts` і `public/robots.txt`
+- [x] T083 [P] Створити favicon, default social image та перевірку унікальних title/description/canonical у `public/favicon.svg`, `public/media/default-social.webp` і `tests/content/seo.test.ts`
+- [x] T084 Реалізувати image pipeline, width/height, responsive variants і budget вихідного файла 5 МБ у `src/components/common/ApprovedImage.astro` і `src/lib/validation/media.ts`
+- [x] T085 Створити реєстр прав на стартові зображення й перевірку відсутності оманливих documentary captions у `src/data/media-rights.yml` і `tests/content/media-rights.test.ts`
+- [x] T086 [P] Додати automated link checker для внутрішніх, зовнішніх і document URLs у `scripts/check-links.mjs`
+- [x] T087 [P] Налаштувати Lighthouse budgets LCP ≤2,5 с, INP ≤200 мс і CLS ≤0,1 для ключових маршрутів у `lighthouserc.cjs`
 - [ ] T088 Провести ручну перевірку клавіатури, screen reader, reduced motion, mobile viewports і масштабу 200% та записати результати у `docs/accessibility-audit.md`
-- [ ] T089 Прийняти рішення щодо privacy-friendly analytics або її відсутності та зафіксувати конфігурацію у `docs/analytics-decision.md` і `src/data/site.yml`
+- [x] T089 Прийняти рішення щодо privacy-friendly analytics або її відсутності та зафіксувати конфігурацію у `docs/analytics-decision.md` і `src/data/site.yml`
 - [ ] T090 Налаштувати щоденний незалежний mirror/export без секретів у репозиторії та описати retention у `.github/workflows/backup.yml` і `docs/backup-recovery.md`
 - [ ] T091 Виконати контрольне відновлення в межах RTO 4 год / RPO 24 год і записати докази у `docs/backup-recovery.md`
 - [ ] T092 Після придбання домену налаштувати canonical `https://manyava-school.if.ua`, DNS, HTTPS і redirect alias у `astro.config.mjs`, `netlify.toml` і `docs/domain-runbook.md`
-- [ ] T093 Повторно перевірити актуальні Netlify pricing/limits/OAuth умови й зафіксувати production рішення у `docs/hosting-review.md`
+- [x] T093 Повторно перевірити актуальні Netlify pricing/limits/OAuth умови й зафіксувати production рішення у `docs/hosting-review.md`
 - [ ] T094 Заповнити й затвердити нормативний реєстр, стартові офіційні документи та відповідальних у `src/data/legal-publications.yml`
 - [ ] T095 Виконати повний `quickstart.md`, усі CI gates і шість незалежних acceptance journeys та записати production sign-off у `docs/release-checklist.md`
-- [ ] T096 Перевірити трасованість `requirement → acceptance scenario → task → code → test` і зафіксувати матрицю у `docs/traceability.md`
+- [x] T096 Перевірити трасованість `requirement → acceptance scenario → task → code → test` і зафіксувати матрицю у `docs/traceability.md`
 
 **Checkpoint**: усі критерії production launch виконано; домен, нормативний
 реєстр, резервне відновлення, медіаправа, доступність і редакційне навчання
@@ -424,3 +424,7 @@ T073–T076 готуються паралельно; після T077 компо�
   специфікаційні артефакти.
 - Домен і нормативний реєстр не блокують перший вертикальний зріз, але блокують
   офіційний production launch.
+
+## Phase 10: Convergence
+
+- [x] T097 Додати до `public/admin/config.yml` безпечну CMS-форму редагування офіційних контактів у `src/data/site.yml` і contract test відповідності полів схемі per Constitution V та plan: регулярні операції без коду (partial)

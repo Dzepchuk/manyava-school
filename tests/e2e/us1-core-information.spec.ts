@@ -46,6 +46,13 @@ test('сторінки вступу й керівництва мають breadcr
   }
 });
 
+test('сторінка керівництва показує підтверджену директорку', async ({ page }) => {
+  await page.goto('/about/leadership/');
+
+  await expect(page.getByRole('heading', { level: 2, name: 'Директор' })).toBeVisible();
+  await expect(page.getByText('Мельник Наталія Володимирівна')).toBeVisible();
+});
+
 test('невідомий маршрут показує доступні наступні кроки', async ({ page }) => {
   const response = await page.goto('/missing-school-page/');
 

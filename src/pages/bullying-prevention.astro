@@ -1,0 +1,44 @@
+---
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+import Container from '../components/common/Container.astro';
+import SafeguardingContacts from '../components/content/SafeguardingContacts.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Протидія булінгу — Манявський ліцей"
+  description="Безпечні способи повідомити про булінг або загрозу та отримати підтримку в Манявському ліцеї."
+>
+  <Container class="page-shell">
+    <Breadcrumbs items={[{ label: 'Головна', href: '/' }, { label: 'Протидія булінгу' }]} />
+    <header class="page-heading">
+      <p class="eyebrow">Безпечне середовище</p>
+      <h1>Протидія булінгу</h1>
+      <p>
+        Булінг не є нормою і не повинен залишатися без уваги. Звернення по допомогу — це
+        відповідальний крок, а не провина людини, яка повідомляє.
+      </p>
+    </header>
+    <SafeguardingContacts />
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 5rem;
+  }
+  .page-heading {
+    max-width: 58rem;
+    margin: clamp(3rem, 8vw, 6rem) 0 2rem;
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 7vw, 6rem);
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+  }
+  .page-heading > p:last-child {
+    color: var(--color-muted);
+    font-size: 1.15rem;
+  }
+</style>

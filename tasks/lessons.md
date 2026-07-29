@@ -33,6 +33,9 @@
 - For every large heading placed beside another column, verify its rendered
   bounding box does not cross the sibling column; a page-level no-overflow test
   does not detect overlap between grid children.
+- Grid form controls can overflow their tracks because of intrinsic sizing even
+  when the grid has a `gap`; set grid children and controls to `min-width: 0`
+  and controls to `width: 100%` before judging the visible spacing.
 
 ## Netlify directory redirects
 

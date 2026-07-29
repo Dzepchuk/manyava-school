@@ -294,3 +294,31 @@ advice.
   browser console errors.
 - GitHub quality, browser, and Netlify deploy-preview checks passed before the
   production merge.
+
+# Contacts and specification completion
+
+- [x] Run Spec Kit prerequisites and verify all feature checklists.
+- [x] Add the confirmed director, email, phone number, and postal address to the
+      canonical site data.
+- [x] Verify the contacts page on desktop, mobile, and with accessible links.
+- [x] Run `speckit-converge` against the implemented website.
+- [x] Execute every locally actionable remaining task through `speckit-implement`.
+- [x] Run the full quality, build, content, browser, and Lighthouse test suites.
+- [x] Review the final diff against the specification and document results.
+- [ ] Publish through the protected `main` workflow and smoke-test production.
+
+## Review
+
+- Додано підтверджені контакти, ім’я директорки та CMS-форму для подальшого
+  редагування контактів без коду.
+- Реалізовано документи й прозорість, сторінки для батьків та учнів, протидію
+  булінгу, пошук Pagefind, RSS, SEO, реєстр медіаправ і responsive-зображення.
+- Додано link checker, Lighthouse budgets, документацію домену, аналітики,
+  доступності, резервування, релізу та трасованості.
+- Перевірки: Astro/lint без помилок; 37/37 Vitest; build і link checker успішні;
+  Playwright 79/80 у повному запуску з одним нестабільним focus-тестом, який
+  одразу пройшов 3/3 ізольовано; Lighthouse завершився без blocking failures.
+- Відкритими лишаються T053, T056, T088, T090–T092, T094–T095: вони потребують
+  навчання директора, реальних офіційних документів, ручного screen-reader
+  аудиту, незалежного backup destination/restore drill, завершення поширення TLS
+  або фінального production sign-off.

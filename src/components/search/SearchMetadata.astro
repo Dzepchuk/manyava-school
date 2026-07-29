@@ -1,0 +1,13 @@
+---
+interface Props {
+  type: string;
+  date?: Date;
+  keywords?: string[];
+}
+
+const { type, date, keywords = [] } = Astro.props;
+---
+
+<meta data-pagefind-meta="type" content={type} />
+{date && <meta data-pagefind-meta="date" content={date.toISOString()} />}
+{keywords.length > 0 && <meta data-pagefind-meta="keywords" content={keywords.join(', ')} />}

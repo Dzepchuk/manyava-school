@@ -7,8 +7,7 @@ import { loadSiteData } from '../lib/content/load-site-data';
 
 const { site } = loadSiteData();
 const contacts = getPublishedContacts(site);
-const hasPendingContacts =
-  !contacts.email || contacts.phones.length === 0 || !contacts.workingHours;
+const hasPendingContacts = !contacts.workingHours;
 ---
 
 <BaseLayout
@@ -43,8 +42,8 @@ const hasPendingContacts =
                 <p class="label">Адреса</p>
                 <h2>{contacts.address}</h2>
                 <p class="note">
-                  Орієнтир для відвідування. Точну поштову адресу буде додано після офіційного
-                  підтвердження.
+                  Підтверджена поштова адреса ліцею. Перед візитом рекомендуємо попередньо
+                  зателефонувати або написати.
                 </p>
               </div>
             </article>
@@ -113,8 +112,8 @@ const hasPendingContacts =
         <p class="panel-number" aria-hidden="true">01</p>
         <h2 id="visit-title">Перед відвідуванням</h2>
         <p>
-          Рекомендуємо попередньо узгодити візит через офіційний номер або email, щойно вони
-          з’являться на цій сторінці.
+          Рекомендуємо попередньо узгодити візит через офіційний номер телефону або електронну
+          пошту, опубліковані на цій сторінці.
         </p>
         <div class="divider"></div>
         <p class="privacy">Сайт не містить контактної форми й не збирає ваші персональні дані.</p>
@@ -128,10 +127,10 @@ const hasPendingContacts =
             i
           </span>
           <div>
-            <h2 id="pending-title">Контактні дані уточнюються</h2>
+            <h2 id="pending-title">Години роботи уточнюються</h2>
             <p>
-              Телефон, офіційна електронна адреса та години роботи будуть опубліковані після
-              перевірки директором. Не використовуйте непідтверджені контакти зі сторонніх джерел.
+              Графік роботи буде опубліковано після окремого підтвердження ліцеєм. Для узгодження
+              часу візиту скористайтеся телефоном або електронною поштою вище.
             </p>
           </div>
         </section>

@@ -280,6 +280,7 @@ advice.
 
 - [x] Reproduce and identify the redirect loop on `/admin/`.
 - [x] Remove the redundant forced `/admin` redirect from `netlify.toml`.
+- [x] Permit Decap CMS dynamic evaluation only within the `/admin/*` CSP.
 - [x] Run formatting, project checks, and a production build.
 - [ ] Deploy through the protected `main` workflow and verify `/admin/` returns
       the editor without redirects.

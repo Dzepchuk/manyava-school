@@ -43,3 +43,9 @@
 - Include direct HTTP checks for protected utility routes such as `/admin/`
   after every production deployment, not only build and browser checks for
   public pages.
+
+## Decap CMS security policy
+
+- Validate the deployed CMS boot sequence, not only whether `/admin/` returns
+  HTML. Decap CMS currently requires `'unsafe-eval'`; if used, scope that CSP
+  exception to `/admin/*` and never add it to the public-site policy.

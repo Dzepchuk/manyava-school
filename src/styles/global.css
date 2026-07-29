@@ -110,29 +110,6 @@ svg {
   font-size: 1.2rem;
 }
 
-.site-nav ul {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.site-nav a {
-  display: block;
-  padding: 0.55rem 0.72rem;
-  border-radius: var(--radius-sm);
-  color: var(--color-ink);
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.site-nav a:hover {
-  background: var(--color-soft);
-}
-
 main {
   min-height: 60vh;
 }
@@ -172,19 +149,9 @@ h3 {
 
 @media (max-width: 58rem) {
   .header-inner {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 1rem;
     padding-block: 1rem;
-  }
-
-  .site-nav {
-    width: 100%;
-    overflow-x: auto;
-  }
-
-  .site-nav ul {
-    width: max-content;
   }
 }
 

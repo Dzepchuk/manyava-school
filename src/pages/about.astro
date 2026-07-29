@@ -1,11 +1,19 @@
 ---
+import { getEntry } from 'astro:content';
 import Breadcrumbs from '../components/common/Breadcrumbs.astro';
 import Container from '../components/common/Container.astro';
+import ContentMeta from '../components/common/ContentMeta.astro';
 import ExternalLink from '../components/common/ExternalLink.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { loadSiteData } from '../lib/content/load-site-data';
+import { formatDate } from '../lib/dates/format';
 
-const { site } = loadSiteData();
+const aboutEntry = await getEntry('pages', 'about');
+if (!aboutEntry) {
+  throw new Error('Не знайдено content record сторінки "Про ліцей".');
+}
+const { site, owners } = loadSiteData();
+const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.ownerId);
 ---
 
 <BaseLayout
@@ -25,16 +33,17 @@ const { site } = loadSiteData();
         </p>
       </div>
 
-      <div class="hero-mark" aria-hidden="true">
-        <span class="hero-number">01</span>
-        <div class="landscape">
-          <span class="sun"></span>
-          <span class="ridge ridge-far"></span>
-          <span class="ridge ridge-near"></span>
-          <span class="school"></span>
-        </div>
-        <p>Манява · Карпати</p>
-      </div>
+      <figure class="hero-photo">
+        <img
+          src="/media/manyava-lyceum-building.webp"
+          width="592"
+          height="299"
+          alt="Будівля Манявського ліцею"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <figcaption>Манявський ліцей · село Манява</figcaption>
+      </figure>
     </section>
 
     <section class="facts" aria-labelledby="facts-title">
@@ -143,7 +152,8 @@ const { site } = loadSiteData();
       <div class="source-copy">
         <p>
           Фактичні відомості перевірено 29 липня 2026 року. Опис життя спільноти узагальнює теми
-          відкритих публікацій ліцею; фото й персональні дані дітей не переносилися.
+          відкритих публікацій ліцею. На сторінці використано надане для публікації фото будівлі;
+          персональні дані та зображення дітей не переносилися.
         </p>
         <ul>
           <li>
@@ -173,6 +183,23 @@ const { site } = loadSiteData();
         </ul>
       </div>
     </section>
+
+    <footer class="review-meta" aria-label="Відомості про актуальність сторінки">
+      <ContentMeta
+        label="Відповідальний за зміст"
+        value={contentOwner?.displayName ?? 'Не визначено'}
+      />
+      <ContentMeta
+        label="Перевірено"
+        value={formatDate(aboutEntry.data.review.reviewedAt)}
+        datetime={aboutEntry.data.review.reviewedAt.toISOString()}
+      />
+      <ContentMeta
+        label="Наступна перевірка"
+        value={formatDate(aboutEntry.data.review.reviewDueAt)}
+        datetime={aboutEntry.data.review.reviewDueAt.toISOString()}
+      />
+    </footer>
   </Container>
 </BaseLayout>
 
@@ -207,101 +234,30 @@ const { site } = loadSiteData();
     font-size: clamp(1.08rem, 2vw, 1.35rem);
   }
 
-  .hero-mark {
-    padding: clamp(1.2rem, 3vw, 2rem);
+  .hero-photo {
+    margin: 0;
+    padding: clamp(0.65rem, 1.4vw, 0.9rem);
     color: white;
     background: var(--color-primary);
-    border-radius: 48% 52% 45% 55% / 42% 42% 58% 58%;
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-soft);
   }
 
-  .hero-number {
-    color: #f3ca81;
-    font-family: var(--font-display);
-    font-size: 1.4rem;
-    font-weight: 700;
-  }
-
-  .hero-mark > p {
-    margin: 1rem 0 0;
-    text-align: center;
-  }
-
-  .landscape {
-    position: relative;
-    min-height: 19rem;
-    overflow: hidden;
-    margin-top: 1rem;
+  .hero-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
     background: #e5efe7;
-    border-radius: 48% 52% 45% 55% / 44% 42% 58% 56%;
+    border-radius: calc(var(--radius-lg) - 0.35rem);
+    aspect-ratio: 592 / 299;
+    object-fit: cover;
   }
 
-  .sun {
-    position: absolute;
-    top: 2.8rem;
-    right: 3.4rem;
-    width: 4.2rem;
-    height: 4.2rem;
-    background: var(--color-accent);
-    border-radius: 50%;
-  }
-
-  .ridge {
-    position: absolute;
-    right: -10%;
-    bottom: -10%;
-    left: -10%;
-    height: 70%;
-    background: #2c684b;
-    clip-path: polygon(
-      0 76%,
-      18% 35%,
-      31% 63%,
-      49% 9%,
-      68% 66%,
-      82% 32%,
-      100% 78%,
-      100% 100%,
-      0 100%
-    );
-  }
-
-  .ridge-far {
-    bottom: 17%;
-    background: #9bb9a3;
-  }
-
-  .school {
-    position: absolute;
-    z-index: 2;
-    right: 26%;
-    bottom: 13%;
-    width: 48%;
-    height: 20%;
-    background:
-      linear-gradient(
-        90deg,
-        transparent 12%,
-        #7ea08b 12% 24%,
-        transparent 24% 38%,
-        #7ea08b 38% 50%,
-        transparent 50% 64%,
-        #7ea08b 64% 76%,
-        transparent 76%
-      ),
-      #fffaf0;
-    box-shadow: 0 8px 24px rgba(14, 48, 31, 0.24);
-  }
-
-  .school::before {
-    position: absolute;
-    top: -48%;
-    left: -8%;
-    width: 116%;
-    height: 52%;
-    background: #8e4d36;
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    content: '';
+  .hero-photo figcaption {
+    margin: 0.75rem 0 0.1rem;
+    color: #e1ece4;
+    font-size: 0.88rem;
+    text-align: center;
   }
 
   .facts,
@@ -499,6 +455,16 @@ const { site } = loadSiteData();
     border-bottom: 1px solid var(--color-line);
   }
 
+  .review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 2rem;
+    margin-top: 2rem;
+    padding: 1.2rem 1.4rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+
   @media (max-width: 52rem) {
     .hero,
     .facts,
@@ -511,7 +477,7 @@ const { site } = loadSiteData();
       min-height: auto;
     }
 
-    .hero-mark {
+    .hero-photo {
       width: min(100%, 30rem);
     }
   }

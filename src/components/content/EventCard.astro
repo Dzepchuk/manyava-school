@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDateTime } from '../../lib/dates/format';
+
+interface Props {
+  entry: CollectionEntry<'events'>;
+}
+const { entry } = Astro.props;
+---
+
+<article class="event-card">
+  <p class="date">
+    {
+      entry.data.timeStatus === 'to-be-confirmed' ? (
+        <>Час буде уточнено</>
+      ) : (
+        <time datetime={entry.data.startsAt.toISOString()}>
+          {formatDateTime(entry.data.startsAt)}
+        </time>
+      )
+    }
+  </p>
+  <h2><a href={`/events/${entry.id}/`}>{entry.data.title}</a></h2>
+  <p>{entry.data.description}</p>
+  {entry.data.location && <p class="location">Місце: {entry.data.location}</p>}
+</article>
+
+<style>
+  .event-card {
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+  .date {
+    color: #6e4500;
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+  h2 {
+    margin: 0.7rem 0;
+    overflow-wrap: anywhere;
+  }
+  h2 a {
+    color: var(--color-ink);
+  }
+  p {
+    color: var(--color-muted);
+  }
+  .location {
+    margin-bottom: 0;
+    font-weight: 700;
+  }
+</style>

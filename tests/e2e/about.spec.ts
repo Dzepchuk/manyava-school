@@ -22,5 +22,9 @@ test('сторінка про ліцей показує підтверджені
 
   await expect(page.locator('form')).toHaveCount(0);
   await expect(page.locator('iframe')).toHaveCount(0);
-  await expect(page.locator('img')).toHaveCount(0);
+  const schoolPhoto = page.getByRole('img', { name: 'Будівля Манявського ліцею' });
+  await expect(schoolPhoto).toHaveAttribute('src', '/media/manyava-lyceum-building.webp');
+  await expect(schoolPhoto).toHaveAttribute('width', '592');
+  await expect(schoolPhoto).toHaveAttribute('height', '299');
+  await expect(page.locator('img')).toHaveCount(1);
 });

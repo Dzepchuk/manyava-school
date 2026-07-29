@@ -1,0 +1,95 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Container from '../../components/common/Container.astro';
+import ContentMeta from '../../components/common/ContentMeta.astro';
+import PublicationPageHeader from '../../components/content/PublicationPageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../lib/dates/format';
+import { assertUniquePublicationSlugs } from '../../lib/validation/publications';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('news');
+  assertUniquePublicationSlugs(entries.map(({ id }) => id));
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+interface Props {
+  entry: CollectionEntry<'news'>;
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} — Манявський ліцей`} description={entry.data.description}>
+  <Container class="publication-shell">
+    <PublicationPageHeader
+      eyebrow="Новина"
+      title={entry.data.title}
+      description={entry.data.description}
+      breadcrumbs={[
+        { label: 'Головна', href: '/' },
+        { label: 'Новини', href: '/news/' },
+        { label: entry.data.title },
+      ]}
+    />
+    <article class="detail">
+      {
+        entry.data.cover && (
+          <img
+            class="cover"
+            src={entry.data.cover.src}
+            alt={entry.data.cover.alt}
+            width={entry.data.cover.width}
+            height={entry.data.cover.height}
+          />
+        )
+      }
+      <div class="body"><Content /></div>
+    </article>
+    <footer class="meta" aria-label="Відомості про публікацію">
+      <ContentMeta
+        label="Опубліковано"
+        value={formatDate(entry.data.publishedAt)}
+        datetime={entry.data.publishedAt.toISOString()}
+      />
+      <ContentMeta label="Автор" value={entry.data.authorDisplayName} />
+    </footer>
+  </Container>
+</BaseLayout>
+<style>
+  .publication-shell {
+    padding-block: 2rem 4rem;
+  }
+  .detail {
+    max-width: 52rem;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 36px rgba(30, 67, 47, 0.06);
+  }
+  .cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .body {
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+  }
+  .body :global(p) {
+    max-width: 44rem;
+  }
+  .body :global(a) {
+    font-weight: 700;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 2rem;
+    max-width: 52rem;
+    margin-top: 1.25rem;
+    padding: 1.2rem 1.4rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+</style>

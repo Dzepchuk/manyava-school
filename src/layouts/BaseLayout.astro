@@ -1,5 +1,6 @@
 ---
 import Container from '../components/common/Container.astro';
+import SiteNavigation from '../components/navigation/SiteNavigation.astro';
 import { loadSiteData } from '../lib/content/load-site-data';
 import { createSeoMetadata } from '../lib/seo/metadata';
 import '../styles/global.css';
@@ -23,9 +24,6 @@ const seo = createSeoMetadata({
   site: Astro.site ?? new URL(site.siteUrl),
   noindex,
 });
-const visibleNavigation = navigation
-  .filter(({ visible }) => visible)
-  .sort((a, b) => a.order - b.order);
 ---
 
 <!doctype html>
@@ -50,17 +48,7 @@ const visibleNavigation = navigation
           <span class="brand-mark" aria-hidden="true">М</span>
           <span>{site.shortName}</span>
         </a>
-        <nav class="site-nav" aria-label="Основна навігація">
-          <ul>
-            {
-              visibleNavigation.map((item) => (
-                <li>
-                  <a href={item.path}>{item.label}</a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
+        <SiteNavigation items={navigation} currentPath={Astro.url.pathname} />
       </Container>
     </header>
     <main id="main-content">

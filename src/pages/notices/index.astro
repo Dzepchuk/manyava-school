@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Container from '../../components/common/Container.astro';
+import NoticeCard from '../../components/content/NoticeCard.astro';
+import PublicationPageHeader from '../../components/content/PublicationPageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { splitNoticesByExpiry } from '../../lib/content/publications';
+const { current } = splitNoticesByExpiry((await getCollection('notices')).map(({ data }) => data));
+const entries = await getCollection('notices');
+const currentEntries = current.map((data) => entries.find((entry) => entry.data === data)!);
+---
+
+<BaseLayout title="Оголошення — Манявський ліцей">
+  <Container class="publication-shell">
+    <PublicationPageHeader
+      eyebrow="Актуальне"
+      title="Оголошення ліцею"
+      description="Офіційні повідомлення з чітко вказаним строком актуальності."
+      breadcrumbs={[{ label: 'Головна', href: '/' }, { label: 'Оголошення' }]}
+    />
+    {
+      currentEntries.length ? (
+        <div class="publication-grid">
+          {currentEntries.map((entry) => (
+            <NoticeCard entry={entry} />
+          ))}
+        </div>
+      ) : (
+        <p class="empty">Наразі немає актуальних оголошень.</p>
+      )
+    }
+    <a class="archive-link" href="/notices/archive/"
+      >Архів оголошень <span aria-hidden="true">→</span></a
+    >
+  </Container>
+</BaseLayout>
+<style>
+  .publication-shell {
+    padding-block: 2rem 4rem;
+  }
+  .publication-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  }
+  .empty {
+    padding: 1.5rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+  .archive-link {
+    display: inline-block;
+    margin-top: 2rem;
+    font-weight: 800;
+  }
+</style>

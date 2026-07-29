@@ -1,0 +1,244 @@
+locale: uk
+
+backend:
+  name: github
+  repo: Dzepchuk/manyava-school
+  branch: main
+  preview_context: deploy/netlify
+  squash_merges: true
+  use_graphql: true
+
+publish_mode: editorial_workflow
+media_folder: public/media/uploads
+public_folder: /media/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+  - name: pages
+    label: Сторінки
+    label_singular: Сторінка
+    description: Стабільні інформаційні сторінки ліцею.
+    folder: src/content/pages
+    create: false
+    delete: false
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Заголовок, name: title, widget: string }
+      - { label: Короткий опис, name: description, widget: text }
+      - { label: Шлях, name: path, widget: string, hint: 'Формат: /about/' }
+      - label: Розділ
+        name: section
+        widget: select
+        options:
+          - { label: Про ліцей, value: about }
+          - { label: Батькам, value: parents }
+          - { label: Учням, value: students }
+          - { label: Безпека, value: safety }
+          - { label: Прозорість, value: transparency }
+      - { label: Показувати в навігації, name: showInNavigation, widget: boolean }
+      - label: SEO-зображення
+        name: seoImage
+        widget: object
+        required: false
+        fields:
+          - { label: Файл, name: src, widget: image }
+          - { label: Альтернативний текст, name: alt, widget: string }
+          - { label: Ширина у пікселях, name: width, widget: number, value_type: int, min: 1 }
+          - { label: Висота у пікселях, name: height, widget: number, value_type: int, min: 1 }
+          - { label: URL джерела, name: sourceUrl, widget: string, required: false }
+          - { label: Ліцензія або дозвіл, name: license, widget: string }
+          - { label: Хто затвердив, name: approvedBy, widget: string, default: director }
+          - { label: Дата затвердження, name: approvedAt, widget: datetime, time_format: false }
+          - { label: Є діти на зображенні, name: containsChildren, widget: boolean, default: false }
+          - {
+              label: Підстава публікації дітей,
+              name: publicationBasis,
+              widget: string,
+              required: false,
+            }
+          - {
+              label: Зображення показує реальний ліцей,
+              name: depictsSchoolReality,
+              widget: boolean,
+              default: true,
+            }
+      - { label: Пошукові слова, name: searchKeywords, widget: list, required: false }
+      - &review
+        label: Перевірка й відповідальність
+        name: review
+        widget: object
+        fields:
+          - { label: Відповідальний, name: ownerId, widget: string, default: director }
+          - { label: Створено, name: createdAt, widget: datetime, time_format: false }
+          - { label: Оновлено, name: updatedAt, widget: datetime, time_format: false }
+          - { label: Перевірено, name: reviewedAt, widget: datetime, time_format: false }
+          - { label: Наступна перевірка, name: reviewDueAt, widget: datetime, time_format: false }
+          - label: Статус
+            name: status
+            widget: select
+            default: published
+            options:
+              - { label: Опубліковано, value: published }
+              - { label: В архіві, value: archived }
+      - &safe_body
+        label: Зміст
+        name: body
+        widget: markdown
+        buttons:
+          - bold
+          - italic
+          - link
+          - heading-two
+          - heading-three
+          - bulleted-list
+          - numbered-list
+        editor_components: []
+
+  - name: news
+    label: Новини
+    label_singular: Новина
+    folder: src/content/news
+    create: true
+    delete: false
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    preview_path: news/{{slug}}
+    fields:
+      - { label: Заголовок, name: title, widget: string }
+      - { label: Короткий опис, name: description, widget: text }
+      - { label: Дата публікації, name: publishedAt, widget: datetime }
+      - {
+          label: Дата події,
+          name: eventDate,
+          widget: datetime,
+          required: false,
+          time_format: false,
+        }
+      - &media
+        label: Головне зображення
+        name: cover
+        widget: object
+        required: false
+        fields: &media_fields
+          - { label: Файл, name: src, widget: image }
+          - {
+              label: Альтернативний текст,
+              name: alt,
+              widget: string,
+              hint: Коротко опишіть зміст зображення.,
+            }
+          - { label: Ширина у пікселях, name: width, widget: number, value_type: int, min: 1 }
+          - { label: Висота у пікселях, name: height, widget: number, value_type: int, min: 1 }
+          - {
+              label: URL джерела,
+              name: sourceUrl,
+              widget: string,
+              required: false,
+              hint: Обов’язково для зовнішнього зображення; лише HTTPS.,
+            }
+          - { label: Ліцензія або дозвіл, name: license, widget: string }
+          - { label: Хто затвердив, name: approvedBy, widget: string, default: director }
+          - { label: Дата затвердження, name: approvedAt, widget: datetime, time_format: false }
+          - { label: Є діти на зображенні, name: containsChildren, widget: boolean, default: false }
+          - {
+              label: Підстава публікації дітей,
+              name: publicationBasis,
+              widget: string,
+              required: false,
+            }
+          - {
+              label: Зображення показує реальний ліцей,
+              name: depictsSchoolReality,
+              widget: boolean,
+              default: true,
+            }
+      - label: Галерея
+        name: gallery
+        widget: list
+        required: false
+        default: []
+        fields: *media_fields
+      - { label: Автор, name: authorDisplayName, widget: string, default: Манявський ліцей }
+      - { label: Теги, name: tags, widget: list, required: false, default: [] }
+      - { label: Важлива новина, name: featured, widget: boolean, default: false }
+      - *review
+      - *safe_body
+
+  - name: notices
+    label: Оголошення
+    label_singular: Оголошення
+    folder: src/content/notices
+    create: true
+    delete: false
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    fields:
+      - { label: Заголовок, name: title, widget: string }
+      - { label: Короткий опис, name: description, widget: text }
+      - { label: Початок, name: startsAt, widget: datetime }
+      - { label: Завершення, name: expiresAt, widget: datetime }
+      - label: Аудиторія
+        name: audience
+        widget: select
+        options:
+          - { label: Усі, value: all }
+          - { label: Батьки, value: parents }
+          - { label: Учні, value: students }
+          - { label: Працівники, value: staff }
+          - { label: Громада, value: community }
+      - label: Пріоритет
+        name: priority
+        widget: select
+        default: normal
+        options:
+          - { label: Звичайне, value: normal }
+          - { label: Важливе, value: important }
+          - { label: Термінове, value: urgent }
+      - *review
+      - *safe_body
+
+  - name: events
+    label: Події
+    label_singular: Подія
+    folder: src/content/events
+    create: true
+    delete: false
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    preview_path: events/{{slug}}
+    fields:
+      - { label: Заголовок, name: title, widget: string }
+      - { label: Короткий опис, name: description, widget: text }
+      - { label: Початок, name: startsAt, widget: datetime }
+      - { label: Завершення, name: endsAt, widget: datetime, required: false }
+      - label: Статус часу
+        name: timeStatus
+        widget: select
+        options:
+          - { label: Підтверджено, value: confirmed }
+          - { label: Буде уточнено, value: to-be-confirmed }
+      - { label: Місце, name: location, widget: string, required: false }
+      - label: Формат
+        name: format
+        widget: select
+        options:
+          - { label: Очно, value: onsite }
+          - { label: Онлайн, value: online }
+          - { label: Змішано, value: hybrid }
+      - {
+          label: Зовнішнє посилання,
+          name: externalUrl,
+          widget: string,
+          required: false,
+          hint: Лише HTTPS.,
+        }
+      - *review
+      - *safe_body

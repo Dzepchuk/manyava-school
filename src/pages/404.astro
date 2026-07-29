@@ -1,0 +1,73 @@
+---
+import Container from '../components/common/Container.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Сторінку не знайдено — Манявський ліцей"
+  description="Запитаної сторінки немає. Скористайтеся основними розділами сайту Манявського ліцею."
+  noindex
+>
+  <Container class="not-found">
+    <p class="code" aria-hidden="true">404</p>
+    <p class="eyebrow">Помилка навігації</p>
+    <h1>Сторінку не знайдено</h1>
+    <p class="lead">
+      Можливо, адресу змінено або в посиланні є помилка. Оберіть один із безпечних наступних кроків.
+    </p>
+    <nav aria-label="Наступні кроки">
+      <a class="primary" href="/">На головну</a>
+      <a href="/about/">Про ліцей</a>
+      <a href="/admission/">Вступ</a>
+      <a href="/contacts/">Контакти ліцею</a>
+    </nav>
+  </Container>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding-block: clamp(5rem, 12vw, 10rem);
+  }
+
+  .code {
+    margin: 0;
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  h1 {
+    max-width: 10ch;
+    margin: 0;
+    font-size: clamp(3.4rem, 9vw, 7rem);
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+
+  .lead {
+    max-width: 42rem;
+    color: var(--color-muted);
+    font-size: 1.15rem;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 2rem;
+  }
+
+  nav a {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  nav .primary {
+    color: white;
+    background: var(--color-primary);
+  }
+</style>

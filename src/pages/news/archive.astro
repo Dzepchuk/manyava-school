@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import Container from '../../components/common/Container.astro';
+import NewsCard from '../../components/content/NewsCard.astro';
+import PublicationPageHeader from '../../components/content/PublicationPageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isArchived } from '../../lib/content/publications';
+
+const news = (await getCollection('news'))
+  .filter(({ data }) => isArchived(data))
+  .sort((left, right) => right.data.publishedAt.getTime() - left.data.publishedAt.getTime());
+---
+
+<BaseLayout title="Архів новин — Манявський ліцей">
+  <Container class="publication-shell">
+    <PublicationPageHeader
+      eyebrow="Новини"
+      title="Архів новин"
+      description="Новини, які більше не належать до актуальних публікацій."
+      breadcrumbs={[
+        { label: 'Головна', href: '/' },
+        { label: 'Новини', href: '/news/' },
+        { label: 'Архів' },
+      ]}
+    />
+    {
+      news.length ? (
+        <div class="publication-grid">
+          {news.map((entry) => (
+            <NewsCard entry={entry} />
+          ))}
+        </div>
+      ) : (
+        <p class="empty">В архіві новин поки немає матеріалів.</p>
+      )
+    }
+  </Container>
+</BaseLayout>
+<style>
+  .publication-shell {
+    padding-block: 2rem 4rem;
+  }
+  .publication-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  }
+  .empty {
+    padding: 1.5rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+</style>

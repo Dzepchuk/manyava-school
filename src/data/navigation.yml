@@ -10,10 +10,38 @@
   order: 2
   audiences: [all]
   visible: true
+- id: leadership
+  label: Керівництво
+  path: /about/leadership/
+  parentId: about
+  order: 1
+  audiences: [all]
+  visible: true
+- id: admission
+  label: Вступ
+  path: /admission/
+  parentId: about
+  order: 2
+  audiences: [all]
+  visible: true
 - id: news
   label: Новини
   path: /news/
   order: 3
+  audiences: [all]
+  visible: true
+- id: notices
+  label: Оголошення
+  path: /notices/
+  parentId: news
+  order: 1
+  audiences: [all]
+  visible: true
+- id: events
+  label: Події
+  path: /events/
+  parentId: news
+  order: 2
   audiences: [all]
   visible: true
 - id: documents

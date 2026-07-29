@@ -1,6 +1,29 @@
 ---
+import { getCollection } from 'astro:content';
 import Container from '../components/common/Container.astro';
+import EventCard from '../components/content/EventCard.astro';
+import NewsCard from '../components/content/NewsCard.astro';
+import NoticeCard from '../components/content/NoticeCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadSiteData } from '../lib/content/load-site-data';
+import { isPublished, splitEventsByDate, splitNoticesByExpiry } from '../lib/content/publications';
+
+const { site } = loadSiteData();
+const newsEntries = await getCollection('news');
+const noticeEntries = await getCollection('notices');
+const eventEntries = await getCollection('events');
+const latestNews = newsEntries
+  .filter(({ data }) => isPublished(data))
+  .sort((left, right) => right.data.publishedAt.getTime() - left.data.publishedAt.getTime())
+  .slice(0, 1);
+const { current: currentNotices } = splitNoticesByExpiry(noticeEntries.map(({ data }) => data));
+const { upcoming: upcomingEvents } = splitEventsByDate(eventEntries.map(({ data }) => data));
+const latestNotices = currentNotices
+  .slice(0, 1)
+  .map((data) => noticeEntries.find((entry) => entry.data === data)!);
+const nearestEvents = upcomingEvents
+  .slice(0, 1)
+  .map((data) => eventEntries.find((entry) => entry.data === data)!);
 ---
 
 <BaseLayout>
@@ -11,7 +34,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h1>Манявський ліцей</h1>
         <p class="lead">Простір знань, взаємоповаги та розвитку в серці Карпатської громади.</p>
         <div class="actions">
-          <a class="button primary" href="#preview">Переглянути структуру</a>
+          <a class="button primary" href="#essentials">Основна інформація</a>
           <a class="button secondary" href="/contacts/">Контакти ліцею</a>
         </div>
       </div>
@@ -26,33 +49,88 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </Container>
   </section>
 
-  <Container as="section" class="preview" id="preview">
+  <Container as="section" class="preview" id="essentials">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Основа майбутнього сайту</p>
-        <h2>Важливе — завжди поруч</h2>
+        <p class="eyebrow">Основна інформація</p>
+        <h2>Потрібне — за один перехід</h2>
       </div>
-      <p>Зараз це демонстрація стилю. Реальний контент додамо на наступному етапі.</p>
+      <p>
+        Відомості про ліцей, вступ і підтверджені контакти доступні без реєстрації та зовнішніх
+        сервісів.
+      </p>
     </div>
     <div class="cards">
       <article>
         <span class="card-number">01</span>
-        <h3>Новини ліцею</h3>
-        <p>Події, досягнення та важливі повідомлення для шкільної спільноти.</p>
-        <span class="status">Контент буде додано</span>
+        <h3>Про ліцей</h3>
+        <p>Підтверджені відомості про заклад, освітні рівні та шкільну спільноту.</p>
+        <a class="card-link" href="/about/"
+          >Переглянути відомості <span aria-hidden="true">→</span></a
+        >
       </article>
       <article>
         <span class="card-number">02</span>
-        <h3>Офіційні документи</h3>
-        <p>Структурований каталог документів із датами, категоріями та статусами.</p>
-        <span class="status">Контент буде додано</span>
+        <h3>Вступ</h3>
+        <p>Актуальний стан правил прийому та безпечний спосіб уточнити інформацію.</p>
+        <a class="card-link" href="/admission/">Вступ до ліцею <span aria-hidden="true">→</span></a>
       </article>
       <article>
         <span class="card-number">03</span>
-        <h3>Батькам і учням</h3>
-        <p>Зрозумілі тематичні розділи без зайвих переходів і складної навігації.</p>
-        <span class="status">Контент буде додано</span>
+        <h3>Контакти</h3>
+        <p>{site.address}. Публікуємо лише перевірені ліцеєм способи зв’язку.</p>
+        <a class="card-link" href="/contacts/"
+          >Переглянути контакти <span aria-hidden="true">→</span></a
+        >
       </article>
+    </div>
+  </Container>
+
+  <Container as="section" class="updates">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Актуальне</p>
+        <h2>Новини, оголошення та події</h2>
+      </div>
+      <p>Публікуємо лише перевірені матеріали з датою та зрозумілим статусом актуальності.</p>
+    </div>
+    <div class="update-columns">
+      <section aria-labelledby="latest-news">
+        <div class="update-title">
+          <h3 id="latest-news">Остання новина</h3><a href="/news/">Усі новини</a>
+        </div>
+        {
+          latestNews.length ? (
+            latestNews.map((entry) => <NewsCard entry={entry} />)
+          ) : (
+            <p class="empty">Новин ще немає.</p>
+          )
+        }
+      </section>
+      <section aria-labelledby="current-notices">
+        <div class="update-title">
+          <h3 id="current-notices">Оголошення</h3><a href="/notices/">Усі оголошення</a>
+        </div>
+        {
+          latestNotices.length ? (
+            latestNotices.map((entry) => <NoticeCard entry={entry} />)
+          ) : (
+            <p class="empty">Наразі немає актуальних оголошень.</p>
+          )
+        }
+      </section>
+      <section aria-labelledby="nearest-events">
+        <div class="update-title">
+          <h3 id="nearest-events">Найближча подія</h3><a href="/events/">Усі події</a>
+        </div>
+        {
+          nearestEvents.length ? (
+            nearestEvents.map((entry) => <EventCard entry={entry} />)
+          ) : (
+            <p class="empty">Наразі немає підтверджених подій.</p>
+          )
+        }
+      </section>
     </div>
   </Container>
 
@@ -210,6 +288,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: 0.15rem;
   }
   .preview,
+  .updates,
   .school-intro {
     padding-block: 4rem;
   }
@@ -236,6 +315,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     gap: 1rem;
     grid-template-columns: repeat(3, 1fr);
   }
+  .update-columns {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .update-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .update-title h3 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+  .update-title a {
+    flex: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .empty {
+    min-height: 9rem;
+    margin: 0;
+    padding: 1.5rem;
+    color: var(--color-muted);
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
   .cards article {
     padding: 1.8rem;
     background: var(--color-surface);
@@ -256,15 +364,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .cards p {
     color: var(--color-muted);
   }
-  .status {
-    display: inline-block;
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
     margin-top: 1rem;
-    padding: 0.35rem 0.7rem;
     color: var(--color-primary);
-    background: var(--color-soft);
-    border-radius: 999px;
-    font-size: 0.78rem;
     font-weight: 700;
+    text-decoration-thickness: 1px;
+  }
+
+  .card-link span {
+    transition: transform 160ms ease;
+  }
+
+  .card-link:hover span {
+    transform: translateX(0.2rem);
   }
   .school-intro {
     margin-top: 3rem;
@@ -345,6 +460,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   @media (max-width: 48rem) {
     .hero-grid,
     .cards,
+    .update-columns,
     .school-intro-heading,
     .intro-points {
       grid-template-columns: 1fr;

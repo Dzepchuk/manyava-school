@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../../lib/dates/format';
+
+interface Props {
+  entry: CollectionEntry<'notices'>;
+}
+const { entry } = Astro.props;
+const priorityLabel = { normal: 'Оголошення', important: 'Важливо', urgent: 'Терміново' }[
+  entry.data.priority
+];
+---
+
+<article class="notice-card">
+  <p class={`status ${entry.data.priority}`}>{priorityLabel}</p>
+  <h2>{entry.data.title}</h2>
+  <p>{entry.data.description}</p>
+  <p class="dates">
+    Актуально до <time datetime={entry.data.expiresAt.toISOString()}
+      >{formatDate(entry.data.expiresAt)}</time
+    >
+  </p>
+</article>
+
+<style>
+  .notice-card {
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+  .status {
+    display: inline-block;
+    margin: 0;
+    padding: 0.2rem 0.6rem;
+    color: var(--color-primary);
+    background: var(--color-soft);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+  .status.important,
+  .status.urgent {
+    color: #6e4500;
+    background: #fff0cf;
+  }
+  h2 {
+    margin: 0.8rem 0;
+    overflow-wrap: anywhere;
+  }
+  p {
+    color: var(--color-muted);
+  }
+  .dates {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
+</style>

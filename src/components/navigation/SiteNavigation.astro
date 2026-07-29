@@ -1,0 +1,258 @@
+---
+import type { NavigationItem } from '../../lib/validation/site-data';
+
+interface Props {
+  items: NavigationItem[];
+  currentPath: string;
+}
+
+const { items, currentPath } = Astro.props;
+const visibleItems = items.filter(({ visible }) => visible);
+const roots = visibleItems.filter(({ parentId }) => !parentId).sort((a, b) => a.order - b.order);
+const childrenFor = (parentId: string) =>
+  visibleItems.filter((item) => item.parentId === parentId).sort((a, b) => a.order - b.order);
+const isCurrent = (path: string) => currentPath === path;
+const isActiveBranch = (id: string) => {
+  const children = childrenFor(id);
+  return children.some(
+    (child) => isCurrent(child.path) || childrenFor(child.id).some(({ path }) => isCurrent(path)),
+  );
+};
+---
+
+<nav class="site-navigation" aria-label="Основна навігація">
+  <div class="desktop-navigation">
+    <ul class="root-list">
+      {
+        roots.map((item) => {
+          const children = childrenFor(item.id);
+          return (
+            <li>
+              {children.length > 0 ? (
+                <details
+                  class:list={{
+                    'active-branch': isCurrent(item.path) || isActiveBranch(item.id),
+                  }}
+                >
+                  <summary>{item.label}</summary>
+                  <ul class="submenu">
+                    <li>
+                      <a href={item.path} aria-current={isCurrent(item.path) ? 'page' : undefined}>
+                        Огляд
+                      </a>
+                    </li>
+                    {children.map((child) => {
+                      const grandchildren = childrenFor(child.id);
+                      return (
+                        <li>
+                          {grandchildren.length > 0 ? (
+                            <details
+                              class:list={{
+                                'active-branch': isCurrent(child.path) || isActiveBranch(child.id),
+                              }}
+                            >
+                              <summary>{child.label}</summary>
+                              <ul>
+                                <li>
+                                  <a
+                                    href={child.path}
+                                    aria-current={isCurrent(child.path) ? 'page' : undefined}
+                                  >
+                                    Огляд
+                                  </a>
+                                </li>
+                                {grandchildren.map((grandchild) => (
+                                  <li>
+                                    <a
+                                      href={grandchild.path}
+                                      aria-current={isCurrent(grandchild.path) ? 'page' : undefined}
+                                    >
+                                      {grandchild.label}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </details>
+                          ) : (
+                            <a
+                              href={child.path}
+                              aria-current={isCurrent(child.path) ? 'page' : undefined}
+                            >
+                              {child.label}
+                            </a>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </details>
+              ) : (
+                <a href={item.path} aria-current={isCurrent(item.path) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+
+  <details class="mobile-navigation">
+    <summary>Меню</summary>
+    <ul class="mobile-list">
+      {
+        roots.map((item) => {
+          const children = childrenFor(item.id);
+          return (
+            <li>
+              <a href={item.path} aria-current={isCurrent(item.path) ? 'page' : undefined}>
+                {item.label}
+              </a>
+              {children.length > 0 && (
+                <ul>
+                  {children.map((child) => (
+                    <li>
+                      <a
+                        href={child.path}
+                        aria-current={isCurrent(child.path) ? 'page' : undefined}
+                      >
+                        {child.label}
+                      </a>
+                      {childrenFor(child.id).length > 0 && (
+                        <ul>
+                          {childrenFor(child.id).map((grandchild) => (
+                            <li>
+                              <a
+                                href={grandchild.path}
+                                aria-current={isCurrent(grandchild.path) ? 'page' : undefined}
+                              >
+                                {grandchild.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </details>
+</nav>
+
+<style>
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .root-list {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  a,
+  summary {
+    display: block;
+    padding: 0.55rem 0.72rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-ink);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  a:hover,
+  summary:hover,
+  a[aria-current='page'],
+  .active-branch > summary {
+    background: var(--color-soft);
+  }
+
+  details {
+    position: relative;
+  }
+
+  summary {
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .desktop-navigation summary::after {
+    margin-left: 0.4rem;
+    content: '⌄';
+  }
+
+  .submenu {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    min-width: 13rem;
+    padding: 0.45rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .submenu a {
+    width: 100%;
+  }
+
+  .mobile-navigation {
+    display: none;
+  }
+
+  @media (max-width: 58rem) {
+    .desktop-navigation {
+      display: none;
+    }
+
+    .mobile-navigation {
+      display: block;
+    }
+
+    .mobile-navigation > summary {
+      padding: 0.65rem 1rem;
+      color: white;
+      background: var(--color-primary);
+      border-radius: 999px;
+    }
+
+    .mobile-navigation[open] > summary {
+      margin-bottom: 0.7rem;
+    }
+
+    .mobile-list {
+      position: absolute;
+      z-index: 30;
+      right: 0;
+      width: min(19rem, calc(100vw - 2rem));
+      max-height: calc(100vh - 7rem);
+      overflow-y: auto;
+      padding: 0.7rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mobile-list ul {
+      margin-left: 0.8rem;
+      padding-left: 0.6rem;
+      border-left: 1px solid var(--color-line);
+    }
+  }
+</style>

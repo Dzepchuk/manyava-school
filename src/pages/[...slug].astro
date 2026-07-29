@@ -1,0 +1,133 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+import Container from '../components/common/Container.astro';
+import ContentMeta from '../components/common/ContentMeta.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { assertSafeMarkdown, assertUniquePagePaths } from '../lib/validation/pages';
+import { loadSiteData } from '../lib/content/load-site-data';
+import { formatDate } from '../lib/dates/format';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages', ({ data }) => data.review.status === 'published');
+  assertUniquePagePaths(pages.map(({ id, data }) => ({ id, path: data.path })));
+  pages.forEach(({ body }) => assertSafeMarkdown(body ?? ''));
+
+  return pages
+    .filter(({ data }) => data.path !== '/about/')
+    .map((entry) => ({
+      params: { slug: entry.data.path.replace(/^\/|\/$/g, '') },
+      props: { entry },
+    }));
+}
+
+interface Props {
+  entry: CollectionEntry<'pages'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { navigation, owners, site } = loadSiteData();
+const owner = owners.find(({ id }) => id === entry.data.review.ownerId);
+const currentNavigationItem = navigation.find(({ path }) => path === entry.data.path);
+const parentNavigationItem = currentNavigationItem?.parentId
+  ? navigation.find(({ id }) => id === currentNavigationItem.parentId)
+  : undefined;
+const breadcrumbs = [
+  { label: 'Головна', href: '/' },
+  ...(parentNavigationItem
+    ? [{ label: parentNavigationItem.label, href: parentNavigationItem.path }]
+    : []),
+  { label: entry.data.title },
+];
+---
+
+<BaseLayout title={`${entry.data.title} — ${site.shortName}`} description={entry.data.description}>
+  <Container class="page-shell">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="page-heading">
+      <p class="eyebrow">{parentNavigationItem?.label ?? 'Інформація'}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="lead">{entry.data.description}</p>
+    </header>
+
+    <article class="content">
+      <Content />
+    </article>
+
+    <footer class="review-meta" aria-label="Відомості про актуальність сторінки">
+      <ContentMeta label="Відповідальний за зміст" value={owner?.displayName ?? 'Не визначено'} />
+      <ContentMeta
+        label="Перевірено"
+        value={formatDate(entry.data.review.reviewedAt)}
+        datetime={entry.data.review.reviewedAt.toISOString()}
+      />
+      <ContentMeta
+        label="Наступна перевірка"
+        value={formatDate(entry.data.review.reviewDueAt)}
+        datetime={entry.data.review.reviewDueAt.toISOString()}
+      />
+    </footer>
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 4rem;
+  }
+
+  .page-heading {
+    max-width: 58rem;
+    margin: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4rem);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 7vw, 6rem);
+    hyphens: auto;
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .lead {
+    max-width: 45rem;
+    margin: 1.4rem 0 0;
+    color: var(--color-muted);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+  }
+
+  .content {
+    max-width: 48rem;
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 36px rgba(30, 67, 47, 0.06);
+  }
+
+  .content :global(h2) {
+    margin: 2.2rem 0 0.8rem;
+    font-size: clamp(1.65rem, 4vw, 2.4rem);
+  }
+
+  .content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .content :global(a) {
+    font-weight: 700;
+  }
+
+  .review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 2rem;
+    max-width: 48rem;
+    margin-top: 1.25rem;
+    padding: 1.2rem 1.4rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+</style>

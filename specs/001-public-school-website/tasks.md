@@ -75,19 +75,19 @@
 
 ### Тести User Story 1
 
-- [ ] T021 [P] [US1] Написати unit-тести валідації сторінок, site settings і navigation depth для FR-PAGE-001–003 та FR-CONTACT-001 у `tests/unit/site-data.test.ts`
-- [ ] T022 [P] [US1] Написати Playwright-сценарій пошуку контактів і правил прийому за ≤3 переходи у `tests/e2e/us1-core-information.spec.ts`
-- [ ] T023 [P] [US1] Написати accessibility-тест клавіатури, focus order і масштабу 200% для головної та контактів у `tests/accessibility/us1-core-information.spec.ts`
+- [x] T021 [P] [US1] Написати unit-тести валідації сторінок, site settings і navigation depth для FR-PAGE-001–003 та FR-CONTACT-001 у `tests/unit/site-data.test.ts`
+- [x] T022 [P] [US1] Написати Playwright-сценарій пошуку контактів і правил прийому за ≤3 переходи у `tests/e2e/us1-core-information.spec.ts`
+- [x] T023 [P] [US1] Написати accessibility-тест клавіатури, focus order і масштабу 200% для головної та контактів у `tests/accessibility/us1-core-information.spec.ts`
 
 ### Реалізація User Story 1
 
-- [ ] T024 [US1] Визначити колекцію `pages` з унікальним canonical path, review metadata і безпечним Markdown у `src/content.config.ts`
-- [ ] T025 [P] [US1] Додати затверджені placeholder-сторінки «Про ліцей», «Керівництво» і «Вступ» у `src/content/pages/`
-- [ ] T026 [P] [US1] Створити головну сторінку з основними маршрутами, контактним блоком і місцями для актуального контенту у `src/pages/index.astro`
+- [x] T024 [US1] Визначити колекцію `pages` з унікальним canonical path, review metadata і безпечним Markdown у `src/content.config.ts`
+- [x] T025 [P] [US1] Додати затверджені placeholder-сторінки «Про ліцей», «Керівництво» і «Вступ» у `src/content/pages/`
+- [x] T026 [P] [US1] Створити головну сторінку з основними маршрутами, контактним блоком і місцями для актуального контенту у `src/pages/index.astro`
 - [x] T027 [P] [US1] Створити автономну контактну сторінку без форм і залежності від карти у `src/pages/contacts.astro`
-- [ ] T028 [US1] Реалізувати генерацію стабільних сторінок із breadcrumb і review metadata у `src/pages/[...slug].astro`
-- [ ] T029 [US1] Реалізувати desktop/mobile navigation із максимум трьома рівнями у `src/components/navigation/SiteNavigation.astro`
-- [ ] T030 [US1] Створити доступну сторінку 404 з основними переходами у `src/pages/404.astro`
+- [x] T028 [US1] Реалізувати генерацію стабільних сторінок із breadcrumb і review metadata у `src/pages/[...slug].astro`
+- [x] T029 [US1] Реалізувати desktop/mobile navigation із максимум трьома рівнями у `src/components/navigation/SiteNavigation.astro`
+- [x] T030 [US1] Створити доступну сторінку 404 з основними переходами у `src/pages/404.astro`
 
 **Checkpoint**: US1 повністю працює й перевіряється незалежно без CMS, пошуку
 та зовнішніх сервісів.
@@ -106,20 +106,20 @@
 
 ### Тести User Story 2
 
-- [ ] T031 [P] [US2] Написати unit-тести сортування новин, строку оголошень і поділу подій на майбутні/архівні для FR-NEWS-001, FR-NOTICE-001 і FR-EVENT-001–002 у `tests/unit/publications.test.ts`
-- [ ] T032 [P] [US2] Написати content contract tests обов'язкових полів, alt і унікальних slug для News, Notice та Event у `tests/content/publication-schemas.test.ts`
-- [ ] T033 [P] [US2] Написати Playwright-сценарій списку й detail новини та календаря подій у `tests/e2e/us2-publications.spec.ts`
-- [ ] T034 [P] [US2] Написати axe і keyboard-тести карток, списків, архівів та змістового зображення у `tests/accessibility/us2-publications.spec.ts`
+- [x] T031 [P] [US2] Написати unit-тести сортування новин, строку оголошень і поділу подій на майбутні/архівні для FR-NEWS-001, FR-NOTICE-001 і FR-EVENT-001–002 у `tests/unit/publications.test.ts`
+- [x] T032 [P] [US2] Написати content contract tests обов'язкових полів, alt і унікальних slug для News, Notice та Event у `tests/content/publication-schemas.test.ts`
+- [x] T033 [P] [US2] Написати Playwright-сценарій списку й detail новини та календаря подій у `tests/e2e/us2-publications.spec.ts`
+- [x] T034 [P] [US2] Написати axe і keyboard-тести карток, списків, архівів та змістового зображення у `tests/accessibility/us2-publications.spec.ts`
 
 ### Реалізація User Story 2
 
-- [ ] T035 [US2] Додати схеми й колекції `news`, `notices` та `events` відповідно до data model у `src/content.config.ts`
-- [ ] T036 [P] [US2] Реалізувати сортування, фільтрацію published/archived, expiry і event time status у `src/lib/content/publications.ts`
-- [ ] T037 [P] [US2] Створити доступні картки News, Notice та Event з датами й статусами у `src/components/content/`
-- [ ] T038 [US2] Створити список, архів і detail маршрути новин у `src/pages/news/index.astro`, `src/pages/news/archive.astro` і `src/pages/news/[slug].astro`
-- [ ] T039 [P] [US2] Створити поточний список і архів оголошень у `src/pages/notices/index.astro` і `src/pages/notices/archive.astro`
-- [ ] T040 [P] [US2] Створити список майбутніх подій, архів і detail у `src/pages/events/index.astro`, `src/pages/events/archive.astro` і `src/pages/events/[slug].astro`
-- [ ] T041 [US2] Додати останні новини, актуальні оголошення й найближчі події на головну у `src/pages/index.astro`
+- [x] T035 [US2] Додати схеми й колекції `news`, `notices` та `events` відповідно до data model у `src/content.config.ts`
+- [x] T036 [P] [US2] Реалізувати сортування, фільтрацію published/archived, expiry і event time status у `src/lib/content/publications.ts`
+- [x] T037 [P] [US2] Створити доступні картки News, Notice та Event з датами й статусами у `src/components/content/`
+- [x] T038 [US2] Створити список, архів і detail маршрути новин у `src/pages/news/index.astro`, `src/pages/news/archive.astro` і `src/pages/news/[slug].astro`
+- [x] T039 [P] [US2] Створити поточний список і архів оголошень у `src/pages/notices/index.astro` і `src/pages/notices/archive.astro`
+- [x] T040 [P] [US2] Створити список майбутніх подій, архів і detail у `src/pages/events/index.astro`, `src/pages/events/archive.astro` і `src/pages/events/[slug].astro`
+- [x] T041 [US2] Додати останні новини, актуальні оголошення й найближчі події на головну у `src/pages/index.astro`
 
 **Checkpoint**: US2 працює незалежно з Git-контентом; CMS workflow додається в
 US6.
@@ -139,20 +139,20 @@ US6.
 
 ### Тести User Story 6
 
-- [ ] T042 [P] [US6] Написати contract tests відповідності Decap-полів content schemas і блокування відсутніх alt/license/legal fields у `tests/content/cms-contract.test.ts`
-- [ ] T043 [P] [US6] Написати тест, що build і Pagefind не включають draft/archived записи та `/admin/`, у `tests/content/publication-boundary.test.ts`
-- [ ] T044 [P] [US6] Створити документований тестовий сценарій Admin/Write, MFA, denied role management і revoke access у `tests/e2e/us6-role-workflow.md`
-- [ ] T045 [P] [US6] Написати Playwright smoke test доступності й `noindex` CMS shell без використання production credentials у `tests/e2e/us6-admin-shell.spec.ts`
+- [x] T042 [P] [US6] Написати contract tests відповідності Decap-полів content schemas і блокування відсутніх alt/license/legal fields у `tests/content/cms-contract.test.ts`
+- [x] T043 [P] [US6] Написати тест, що build і Pagefind не включають draft/archived записи та `/admin/`, у `tests/content/publication-boundary.test.ts`
+- [x] T044 [P] [US6] Створити документований тестовий сценарій Admin/Write, MFA, denied role management і revoke access у `tests/e2e/us6-role-workflow.md`
+- [x] T045 [P] [US6] Написати Playwright smoke test доступності й `noindex` CMS shell без використання production credentials у `tests/e2e/us6-admin-shell.spec.ts`
 
 ### Реалізація User Story 6
 
-- [ ] T046 [US6] Створити `/admin/` shell із Decap CMS, українською локалізацією, `noindex` і без вбудованих секретів у `public/admin/index.html`
-- [ ] T047 [US6] Налаштувати GitHub backend, `editorial_workflow`, preview context, media paths і collections Page/News/Notice/Event у `public/admin/config.yml`
-- [ ] T048 [US6] Додати CMS fields для owner, review dates, alt, source, license, child-publication basis і безпечного Markdown у `public/admin/config.yml`
-- [ ] T049 [US6] Реалізувати build validator небезпечного HTML, iframe/script, URL, MIME, file/image size та media rights у `src/lib/validation/content-policy.ts`
-- [ ] T050 [US6] Підключити content-policy validation і зрозумілий український error contract до `scripts/validate-content.mjs`
-- [ ] T051 [US6] Налаштувати CMS OAuth redirect, preview headers і production contexts без секретів у `netlify.toml`
-- [ ] T052 [US6] Документувати початкові ролі Admin/Write, MFA, onboarding, revocation, conflict resolution і revert у `docs/cms-operations.md`
+- [x] T046 [US6] Створити `/admin/` shell із Decap CMS, українською локалізацією, `noindex` і без вбудованих секретів у `public/admin/index.html`
+- [x] T047 [US6] Налаштувати GitHub backend, `editorial_workflow`, preview context, media paths і collections Page/News/Notice/Event у `public/admin/config.yml`
+- [x] T048 [US6] Додати CMS fields для owner, review dates, alt, source, license, child-publication basis і безпечного Markdown у `public/admin/config.yml`
+- [x] T049 [US6] Реалізувати build validator небезпечного HTML, iframe/script, URL, MIME, file/image size та media rights у `src/lib/validation/content-policy.ts`
+- [x] T050 [US6] Підключити content-policy validation і зрозумілий український error contract до `scripts/validate-content.mjs`
+- [x] T051 [US6] Налаштувати CMS OAuth redirect, preview headers і production contexts без секретів у `netlify.toml`
+- [x] T052 [US6] Документувати початкові ролі Admin/Write, MFA, onboarding, revocation, conflict resolution і revert у `docs/cms-operations.md`
 - [ ] T053 [US6] Провести навчальний publish-preview-approve-revert сценарій і записати фактичний час та результат у `tests/e2e/us6-role-workflow.md`
 
 **Checkpoint**: перший вертикальний зріз завершено: директор публікує новину

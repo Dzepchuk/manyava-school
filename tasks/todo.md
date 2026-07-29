@@ -183,3 +183,94 @@ advice.
   at 1440 px and 390 px browser widths.
 - Passed Astro check, ESLint, Vitest, production build with Pagefind, and 10
   relevant Playwright tests across desktop and mobile projects.
+
+### About Page — School Photo
+
+- [x] Update the content test for one meaningful, locally hosted school photo.
+- [x] Replace the decorative hero landscape with the provided building photo.
+- [x] Add intrinsic dimensions, accessible alternative text, and responsive styles.
+- [x] Verify build, accessibility, desktop, and mobile presentation.
+
+#### Review
+
+- Converted the supplied 592 × 299 PNG to a 35 KB WebP stored locally in
+  `public/media/`; the page has no runtime dependency on Facebook or another
+  image host.
+- Added intrinsic dimensions, `fetchpriority="high"`, and the alternative text
+  «Будівля Манявського ліцею».
+- Updated the transparency note to distinguish the supplied building photo from
+  children's images and personal data.
+- Passed Astro check, ESLint, Vitest, production build with Pagefind, and 8
+  about-page Playwright/axe tests on desktop and mobile.
+
+### Speckit Implement — User Story 1 Completion
+
+- [x] T021 Add validation tests for pages, site settings, and navigation depth.
+- [x] T022 Add ≤3-transition journeys for contacts, admission, and school information.
+- [x] T023 Add keyboard, focus-order, axe, and 200% reflow coverage.
+- [x] T024 Define the validated `pages` content collection and Markdown policy.
+- [x] T025 Add reviewed content records for About, Leadership, and Admission.
+- [x] T026 Complete homepage routes and the contact-information entry point.
+- [x] T028 Generate stable content pages with breadcrumbs and review metadata.
+- [x] T029 Add accessible desktop/mobile navigation with at most three levels.
+- [x] T030 Add a useful accessible 404 page.
+
+#### Review
+
+- Completed the full US1 route set with `/about/`, `/about/leadership/`,
+  `/admission/`, `/contacts/`, homepage entry points, and a custom 404.
+- Added a strict Page schema, canonical-path uniqueness guard, safe Markdown
+  guard, owner/review metadata, and maximum three-level navigation validation.
+- Replaced the horizontal mobile navigation strip with a keyboard-operable menu
+  and added a nested desktop menu for About, Leadership, and Admission.
+- Confirmed all key information is one meaningful transition from the homepage,
+  below the three-transition requirement.
+- Built six static pages and indexed the five public content routes with
+  Pagefind; 320 px reflow and axe checks pass across the complete US1 route set.
+
+# Speckit Implement — User Story 2
+
+- [x] Перевірити вимоги, модель даних, контракти й задачі US2.
+- [x] Написати unit, content contract, e2e та accessibility тести.
+- [x] Реалізувати схеми, helpers і перевірений демонстраційний контент.
+- [x] Створити картки, списки, архіви та detail-сторінки.
+- [x] Додати актуальні публікації на головну.
+- [x] Виконати повну перевірку й задокументувати результат.
+
+## Review
+
+- Реалізовано повний потік US2 для новин, оголошень і подій: колекції, валідація,
+  автоматичне сортування й архівування, картки, списки та detail-маршрути.
+- Додано одну правдиву новину про підготовку офіційного сайту. Для непідтверджених
+  оголошень і подій використано порожні стани без вигаданих фактів.
+- Головна сторінка показує останню новину, актуальне оголошення й найближчу
+  подію або відповідний порожній стан.
+- `npm test`: 13/13; `npm run check`: 0 помилок; `npm run build`: 13 сторінок;
+  `npm run test:e2e`: 50/50 на desktop і mobile.
+- Окремо перевірено семантичну структуру та компонування головної в локальному
+  браузері: горизонтального переповнення немає.
+# Speckit Implement — User Story 6
+
+- [x] Перевірити вимоги й задачі CMS workflow.
+- [x] Додати contract, boundary та browser smoke тести.
+- [x] Реалізувати український Decap CMS shell і editorial workflow.
+- [x] Додати build-blocking content policy та українські помилки.
+- [x] Налаштувати Netlify contexts, redirect і security headers.
+- [x] Документувати ролі, MFA, onboarding, revocation, conflict і revert.
+- [ ] Провести реальний training publish-preview-approve-revert із GitHub Admin/Write
+      акаунтами та Netlify preview.
+
+## Review
+
+- Decap CMS 3.15.1 доступний через `/admin/`, показує українську кнопку входу
+  через GitHub і не містить credentials у репозиторії.
+- Форми Pages/News/Notice/Event відповідають Astro schemas, використовують
+  `editorial_workflow` і збирають review та media-rights metadata.
+- `npm run build` спочатку блокує небезпечний Markdown, URL, недозволені або
+  завеликі файли та неповні права на медіа.
+- Pagefind знайшов 14 HTML-файлів, але проіндексував 13 публічних сторінок:
+  `/admin/` не потрапив до індексу.
+- Перевірки: 22/22 unit/contract, 52/52 Playwright desktop/mobile, Astro check і
+  lint без помилок.
+- T053 лишається відкритою: для чесного результату потрібні реальні GitHub
+  `Admin`/`Write`, MFA, Netlify OAuth і deploy preview.

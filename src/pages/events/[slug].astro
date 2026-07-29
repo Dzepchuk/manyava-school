@@ -1,0 +1,70 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Container from '../../components/common/Container.astro';
+import ContentMeta from '../../components/common/ContentMeta.astro';
+import PublicationPageHeader from '../../components/content/PublicationPageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDateTime } from '../../lib/dates/format';
+import { assertUniquePublicationSlugs } from '../../lib/validation/publications';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('events');
+  assertUniquePublicationSlugs(entries.map(({ id }) => id));
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+interface Props {
+  entry: CollectionEntry<'events'>;
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} — Манявський ліцей`} description={entry.data.description}>
+  <Container class="publication-shell">
+    <PublicationPageHeader
+      eyebrow="Подія"
+      title={entry.data.title}
+      description={entry.data.description}
+      breadcrumbs={[
+        { label: 'Головна', href: '/' },
+        { label: 'Події', href: '/events/' },
+        { label: entry.data.title },
+      ]}
+    />
+    <article class="detail"><Content /></article>
+    <footer class="meta" aria-label="Відомості про подію">
+      <ContentMeta
+        label="Початок"
+        value={entry.data.timeStatus === 'to-be-confirmed'
+          ? 'Час буде уточнено'
+          : formatDateTime(entry.data.startsAt)}
+        datetime={entry.data.timeStatus === 'confirmed'
+          ? entry.data.startsAt.toISOString()
+          : undefined}
+      />
+      {entry.data.location && <ContentMeta label="Місце" value={entry.data.location} />}
+    </footer>
+  </Container>
+</BaseLayout>
+<style>
+  .publication-shell {
+    padding-block: 2rem 4rem;
+  }
+  .detail {
+    max-width: 48rem;
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 2rem;
+    max-width: 48rem;
+    margin-top: 1.25rem;
+    padding: 1.2rem 1.4rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+</style>

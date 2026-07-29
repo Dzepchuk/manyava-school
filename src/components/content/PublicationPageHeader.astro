@@ -1,0 +1,39 @@
+---
+import Breadcrumbs from '../common/Breadcrumbs.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  breadcrumbs: { label: string; href?: string }[];
+}
+const { eyebrow, title, description, breadcrumbs } = Astro.props;
+---
+
+<Breadcrumbs items={breadcrumbs} />
+<header class="publication-heading">
+  <p class="eyebrow">{eyebrow}</p>
+  <h1>{title}</h1>
+  <p class="lead">{description}</p>
+</header>
+
+<style>
+  .publication-heading {
+    max-width: 58rem;
+    margin: clamp(3rem, 8vw, 6rem) 0 clamp(2rem, 5vw, 3rem);
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 7vw, 6rem);
+    hyphens: auto;
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+  .lead {
+    max-width: 46rem;
+    margin: 1.25rem 0 0;
+    color: var(--color-muted);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+  }
+</style>

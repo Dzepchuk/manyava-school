@@ -44,14 +44,55 @@ export const navigationItemSchema = z.object({
 export const ownersSchema = z.array(contentOwnerSchema);
 export const navigationSchema = z.array(navigationItemSchema).superRefine((items, context) => {
   const ids = new Set(items.map(({ id }) => id));
+  const paths = new Set<string>();
 
-  for (const item of items) {
+  for (const [index, item] of items.entries()) {
+    if (paths.has(item.path)) {
+      context.addIssue({
+        code: 'custom',
+        message: `Навігаційний шлях "${item.path}" повторюється.`,
+        path: [index, 'path'],
+      });
+    }
+    paths.add(item.path);
+
     if (item.parentId && !ids.has(item.parentId)) {
       context.addIssue({
         code: 'custom',
         message: `Навігаційний батько "${item.parentId}" не існує.`,
-        path: [items.indexOf(item), 'parentId'],
+        path: [index, 'parentId'],
       });
+    }
+  }
+
+  const itemsById = new Map(items.map((item) => [item.id, item]));
+
+  for (const [index, item] of items.entries()) {
+    const visited = new Set([item.id]);
+    let depth = 1;
+    let parentId = item.parentId;
+
+    while (parentId) {
+      if (visited.has(parentId)) {
+        context.addIssue({
+          code: 'custom',
+          message: `Навігація містить цикл за участю "${item.id}".`,
+          path: [index, 'parentId'],
+        });
+        break;
+      }
+
+      visited.add(parentId);
+      depth += 1;
+      if (depth > 3) {
+        context.addIssue({
+          code: 'custom',
+          message: 'Навігація не може бути глибшою за три рівні.',
+          path: [index, 'parentId'],
+        });
+        break;
+      }
+      parentId = itemsById.get(parentId)?.parentId;
     }
   }
 });

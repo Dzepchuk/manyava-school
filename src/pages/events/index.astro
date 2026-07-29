@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import Container from '../../components/common/Container.astro';
+import EventCard from '../../components/content/EventCard.astro';
+import PublicationPageHeader from '../../components/content/PublicationPageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { splitEventsByDate } from '../../lib/content/publications';
+const entries = await getCollection('events');
+const { upcoming } = splitEventsByDate(entries.map(({ data }) => data));
+const upcomingEntries = upcoming.map((data) => entries.find((entry) => entry.data === data)!);
+---
+
+<BaseLayout title="Події — Манявський ліцей">
+  <Container class="publication-shell">
+    <PublicationPageHeader
+      eyebrow="Календар"
+      title="Події ліцею"
+      description="Підтверджені майбутні події та важливі дати Манявського ліцею."
+      breadcrumbs={[{ label: 'Головна', href: '/' }, { label: 'Події' }]}
+    />
+    {
+      upcomingEntries.length ? (
+        <div class="publication-grid">
+          {upcomingEntries.map((entry) => (
+            <EventCard entry={entry} />
+          ))}
+        </div>
+      ) : (
+        <p class="empty">Наразі немає підтверджених майбутніх подій.</p>
+      )
+    }
+    <a class="archive-link" href="/events/archive/">Архів подій <span aria-hidden="true">→</span></a
+    >
+  </Container>
+</BaseLayout>
+<style>
+  .publication-shell {
+    padding-block: 2rem 4rem;
+  }
+  .publication-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  }
+  .empty {
+    padding: 1.5rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+  .archive-link {
+    display: inline-block;
+    margin-top: 2rem;
+    font-weight: 800;
+  }
+</style>

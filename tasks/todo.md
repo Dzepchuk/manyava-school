@@ -282,5 +282,15 @@ advice.
 - [x] Remove the redundant forced `/admin` redirect from `netlify.toml`.
 - [x] Permit Decap CMS dynamic evaluation only within the `/admin/*` CSP.
 - [x] Run formatting, project checks, and a production build.
-- [ ] Deploy through the protected `main` workflow and verify `/admin/` returns
-      the editor without redirects.
+- [x] Deploy through the protected `main` workflow and verify `/admin` performs
+      one canonical redirect while `/admin/` returns the working editor.
+
+## Review
+
+- Production `/admin` returns one `301` to `/admin/`; `/admin/` returns `200`.
+- The admin-only CSP permits Decap CMS evaluation while the public-site CSP
+  remains unchanged.
+- Decap CMS rendered its GitHub login action on the deploy preview with no
+  browser console errors.
+- GitHub quality, browser, and Netlify deploy-preview checks passed before the
+  production merge.

@@ -10,7 +10,7 @@
   targetPort = 4321
 
 [context.production]
-  command = "npm run build"
+  command = "PUBLIC_SITE_URL=https://manyava-school.if.ua npm run build"
 
 [context.deploy-preview]
   command = "PUBLIC_SITE_URL=$DEPLOY_PRIME_URL npm run build"

@@ -33,3 +33,13 @@
 - For every large heading placed beside another column, verify its rendered
   bounding box does not cross the sibling column; a page-level no-overflow test
   does not detect overlap between grid children.
+
+## Netlify directory redirects
+
+- Do not add a forced `/path` to `/path/` redirect for a deployed static
+  directory without testing both URLs against Netlify's production redirect
+  engine; Netlify may normalize both patterns to the same path and create a
+  self-redirect loop.
+- Include direct HTTP checks for protected utility routes such as `/admin/`
+  after every production deployment, not only build and browser checks for
+  public pages.

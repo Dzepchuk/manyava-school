@@ -1,0 +1,8 @@
+- id: technical-administrator
+  displayName: Технічний адміністратор
+  role: administrator
+  active: true
+- id: director
+  displayName: Директор ліцею
+  role: approver
+  active: true

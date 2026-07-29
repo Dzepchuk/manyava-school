@@ -108,3 +108,20 @@ advice.
 - Validated task IDs, checklist syntax, story labels, exact paths, requirement
   coverage, and absence of placeholders or unresolved clarification markers.
 - Next phase: run `speckit-analyze` before implementation.
+
+### Speckit Implement — Foundation
+
+- Completed T001–T020: Astro setup, pinned dependencies, formatting/linting,
+  project structure, Netlify build, shared schemas, Ukrainian date helpers, SEO
+  metadata, design tokens, semantic layout, common components, validated YAML
+  settings, security headers, sitemap, CI, axe and Lighthouse gates.
+- Added a temporary visual homepage shell so stakeholders can review the design
+  before real content implementation starts.
+- Kept the public foundation serverless and free of client-side JavaScript.
+- Removed `decap-cms-app` from the current dependency tree after `npm audit`
+  identified high-severity transitive advisories, including an advisory without
+  an available fix. The CMS integration task T046 must choose a safe, pinned
+  delivery method after re-evaluation.
+- Verified Astro check, ESLint, formatting, unit-test runner, production build,
+  Pagefind indexing, desktop/mobile Playwright + axe, Lighthouse gates, and a
+  production-dependency audit with zero known vulnerabilities.

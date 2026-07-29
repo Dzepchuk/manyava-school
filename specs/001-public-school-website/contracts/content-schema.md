@@ -34,15 +34,15 @@
 
 ## Колекції CMS
 
-| Collection | Create | Delete | Publish | Основний шлях |
-|---|---:|---:|---:|---|
-| pages | limited | false | true | `src/content/pages/` |
-| news | true | false | true | `src/content/news/` |
-| notices | true | false | true | `src/content/notices/` |
-| events | true | false | true | `src/content/events/` |
-| documents | true | false | true | `src/content/documents/` |
-| legal-publications | limited | false | admin review | `src/data/legal-publications.yml` |
-| site-settings | false | false | admin review | `src/data/site.yml` |
+| Collection         |  Create | Delete |      Publish | Основний шлях                     |
+| ------------------ | ------: | -----: | -----------: | --------------------------------- |
+| pages              | limited |  false |         true | `src/content/pages/`              |
+| news               |    true |  false |         true | `src/content/news/`               |
+| notices            |    true |  false |         true | `src/content/notices/`            |
+| events             |    true |  false |         true | `src/content/events/`             |
+| documents          |    true |  false |         true | `src/content/documents/`          |
+| legal-publications | limited |  false | admin review | `src/data/legal-publications.yml` |
+| site-settings      |   false |  false | admin review | `src/data/site.yml`               |
 
 `delete=false` означає, що редактор використовує archive/withdraw workflow.
 

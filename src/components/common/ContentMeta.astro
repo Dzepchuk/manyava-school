@@ -1,0 +1,29 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  datetime?: string;
+}
+
+const { label, value, datetime } = Astro.props;
+---
+
+<p class="meta">
+  <span>{label}</span>
+  {datetime ? <time datetime={datetime}>{value}</time> : <strong>{value}</strong>}
+</p>
+
+<style>
+  .meta {
+    display: flex;
+    gap: 0.4rem;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+  strong,
+  time {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+</style>

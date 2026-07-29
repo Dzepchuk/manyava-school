@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
+  as?: 'div' | 'section' | 'article';
+}
+
+const { as: Element = 'div', class: className = '', ...attributes } = Astro.props;
+---
+
+<Element {...attributes} class:list={['container', className]}>
+  <slot />
+</Element>
+
+<style>
+  .container {
+    width: min(calc(100% - 2rem), var(--container));
+    margin-inline: auto;
+  }
+</style>

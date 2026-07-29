@@ -1,0 +1,280 @@
+---
+import Container from '../components/common/Container.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+  <section class="hero">
+    <Container class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Офіційний сайт</p>
+        <h1>Манявський ліцей</h1>
+        <p class="lead">Простір знань, взаємоповаги та розвитку в серці Карпатської громади.</p>
+        <div class="actions">
+          <a class="button primary" href="#preview">Переглянути структуру</a>
+          <a class="button secondary" href="/contacts/">Контакти ліцею</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="mountain far"></div>
+        <div class="mountain near"></div>
+        <div class="school">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <Container as="section" class="preview" id="preview">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Основа майбутнього сайту</p>
+        <h2>Важливе — завжди поруч</h2>
+      </div>
+      <p>Зараз це демонстрація стилю. Реальний контент додамо на наступному етапі.</p>
+    </div>
+    <div class="cards">
+      <article>
+        <span class="card-number">01</span>
+        <h3>Новини ліцею</h3>
+        <p>Події, досягнення та важливі повідомлення для шкільної спільноти.</p>
+        <span class="status">Контент буде додано</span>
+      </article>
+      <article>
+        <span class="card-number">02</span>
+        <h3>Офіційні документи</h3>
+        <p>Структурований каталог документів із датами, категоріями та статусами.</p>
+        <span class="status">Контент буде додано</span>
+      </article>
+      <article>
+        <span class="card-number">03</span>
+        <h3>Батькам і учням</h3>
+        <p>Зрозумілі тематичні розділи без зайвих переходів і складної навігації.</p>
+        <span class="status">Контент буде додано</span>
+      </article>
+    </div>
+  </Container>
+
+  <Container as="section" class="principles">
+    <p class="eyebrow">Наш підхід</p>
+    <h2>Швидко. Доступно. Відповідально.</h2>
+    <div class="principle-list">
+      <p><strong>Mobile-first</strong><br />Зручно з телефона навіть за повільного інтернету.</p>
+      <p><strong>Без бар’єрів</strong><br />Клавіатура, скринрідер і масштабування 200%.</p>
+      <p>
+        <strong>Перевірений зміст</strong><br />Прозора редакційна історія та відповідальні особи.
+      </p>
+    </div>
+  </Container>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: clamp(3.5rem, 9vw, 7.5rem) 0 4rem;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    align-items: center;
+    gap: clamp(2rem, 6vw, 6rem);
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+  h1 {
+    max-width: 10ch;
+    margin: 0;
+    font-size: clamp(3.4rem, 8vw, 6.8rem);
+    letter-spacing: -0.055em;
+  }
+  .lead {
+    max-width: 38rem;
+    margin: 1.5rem 0 2rem;
+    color: var(--color-muted);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .button {
+    padding: 0.8rem 1.2rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .primary {
+    color: white;
+    background: var(--color-primary);
+  }
+  .secondary {
+    color: var(--color-primary);
+  }
+  .hero-art {
+    position: relative;
+    min-height: 26rem;
+    overflow: hidden;
+    background: linear-gradient(160deg, #e2ede5, #f6e8c9);
+    border: 0.6rem solid white;
+    border-radius: 48% 52% 44% 56% / 44% 40% 60% 56%;
+    box-shadow: var(--shadow-soft);
+  }
+  .sun {
+    position: absolute;
+    top: 3rem;
+    right: 4rem;
+    width: 5rem;
+    height: 5rem;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+  .mountain {
+    position: absolute;
+    right: -20%;
+    bottom: -10%;
+    left: -20%;
+    height: 67%;
+    background: #5c866a;
+    clip-path: polygon(
+      0 78%,
+      17% 37%,
+      28% 62%,
+      45% 15%,
+      67% 66%,
+      79% 38%,
+      100% 82%,
+      100% 100%,
+      0 100%
+    );
+  }
+  .mountain.far {
+    bottom: 17%;
+    background: #a5bda9;
+  }
+  .mountain.near {
+    background: #235b40;
+  }
+  .school {
+    position: absolute;
+    z-index: 2;
+    right: 21%;
+    bottom: 12%;
+    display: flex;
+    gap: 0.7rem;
+    width: 58%;
+    height: 24%;
+    align-items: center;
+    justify-content: center;
+    background: #fffaf0;
+    border-radius: 0.2rem;
+    box-shadow: 0 10px 30px rgba(13, 48, 30, 0.2);
+  }
+  .school::before {
+    position: absolute;
+    top: -45%;
+    width: 112%;
+    height: 52%;
+    background: #8f4f39;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    content: '';
+  }
+  .school span {
+    width: 15%;
+    height: 42%;
+    background: #78a18a;
+    border-radius: 0.15rem;
+  }
+  .preview,
+  .principles {
+    padding-block: 4rem;
+  }
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .section-heading h2,
+  .principles h2 {
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    letter-spacing: -0.04em;
+  }
+  .section-heading > p {
+    max-width: 32rem;
+    color: var(--color-muted);
+  }
+  .cards {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cards article {
+    padding: 1.8rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 30px rgba(30, 67, 47, 0.05);
+  }
+  .card-number {
+    color: #8a5906;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .cards h3 {
+    margin: 2rem 0 0.7rem;
+    font-size: 1.55rem;
+  }
+  .cards p {
+    color: var(--color-muted);
+  }
+  .status {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.35rem 0.7rem;
+    color: var(--color-primary);
+    background: var(--color-soft);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .principles {
+    margin-top: 3rem;
+    padding-inline: clamp(1.4rem, 5vw, 4rem);
+    color: white;
+    background: var(--color-primary);
+    border-radius: var(--radius-lg);
+  }
+  .principles .eyebrow {
+    color: #f3ca81;
+  }
+  .principle-list {
+    display: grid;
+    gap: 2rem;
+    margin-top: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .principle-list p {
+    color: #d6e5db;
+  }
+  .principle-list strong {
+    color: white;
+  }
+  @media (max-width: 48rem) {
+    .hero-grid,
+    .cards,
+    .principle-list {
+      grid-template-columns: 1fr;
+    }
+    .hero-art {
+      min-height: 20rem;
+    }
+    .section-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

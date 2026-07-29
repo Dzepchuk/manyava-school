@@ -25,14 +25,14 @@
 
 **Мета**: створити відтворюване середовище Astro та базову структуру файлів.
 
-- [ ] T001 Ініціалізувати Astro 7.1.x проєкт із TypeScript strict у `package.json`, `astro.config.mjs` і `tsconfig.json`
-- [ ] T002 Додати зафіксовані залежності Astro, Decap CMS, Pagefind, sitemap, Vitest, Playwright, axe-core і Lighthouse CI до `package.json` та `package-lock.json`
-- [ ] T003 [P] Налаштувати форматування, lint і перевірку Markdown/YAML у `eslint.config.js`, `.prettierrc.mjs` і `.prettierignore`
-- [ ] T004 [P] Створити структуру каталогів із placeholder-файлами в `src/components/`, `src/content/`, `src/data/`, `src/layouts/`, `src/lib/`, `src/pages/`, `src/styles/`, `public/admin/`, `public/documents/`, `public/media/` і `tests/`
-- [ ] T005 [P] Налаштувати команди `dev`, `check`, `test`, `test:e2e`, `build`, `index` і `validate` у `package.json`
-- [ ] T006 [P] Налаштувати Vitest і Playwright з локальним Astro web server у `vitest.config.ts` і `playwright.config.ts`
-- [ ] T007 [P] Додати правила ігнорування build output, локальних секретів і тестових артефактів у `.gitignore`
-- [ ] T008 Створити початкову Netlify-конфігурацію статичної збірки та Pagefind indexing у `netlify.toml`
+- [x] T001 Ініціалізувати Astro 7.1.x проєкт із TypeScript strict у `package.json`, `astro.config.mjs` і `tsconfig.json`
+- [x] T002 Додати зафіксовані залежності Astro, Pagefind, sitemap, Vitest, Playwright, axe-core і Lighthouse CI до `package.json` та `package-lock.json`; безпечний спосіб підключення Decap CMS визначити в T046 після усунення high-severity advisory його поточного npm-пакета
+- [x] T003 [P] Налаштувати форматування, lint і перевірку Markdown/YAML у `eslint.config.js`, `.prettierrc.mjs` і `.prettierignore`
+- [x] T004 [P] Створити структуру каталогів із placeholder-файлами в `src/components/`, `src/content/`, `src/data/`, `src/layouts/`, `src/lib/`, `src/pages/`, `src/styles/`, `public/admin/`, `public/documents/`, `public/media/` і `tests/`
+- [x] T005 [P] Налаштувати команди `dev`, `check`, `test`, `test:e2e`, `build`, `index` і `validate` у `package.json`
+- [x] T006 [P] Налаштувати Vitest і Playwright з локальним Astro web server у `vitest.config.ts` і `playwright.config.ts`
+- [x] T007 [P] Додати правила ігнорування build output, локальних секретів і тестових артефактів у `.gitignore`
+- [x] T008 Створити початкову Netlify-конфігурацію статичної збірки та Pagefind indexing у `netlify.toml`
 
 **Checkpoint**: залежності встановлюються з lockfile, а порожній проєкт
 відтворювано проходить базові команди.
@@ -46,18 +46,18 @@
 
 **⚠️ КРИТИЧНО**: усі задачі цієї фази мають бути завершені до story phases.
 
-- [ ] T009 Створити спільні Zod-схеми `ContentStatus`, `ContentOwner`, `ReviewMetadata` і безпечних URL у `src/lib/validation/common.ts`
-- [ ] T010 [P] Реалізувати українські date/time formatters із timezone `Europe/Kyiv` у `src/lib/dates/format.ts`
-- [ ] T011 [P] Реалізувати canonical URL, title, description, Open Graph і robots helpers у `src/lib/seo/metadata.ts`
-- [ ] T012 [P] Створити mobile-first design tokens, видимий focus, reduced-motion і базові правила масштабу 200% у `src/styles/global.css`
-- [ ] T013 Створити семантичний базовий layout з `lang="uk"`, skip-link, header, main і footer у `src/layouts/BaseLayout.astro`
-- [ ] T014 [P] Створити доступні базові компоненти `Container`, `Breadcrumbs`, `ContentMeta`, `ExternalLink` і `Pagination` у `src/components/common/`
-- [ ] T015 Створити схеми `SiteSettings`, `NavigationItem` і `ContentOwner` у `src/lib/validation/site-data.ts`
-- [ ] T016 Створити валідні початкові налаштування, власників і трирівневу навігацію у `src/data/site.yml`, `src/data/owners.yml` і `src/data/navigation.yml`
-- [ ] T017 Реалізувати завантаження та build-blocking валідацію YAML-даних у `src/lib/content/load-site-data.ts`
-- [ ] T018 [P] Додати CSP, HSTS, Referrer-Policy, Permissions-Policy, MIME protection і правила `/admin/` у `public/_headers`
-- [ ] T019 [P] Налаштувати sitemap, canonical site URL placeholder і image service у `astro.config.mjs`
-- [ ] T020 Створити CI workflow з install, format, lint, Astro check, validation, unit tests, build, Pagefind, Playwright, axe і performance gates у `.github/workflows/ci.yml`
+- [x] T009 Створити спільні Zod-схеми `ContentStatus`, `ContentOwner`, `ReviewMetadata` і безпечних URL у `src/lib/validation/common.ts`
+- [x] T010 [P] Реалізувати українські date/time formatters із timezone `Europe/Kyiv` у `src/lib/dates/format.ts`
+- [x] T011 [P] Реалізувати canonical URL, title, description, Open Graph і robots helpers у `src/lib/seo/metadata.ts`
+- [x] T012 [P] Створити mobile-first design tokens, видимий focus, reduced-motion і базові правила масштабу 200% у `src/styles/global.css`
+- [x] T013 Створити семантичний базовий layout з `lang="uk"`, skip-link, header, main і footer у `src/layouts/BaseLayout.astro`
+- [x] T014 [P] Створити доступні базові компоненти `Container`, `Breadcrumbs`, `ContentMeta`, `ExternalLink` і `Pagination` у `src/components/common/`
+- [x] T015 Створити схеми `SiteSettings`, `NavigationItem` і `ContentOwner` у `src/lib/validation/site-data.ts`
+- [x] T016 Створити валідні початкові налаштування, власників і трирівневу навігацію у `src/data/site.yml`, `src/data/owners.yml` і `src/data/navigation.yml`
+- [x] T017 Реалізувати завантаження та build-blocking валідацію YAML-даних у `src/lib/content/load-site-data.ts`
+- [x] T018 [P] Додати CSP, HSTS, Referrer-Policy, Permissions-Policy, MIME protection і правила `/admin/` у `public/_headers`
+- [x] T019 [P] Налаштувати sitemap, canonical site URL placeholder і image service у `astro.config.mjs`
+- [x] T020 Створити CI workflow з install, format, lint, Astro check, validation, unit tests, build, Pagefind, Playwright, axe і performance gates у `.github/workflows/ci.yml`
 
 **Checkpoint**: foundation збирається, спільні дані валідовуються, layout
 доступний із клавіатури, а CI запускає всі погоджені quality gates.
@@ -278,27 +278,27 @@ US6.
 
 ## Покриття вимог задачами
 
-| Вимоги | Основні задачі | Перевірки |
-|---|---|---|
-| FR-LAUNCH-001 | T035–T041, T058–T065, T094 | T033, T056, T095 |
-| FR-PAGE-001, FR-PAGE-002, FR-PAGE-003, FR-PAGE-004, FR-CONTACT-001 | T024–T030 | T021–T023 |
-| FR-NEWS-001, FR-NEWS-002, FR-NOTICE-001, FR-EVENT-001, FR-EVENT-002 | T035–T041 | T031–T034 |
-| FR-DOC-001, FR-DOC-002, FR-DOC-003, FR-DOC-004, FR-TRANS-001 | T058–T065 | T054–T057 |
-| FR-SEARCH-001, FR-SEARCH-002, FR-SEARCH-003, FR-SEARCH-004 | T077–T081 | T073–T076 |
-| FR-CMS-001, FR-CMS-002, FR-CMS-003, FR-CMS-004 | T046–T053 | T042–T045, T053 |
-| FR-ROLE-001, FR-ROLE-002, FR-ROLE-003, FR-ROLE-004 | T047, T051–T053 | T044–T045, T053 |
-| FR-EXT-001, FR-EXT-002 | T071–T072 | T066–T068 |
-| QR-LEGAL-001, QR-LEGAL-002 | T059–T060, T064–T065, T094 | T054, T056, T095 |
-| QR-PRIV-001, QR-PRIV-002, QR-PRIV-003 | T048–T050, T069–T072, T085 | T042, T067, T095 |
-| QR-A11Y-001, QR-A11Y-002, QR-A11Y-003 | T012–T014, T023, T034, T057, T068, T076, T088 | T023, T034, T057, T068, T076, T088 |
-| QR-PERF-001, QR-PERF-002 | T077–T080, T084, T087 | T075, T087, T095 |
-| QR-CONTENT-001, QR-CONTENT-002 | T009, T024, T035, T058, T060 | T021, T032, T054 |
-| QR-SEC-001, QR-SEC-002 | T018, T020, T043, T046–T052 | T043–T045, T095 |
-| QR-RECOVERY-001 | T052, T090–T091 | T091, T095 |
-| QR-ANALYTICS-001 | T089 | T095 |
-| QR-SEO-001, QR-SEO-002 | T011, T019, T043, T077, T082–T083 | T043, T074, T083 |
-| QR-MEDIA-001, QR-MEDIA-002, QR-MEDIA-003 | T048–T050, T084–T085 | T042, T085, T095 |
-| SC-001–SC-011 | T021–T096 відповідно до матриці вище | T095–T096 |
+| Вимоги                                                              | Основні задачі                                | Перевірки                          |
+| ------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------- |
+| FR-LAUNCH-001                                                       | T035–T041, T058–T065, T094                    | T033, T056, T095                   |
+| FR-PAGE-001, FR-PAGE-002, FR-PAGE-003, FR-PAGE-004, FR-CONTACT-001  | T024–T030                                     | T021–T023                          |
+| FR-NEWS-001, FR-NEWS-002, FR-NOTICE-001, FR-EVENT-001, FR-EVENT-002 | T035–T041                                     | T031–T034                          |
+| FR-DOC-001, FR-DOC-002, FR-DOC-003, FR-DOC-004, FR-TRANS-001        | T058–T065                                     | T054–T057                          |
+| FR-SEARCH-001, FR-SEARCH-002, FR-SEARCH-003, FR-SEARCH-004          | T077–T081                                     | T073–T076                          |
+| FR-CMS-001, FR-CMS-002, FR-CMS-003, FR-CMS-004                      | T046–T053                                     | T042–T045, T053                    |
+| FR-ROLE-001, FR-ROLE-002, FR-ROLE-003, FR-ROLE-004                  | T047, T051–T053                               | T044–T045, T053                    |
+| FR-EXT-001, FR-EXT-002                                              | T071–T072                                     | T066–T068                          |
+| QR-LEGAL-001, QR-LEGAL-002                                          | T059–T060, T064–T065, T094                    | T054, T056, T095                   |
+| QR-PRIV-001, QR-PRIV-002, QR-PRIV-003                               | T048–T050, T069–T072, T085                    | T042, T067, T095                   |
+| QR-A11Y-001, QR-A11Y-002, QR-A11Y-003                               | T012–T014, T023, T034, T057, T068, T076, T088 | T023, T034, T057, T068, T076, T088 |
+| QR-PERF-001, QR-PERF-002                                            | T077–T080, T084, T087                         | T075, T087, T095                   |
+| QR-CONTENT-001, QR-CONTENT-002                                      | T009, T024, T035, T058, T060                  | T021, T032, T054                   |
+| QR-SEC-001, QR-SEC-002                                              | T018, T020, T043, T046–T052                   | T043–T045, T095                    |
+| QR-RECOVERY-001                                                     | T052, T090–T091                               | T091, T095                         |
+| QR-ANALYTICS-001                                                    | T089                                          | T095                               |
+| QR-SEO-001, QR-SEO-002                                              | T011, T019, T043, T077, T082–T083             | T043, T074, T083                   |
+| QR-MEDIA-001, QR-MEDIA-002, QR-MEDIA-003                            | T048–T050, T084–T085                          | T042, T085, T095                   |
+| SC-001–SC-011                                                       | T021–T096 відповідно до матриці вище          | T095–T096                          |
 
 ---
 

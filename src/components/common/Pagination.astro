@@ -1,0 +1,25 @@
+---
+interface Props {
+  current: number;
+  total: number;
+  basePath: string;
+}
+
+const { current, total, basePath } = Astro.props;
+---
+
+<nav aria-label="Сторінки" class="pagination">
+  {current > 1 && <a href={`${basePath}${current - 1}/`}>← Попередня</a>}
+  <span>Сторінка {current} з {total}</span>
+  {current < total && <a href={`${basePath}${current + 1}/`}>Наступна →</a>}
+</nav>
+
+<style>
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-block: 2rem;
+  }
+</style>

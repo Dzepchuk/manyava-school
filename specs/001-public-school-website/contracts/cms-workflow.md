@@ -46,15 +46,15 @@ Draft → In review → Ready → Published → Archived
 
 ## Authorization
 
-| Action | TechnicalAdministrator | EditorApprover |
-|---|---:|---:|
-| Create/edit content | yes | yes |
-| Review preview | yes | yes |
-| Publish content | emergency/backup | yes |
-| Archive/restore content | yes | yes |
-| Manage users/roles | yes | no |
-| Change schema/CMS config | yes | no |
-| Change secrets/OAuth/deploy | yes | no |
+| Action                      | TechnicalAdministrator | EditorApprover |
+| --------------------------- | ---------------------: | -------------: |
+| Create/edit content         |                    yes |            yes |
+| Review preview              |                    yes |            yes |
+| Publish content             |       emergency/backup |            yes |
+| Archive/restore content     |                    yes |            yes |
+| Manage users/roles          |                    yes |             no |
+| Change schema/CMS config    |                    yes |             no |
+| Change secrets/OAuth/deploy |                    yes |             no |
 
 ## Failure behavior
 

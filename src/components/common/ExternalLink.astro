@@ -1,0 +1,25 @@
+---
+interface Props {
+  href: string;
+  purpose?: string;
+}
+
+const { href, purpose } = Astro.props;
+---
+
+<a href={href} rel="noopener noreferrer" target="_blank">
+  <slot />
+  <span class="sr-only"> (відкриється в новій вкладці{purpose ? `: ${purpose}` : ''})</span>
+  <span aria-hidden="true">↗</span>
+</a>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+</style>

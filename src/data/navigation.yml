@@ -50,10 +50,38 @@
   order: 4
   audiences: [all]
   visible: true
+- id: transparency
+  label: Прозорість
+  path: /transparency/
+  parentId: documents
+  order: 1
+  audiences: [all]
+  visible: true
 - id: parents
   label: Батькам
   path: /parents/
   order: 5
+  audiences: [parents]
+  visible: true
+- id: parents-learning
+  label: Навчання
+  path: /parents/learning/
+  parentId: parents
+  order: 1
+  audiences: [parents]
+  visible: true
+- id: parents-meals
+  label: Харчування
+  path: /parents/meals/
+  parentId: parents
+  order: 2
+  audiences: [parents]
+  visible: true
+- id: parents-safety
+  label: Безпека
+  path: /parents/safety/
+  parentId: parents
+  order: 3
   audiences: [parents]
   visible: true
 - id: students
@@ -62,9 +90,36 @@
   order: 6
   audiences: [students]
   visible: true
+- id: students-learning
+  label: Навчання
+  path: /students/learning/
+  parentId: students
+  order: 1
+  audiences: [students]
+  visible: true
+- id: students-support
+  label: Підтримка
+  path: /students/support/
+  parentId: students
+  order: 2
+  audiences: [students]
+  visible: true
+- id: bullying-prevention
+  label: Протидія булінгу
+  path: /bullying-prevention/
+  parentId: students
+  order: 3
+  audiences: [all]
+  visible: true
 - id: contacts
   label: Контакти
   path: /contacts/
   order: 7
+  audiences: [all]
+  visible: true
+- id: search
+  label: Пошук
+  path: /search/
+  order: 8
   audiences: [all]
   visible: true

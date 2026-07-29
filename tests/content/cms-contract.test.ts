@@ -25,6 +25,14 @@ function nestedFieldNames(collectionName: string, name: string): Set<string> {
   return new Set(field.fields.map(({ name: value }: { name: string }) => value));
 }
 
+function fileFieldNames(collectionName: string, fileName: string): Set<string> {
+  const collection = config.collections.find(
+    ({ name }: { name: string }) => name === collectionName,
+  );
+  const file = collection.files.find(({ name }: { name: string }) => name === fileName);
+  return new Set(file.fields.map(({ name }: { name: string }) => name));
+}
+
 describe('контракт Decap CMS', () => {
   it('використовує GitHub editorial workflow без секретів', () => {
     expect(config.backend).toMatchObject({
@@ -57,6 +65,28 @@ describe('контракт Decap CMS', () => {
       'publicationBasis',
     ]) {
       expect(coverFields.has(field)).toBe(true);
+    }
+  });
+
+  it('дозволяє змінювати офіційні контакти без редагування коду', () => {
+    const names = fileFieldNames('site-settings', 'official-contacts');
+    for (const field of [
+      'officialName',
+      'shortName',
+      'tagline',
+      'address',
+      'phones',
+      'email',
+      'workingHours',
+      'contactPublication',
+      'siteUrl',
+      'socialLinks',
+      'defaultSeo',
+      'analyticsEnabled',
+      'updatedAt',
+      'approvedBy',
+    ]) {
+      expect(names.has(field)).toBe(true);
     }
   });
 

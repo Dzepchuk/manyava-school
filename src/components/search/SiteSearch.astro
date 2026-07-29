@@ -1,0 +1,218 @@
+<section class="site-search" aria-labelledby="search-title">
+  <h1 id="search-title">Пошук на сайті</h1>
+  <p>Шукайте серед опублікованих сторінок, новин, оголошень, подій і документів.</p>
+
+  <form role="search" action="/search/" method="get">
+    <label for="site-search-query">Ключові слова</label>
+    <div class="search-row">
+      <input
+        id="site-search-query"
+        name="q"
+        type="search"
+        minlength="2"
+        autocomplete="off"
+        placeholder="Наприклад, вступ або документи"
+      />
+      <button type="submit">Знайти</button>
+    </div>
+  </form>
+
+  <p id="search-status" class="status" aria-live="polite"></p>
+  <ol id="search-results" class="results"></ol>
+
+  <section id="search-empty" class="empty" hidden aria-labelledby="search-empty-title">
+    <h2 id="search-empty-title">Нічого не знайдено</h2>
+    <p>Спробуйте коротший запит або перейдіть до одного з основних розділів:</p>
+    <ul>
+      <li><a href="/news/">Новини</a></li>
+      <li><a href="/documents/">Документи</a></li>
+      <li><a href="/contacts/">Контакти</a></li>
+    </ul>
+  </section>
+</section>
+
+<script>
+  interface PagefindData {
+    url: string;
+    excerpt: string;
+    meta: Record<string, string>;
+  }
+  interface PagefindResult {
+    data(): Promise<PagefindData>;
+  }
+  interface PagefindResponse {
+    results: PagefindResult[];
+  }
+  interface PagefindModule {
+    search(query: string): Promise<PagefindResponse>;
+  }
+  interface SearchWindow extends Window {
+    __PAGEFIND_TEST__?: PagefindModule;
+  }
+
+  const form = document.querySelector<HTMLFormElement>('.site-search form');
+  const input = document.querySelector<HTMLInputElement>('#site-search-query');
+  const results = document.querySelector<HTMLOListElement>('#search-results');
+  const status = document.querySelector<HTMLElement>('#search-status');
+  const empty = document.querySelector<HTMLElement>('#search-empty');
+  let debounceTimer: number | undefined;
+
+  function excerptText(value: string): string {
+    const template = document.createElement('template');
+    template.innerHTML = value;
+    return template.content.textContent?.trim() ?? '';
+  }
+
+  async function renderResults(query: string): Promise<void> {
+    if (!results || !status || !empty) return;
+    results.replaceChildren();
+    empty.hidden = true;
+
+    if (query.trim().length < 2) {
+      status.textContent = 'Введіть щонайменше два символи.';
+      return;
+    }
+
+    status.textContent = 'Шукаємо…';
+
+    try {
+      const pagefindPath = '/pagefind/pagefind.js';
+      const pagefind =
+        (window as SearchWindow).__PAGEFIND_TEST__ ??
+        ((await import(/* @vite-ignore */ pagefindPath)) as PagefindModule);
+      const response = await pagefind.search(query.trim());
+      const entries = await Promise.all(
+        response.results.slice(0, 20).map((result) => result.data()),
+      );
+
+      for (const entry of entries) {
+        const item = document.createElement('li');
+        const heading = document.createElement('h2');
+        const link = document.createElement('a');
+        const context = document.createElement('p');
+        const metadata = document.createElement('p');
+
+        link.href = entry.url;
+        link.textContent = entry.meta.title || 'Матеріал без назви';
+        context.textContent = excerptText(entry.excerpt);
+        metadata.className = 'result-meta';
+        metadata.textContent = [entry.meta.type, entry.meta.date].filter(Boolean).join(' · ');
+        heading.append(link);
+        item.append(heading, metadata, context);
+        results.append(item);
+      }
+
+      status.textContent = `Знайдено результатів: ${entries.length}`;
+      empty.hidden = entries.length > 0;
+    } catch {
+      status.textContent =
+        'Пошук тимчасово недоступний. Скористайтеся основною навігацією або контактами ліцею.';
+    }
+  }
+
+  if (form && input) {
+    const initialQuery = new URLSearchParams(window.location.search).get('q') ?? '';
+    input.value = initialQuery;
+    if (initialQuery) void renderResults(initialQuery);
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const query = input.value.trim();
+      const url = new URL(window.location.href);
+      if (query) {
+        url.searchParams.set('q', query);
+      } else {
+        url.searchParams.delete('q');
+      }
+      window.history.replaceState({}, '', url);
+      void renderResults(query);
+    });
+
+    input.addEventListener('input', () => {
+      window.clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(() => void renderResults(input.value), 250);
+    });
+  }
+</script>
+
+<style>
+  .site-search > p {
+    max-width: 46rem;
+    color: var(--color-muted);
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 7vw, 6rem);
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+  }
+  form {
+    max-width: 48rem;
+    margin-block: 2rem;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.45rem;
+    font-weight: 800;
+  }
+  .search-row {
+    display: flex;
+    gap: 0.6rem;
+  }
+  input {
+    flex: 1;
+    min-width: 0;
+    min-height: 3rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.6rem;
+    font: inherit;
+  }
+  button {
+    padding: 0.7rem 1.2rem;
+    color: white;
+    background: var(--color-primary);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 800;
+  }
+  .status {
+    min-height: 1.5rem;
+  }
+  .results {
+    display: grid;
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+  }
+  .results :global(li),
+  .empty {
+    padding: 1.3rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+  .results :global(h2) {
+    margin: 0;
+    font-size: 1.35rem;
+  }
+  .results :global(p) {
+    margin-bottom: 0;
+  }
+  .results :global(.result-meta) {
+    color: var(--color-primary);
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
+  .empty[hidden] {
+    display: none;
+  }
+  @media (max-width: 30rem) {
+    .search-row {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,21 @@
+categories:
+  - id: organizational-documents
+    label: Організаційні документи
+    description: Статути, правила, положення та інші документи з організації роботи ліцею.
+    order: 10
+    active: true
+  - id: educational-activity
+    label: Освітня діяльність
+    description: Освітні програми, навчальні плани та документи про організацію навчання.
+    order: 20
+    active: true
+  - id: financial-transparency
+    label: Фінансова прозорість
+    description: Кошториси, звіти та інші відкриті матеріали про використання коштів.
+    order: 30
+    active: true
+  - id: safety
+    label: Безпека
+    description: Політики, інструкції та плани заходів із безпеки освітнього середовища.
+    order: 40
+    active: true

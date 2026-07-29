@@ -1,14 +1,16 @@
 officialName: Манявський ліцей Солотвинської селищної ради
 shortName: Манявський ліцей
 tagline: Простір знань, взаємоповаги та розвитку
-address: с. Манява, Івано-Франківська область, Україна
-phones: []
-email: school@example.invalid
+address: вул. Незалежності, 10, с. Манява, Івано-Франківський район, Івано-Франківська область, 77772
+phones:
+  - label: Телефон ліцею
+    value: +380 97 236 78 52
+email: manyavanvk@gmail.com
 workingHours: Понеділок–п’ятниця, години уточнюються
 contactPublication:
   address: true
-  phones: false
-  email: false
+  phones: true
+  email: true
   workingHours: false
 siteUrl: https://manyava-school.if.ua
 socialLinks: []
@@ -17,4 +19,4 @@ defaultSeo:
   description: Офіційний сайт Манявського ліцею з актуальними новинами, документами, оголошеннями та інформацією для громади.
 analyticsEnabled: false
 updatedAt: 2026-07-29
-approvedBy: technical-administrator
+approvedBy: director

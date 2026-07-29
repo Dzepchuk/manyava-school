@@ -1,6 +1,7 @@
 ---
 import Container from '../components/common/Container.astro';
 import SiteNavigation from '../components/navigation/SiteNavigation.astro';
+import SearchMetadata from '../components/search/SearchMetadata.astro';
 import { loadSiteData } from '../lib/content/load-site-data';
 import { createSeoMetadata } from '../lib/seo/metadata';
 import '../styles/global.css';
@@ -9,6 +10,10 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  contentType?: string;
+  contentDate?: Date;
+  searchKeywords?: string[];
+  image?: string;
 }
 
 const { site, navigation } = loadSiteData();
@@ -16,6 +21,10 @@ const {
   title = site.defaultSeo.title,
   description = site.defaultSeo.description,
   noindex = false,
+  contentType = 'Сторінка',
+  contentDate,
+  searchKeywords = [],
+  image = '/media/default-social.webp',
 } = Astro.props;
 const seo = createSeoMetadata({
   title,
@@ -23,6 +32,7 @@ const seo = createSeoMetadata({
   pathname: Astro.url.pathname,
   site: Astro.site ?? new URL(site.siteUrl),
   noindex,
+  image,
 });
 ---
 
@@ -36,8 +46,16 @@ const seo = createSeoMetadata({
     <meta property="og:title" content={seo.openGraph.title} />
     <meta property="og:description" content={seo.openGraph.description} />
     <meta property="og:url" content={seo.openGraph.url} />
+    {seo.openGraph.image && <meta property="og:image" content={seo.openGraph.image} />}
     <link rel="canonical" href={seo.canonical} />
     <link rel="icon" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Новини Манявського ліцею"
+      href="/rss.xml"
+    />
+    {!noindex && <SearchMetadata type={contentType} date={contentDate} keywords={searchKeywords} />}
     <title>{seo.title}</title>
   </head>
   <body>
@@ -51,7 +69,7 @@ const seo = createSeoMetadata({
         <SiteNavigation items={navigation} currentPath={Astro.url.pathname} />
       </Container>
     </header>
-    <main id="main-content">
+    <main id="main-content" data-pagefind-body={noindex ? undefined : ''}>
       <slot />
     </main>
     <footer class="site-footer">

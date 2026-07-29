@@ -1,0 +1,127 @@
+---
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+import Container from '../components/common/Container.astro';
+import ExternalLink from '../components/common/ExternalLink.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadDocumentData } from '../lib/content/load-document-data';
+import { loadSiteData } from '../lib/content/load-site-data';
+import { formatDate } from '../lib/dates/format';
+
+const { legalPublications } = loadDocumentData();
+const { owners } = loadSiteData();
+const confirmed = legalPublications.filter(({ status }) => status === 'confirmed');
+---
+
+<BaseLayout
+  title="Прозорість — Манявський ліцей"
+  description="Підтверджений реєстр обов’язкових публікацій та відповідальних за актуальність інформації Манявського ліцею."
+>
+  <Container class="page-shell">
+    <Breadcrumbs items={[{ label: 'Головна', href: '/' }, { label: 'Прозорість' }]} />
+    <header class="page-heading">
+      <p class="eyebrow">Відкритість закладу</p>
+      <h1>Прозорість та обов’язкові публікації</h1>
+      <p>
+        Тут публікуються лише вимоги, нормативну підставу яких перевірено та зафіксовано
+        відповідальною особою.
+      </p>
+    </header>
+
+    {
+      confirmed.length > 0 ? (
+        <div class="publication-list">
+          {confirmed.map((publication) => {
+            const owner = owners.find(({ id }) => id === publication.responsibleOwnerId);
+            return (
+              <article>
+                <p class="status">Підтверджено</p>
+                <h2>{publication.title}</h2>
+                <p>
+                  <ExternalLink
+                    href={publication.sourceUrl}
+                    purpose="перевірити офіційне нормативне джерело"
+                  >
+                    {publication.sourceTitle}, {publication.sourceSection}
+                  </ExternalLink>
+                </p>
+                <dl>
+                  <div>
+                    <dt>Місце публікації</dt>
+                    <dd>
+                      <a href={publication.publicationPath}>{publication.publicationPath}</a>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Відповідальний</dt>
+                    <dd>{owner?.displayName ?? publication.responsibleOwnerId}</dd>
+                  </div>
+                  <div>
+                    <dt>Перевірено</dt>
+                    <dd>{formatDate(publication.verifiedAt)}</dd>
+                  </div>
+                  <div>
+                    <dt>Наступна перевірка</dt>
+                    <dd>{formatDate(publication.reviewDueAt)}</dd>
+                  </div>
+                </dl>
+              </article>
+            );
+          })}
+        </div>
+      ) : (
+        <section class="empty-state" aria-labelledby="registry-title">
+          <h2 id="registry-title">Нормативний реєстр очікує затвердження</h2>
+          <p>
+            Поки уповноважена особа не підтвердить точний перелік і джерела, сайт не позначає жоден
+            матеріал як законодавчо обов’язкову публікацію.
+          </p>
+          <a href="/documents/">Переглянути каталог документів</a>
+        </section>
+      )
+    }
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 5rem;
+  }
+  .page-heading {
+    max-width: 62rem;
+    margin: clamp(3rem, 8vw, 6rem) 0 2rem;
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+  }
+  .publication-list {
+    display: grid;
+    gap: 1rem;
+  }
+  .publication-list article,
+  .empty-state {
+    padding: clamp(1.4rem, 4vw, 2rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+  }
+  .status {
+    color: var(--color-primary);
+    font-weight: 800;
+  }
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
+  dt {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+  }
+  dd {
+    margin: 0.2rem 0 0;
+    font-weight: 700;
+  }
+</style>

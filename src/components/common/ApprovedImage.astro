@@ -1,0 +1,45 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  sizes?: string;
+  sources?: Array<{ src: string; width: number }>;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  caption,
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  sizes = '(max-width: 48rem) 100vw, 50vw',
+  sources = [],
+} = Astro.props;
+const srcset = [...sources, { src, width }]
+  .sort((left, right) => left.width - right.width)
+  .map((source) => `${source.src} ${source.width}w`)
+  .join(', ');
+---
+
+<figure>
+  <img {src} {alt} {width} {height} {loading} {fetchpriority} {sizes} {srcset} decoding="async" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  figure {
+    margin: 0;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

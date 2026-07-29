@@ -1,0 +1,28 @@
+---
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+import Container from '../components/common/Container.astro';
+import SiteSearch from '../components/search/SiteSearch.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Пошук — Манявський ліцей"
+  description="Пошук серед опублікованих сторінок, новин, оголошень, подій і документів Манявського ліцею."
+  noindex
+>
+  <Container class="page-shell">
+    <Breadcrumbs items={[{ label: 'Головна', href: '/' }, { label: 'Пошук' }]} />
+    <div class="search-shell">
+      <SiteSearch />
+    </div>
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 5rem;
+  }
+  .search-shell {
+    margin-top: clamp(3rem, 8vw, 6rem);
+  }
+</style>

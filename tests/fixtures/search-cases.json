@@ -1,0 +1,22 @@
+[
+  {
+    "query": "вступ",
+    "expectedPath": "/admission/",
+    "synonyms": ["прийом", "зарахування"]
+  },
+  {
+    "query": "контакти",
+    "expectedPath": "/contacts/",
+    "synonyms": ["телефон", "адреса", "пошта"]
+  },
+  {
+    "query": "булінг",
+    "expectedPath": "/bullying-prevention/",
+    "synonyms": ["цькування", "безпека", "допомога"]
+  },
+  {
+    "query": "документи",
+    "expectedPath": "/documents/",
+    "synonyms": ["наказ", "положення", "прозорість"]
+  }
+]

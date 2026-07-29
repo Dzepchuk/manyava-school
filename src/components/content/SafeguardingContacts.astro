@@ -1,0 +1,77 @@
+---
+import { getPublishedContacts } from '../../lib/content/contacts';
+import { loadSiteData } from '../../lib/content/load-site-data';
+
+const { site } = loadSiteData();
+const contacts = getPublishedContacts(site);
+---
+
+<aside class="safeguarding" aria-labelledby="safeguarding-title">
+  <p class="eyebrow">Безпечне звернення</p>
+  <h2 id="safeguarding-title">Як повідомити про булінг або небезпеку</h2>
+  <ol>
+    <li>
+      <strong>Зверніться до дорослого, якому довіряєте.</strong>
+      Це можуть бути батьки, директор, класний керівник, психолог або інший працівник ліцею.
+    </li>
+    <li>
+      <strong>Опишіть, що сталося.</strong>
+      Повідомте, де й коли це відбулося та чи потрібна негайна допомога. Не публікуйте персональні дані
+      або фото дітей у відкритих коментарях.
+    </li>
+    <li>
+      <strong>Скористайтеся офіційними контактами ліцею.</strong>
+      {
+        contacts.phones.map((phone) => (
+          <a href={`tel:${phone.value.replace(/\s/g, '')}`}>{phone.value}</a>
+        ))
+      }
+      {contacts.email && <a href={`mailto:${contacts.email}`}>{contacts.email}</a>}
+    </li>
+  </ol>
+  <p class="privacy">
+    На сайті немає відкритої форми звернень. Це захищає повідомлення та персональні дані дітей від
+    випадкового оприлюднення. Якщо існує безпосередня загроза життю або здоров’ю, зверніться до
+    екстрених служб або дорослого поруч.
+  </p>
+</aside>
+
+<style>
+  .safeguarding {
+    padding: clamp(1.4rem, 5vw, 2.5rem);
+    color: white;
+    background: var(--color-primary);
+    border-radius: var(--radius-lg);
+  }
+  h2 {
+    max-width: 22ch;
+    margin: 0 0 1.4rem;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    overflow-wrap: anywhere;
+  }
+  ol {
+    display: grid;
+    gap: 1rem;
+    padding-left: 1.4rem;
+  }
+  li {
+    color: #e1ece4;
+  }
+  strong {
+    display: block;
+    color: white;
+  }
+  a {
+    display: block;
+    width: fit-content;
+    margin-top: 0.35rem;
+    color: #ffe0a3;
+    font-weight: 800;
+  }
+  .privacy {
+    margin: 1.5rem 0 0;
+    padding-top: 1.2rem;
+    color: #e1ece4;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+</style>

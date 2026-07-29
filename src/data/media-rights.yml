@@ -1,0 +1,44 @@
+media:
+  - id: manyava-lyceum-building
+    path: /media/manyava-lyceum-building.webp
+    alt: Будівля Манявського ліцею
+    sourceDescription: Фотографію надав власник сайту для розміщення на офіційному сайті ліцею.
+    license: Дозвіл на публікацію від надавача фотографії
+    licenseProof: Підтвердження користувача в робочому листуванні проєкту від 2026-07-29
+    depictsSchoolReality: true
+    containsChildren: false
+    width: 592
+    height: 299
+    mimeType: image/webp
+    bytes: 35688
+    approvedBy: technical-administrator
+    approvedAt: 2026-07-29
+    caption: Манявський ліцей · село Манява
+  - id: manyava-lyceum-building-responsive
+    path: /media/manyava-lyceum-building-320.webp
+    alt: Будівля Манявського ліцею
+    sourceDescription: Адаптивний варіант фотографії, наданої власником сайту.
+    license: Дозвіл на публікацію від надавача фотографії
+    licenseProof: Похідний файл запису manyava-lyceum-building
+    depictsSchoolReality: true
+    containsChildren: false
+    width: 320
+    height: 162
+    mimeType: image/webp
+    bytes: 12954
+    approvedBy: technical-administrator
+    approvedAt: 2026-07-29
+  - id: default-social
+    path: /media/default-social.webp
+    alt: Будівля Манявського ліцею
+    sourceDescription: Соціальне зображення з фотографії, наданої власником сайту.
+    license: Дозвіл на публікацію від надавача фотографії
+    licenseProof: Похідний файл запису manyava-lyceum-building
+    depictsSchoolReality: true
+    containsChildren: false
+    width: 592
+    height: 299
+    mimeType: image/webp
+    bytes: 35688
+    approvedBy: technical-administrator
+    approvedAt: 2026-07-29

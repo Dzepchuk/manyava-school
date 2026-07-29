@@ -42,7 +42,13 @@ const breadcrumbs = [
 ];
 ---
 
-<BaseLayout title={`${entry.data.title} — ${site.shortName}`} description={entry.data.description}>
+<BaseLayout
+  title={`${entry.data.title} — ${site.shortName}`}
+  description={entry.data.description}
+  contentType="Сторінка"
+  contentDate={entry.data.review.updatedAt}
+  searchKeywords={entry.data.searchKeywords}
+>
   <Container class="page-shell">
     <Breadcrumbs items={breadcrumbs} />
 

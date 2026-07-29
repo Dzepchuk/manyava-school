@@ -1,0 +1,190 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Container from '../../components/common/Container.astro';
+import PublicationPageHeader from '../../components/content/PublicationPageHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCurrentDocument } from '../../lib/content/documents';
+import { loadDocumentData } from '../../lib/content/load-document-data';
+import { formatDate } from '../../lib/dates/format';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('documents');
+  return entries
+    .filter(({ data }) => data.review.status === 'published')
+    .map((entry) => ({ params: { slug: entry.id }, props: { entry, entries } }));
+}
+
+interface Props {
+  entry: CollectionEntry<'documents'>;
+  entries: CollectionEntry<'documents'>[];
+}
+
+const { entry, entries } = Astro.props;
+const { Content } = await render(entry);
+const { categories } = loadDocumentData();
+const category = categories.find(({ id }) => id === entry.data.categoryId);
+const current = getCurrentDocument(
+  entries.map((item) => ({ id: item.id, ...item.data })),
+  entry.id,
+);
+const fileSize = new Intl.NumberFormat('uk-UA', {
+  maximumFractionDigits: 1,
+}).format(entry.data.file.bytes / 1024);
+---
+
+<BaseLayout
+  title={`${entry.data.title} — Документи`}
+  description={entry.data.description}
+  contentType="Документ"
+  contentDate={entry.data.documentDate}
+  searchKeywords={entry.data.searchKeywords}
+>
+  <Container class="page-shell">
+    <PublicationPageHeader
+      eyebrow="Офіційний документ"
+      title={entry.data.title}
+      description={entry.data.description}
+      breadcrumbs={[
+        { label: 'Головна', href: '/' },
+        { label: 'Документи', href: '/documents/' },
+        { label: entry.data.title },
+      ]}
+    />
+
+    {
+      entry.data.versionStatus !== 'current' && (
+        <aside class="version-notice" aria-labelledby="version-title">
+          <h2 id="version-title">Це архівна версія документа</h2>
+          {current && current.id !== entry.id ? (
+            <p>
+              Перейдіть до <a href={`/documents/${current.id}/`}>чинної версії документа</a>.
+            </p>
+          ) : (
+            <p>Чинну версію ще не опубліковано або документ відкликано.</p>
+          )}
+        </aside>
+      )
+    }
+
+    <div class="document-layout">
+      <article>
+        <h2>Доступний опис</h2>
+        <p class="summary">{entry.data.accessibleSummary}</p>
+        <Content />
+      </article>
+
+      <aside class="metadata" aria-labelledby="metadata-title">
+        <h2 id="metadata-title">Відомості про документ</h2>
+        <dl>
+          <div><dt>Категорія</dt><dd>{category?.label ?? entry.data.categoryId}</dd></div>
+          <div>
+            <dt>Дата документа</dt>
+            <dd>{formatDate(entry.data.documentDate)}</dd>
+          </div>
+          <div><dt>Опубліковано</dt><dd>{formatDate(entry.data.publishedAt)}</dd></div>
+          <div>
+            <dt>Статус</dt>
+            <dd>{entry.data.versionStatus === 'current' ? 'Чинний' : 'Архівний'}</dd>
+          </div>
+          <div><dt>Тип файла</dt><dd>{entry.data.file.mimeType}</dd></div>
+          <div><dt>Розмір</dt><dd>{fileSize} КБ</dd></div>
+          {
+            entry.data.number && (
+              <div>
+                <>
+                  <dt>Номер</dt>
+                  <dd>{entry.data.number}</dd>
+                </>
+              </div>
+            )
+          }
+          {
+            entry.data.issuer && (
+              <div>
+                <>
+                  <dt>Видавець</dt>
+                  <dd>{entry.data.issuer}</dd>
+                </>
+              </div>
+            )
+          }
+        </dl>
+
+        {
+          entry.data.file.available && entry.data.file.path ? (
+            <a class="download" href={entry.data.file.path} download>
+              Завантажити документ
+            </a>
+          ) : (
+            <p class="unavailable" role="status">
+              Файл тимчасово недоступний. Метадані й доступний опис залишаються на сторінці.
+            </p>
+          )
+        }
+      </aside>
+    </div>
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 5rem;
+  }
+  .version-notice,
+  .unavailable {
+    padding: 1rem 1.2rem;
+    color: #594000;
+    background: #fff4d8;
+    border: 1px solid #d9b765;
+    border-radius: var(--radius-md);
+  }
+  .version-notice h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+  }
+  .document-layout {
+    display: grid;
+    align-items: start;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1.4fr) minmax(17rem, 0.6fr);
+  }
+  .summary {
+    font-size: 1.15rem;
+  }
+  .metadata {
+    padding: 1.4rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+  .metadata h2 {
+    margin-top: 0;
+  }
+  .metadata dl {
+    display: grid;
+    gap: 0.9rem;
+  }
+  .metadata dt {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+  }
+  .metadata dd {
+    margin: 0.15rem 0 0;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+  .download {
+    display: inline-flex;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    color: white;
+    background: var(--color-primary);
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  @media (max-width: 48rem) {
+    .document-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

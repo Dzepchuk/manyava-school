@@ -1,7 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 function htmlFiles(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -11,10 +10,6 @@ function htmlFiles(directory: string): string[] {
 }
 
 describe('SEO output', () => {
-  beforeAll(() => {
-    execFileSync('npm', ['run', 'build'], { stdio: 'pipe' });
-  });
-
   it('має унікальні title, description і canonical для indexable routes', () => {
     const records = htmlFiles('dist')
       .filter((file) => !file.includes('/admin/'))

@@ -1,5 +1,4 @@
-import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 describe('Pagefind publication boundary', () => {
@@ -15,10 +14,6 @@ describe('Pagefind publication boundary', () => {
   });
 
   it('не індексує admin у зібраному індексі', () => {
-    if (!existsSync('dist/pagefind/pagefind-entry.json')) {
-      execFileSync('npm', ['run', 'build'], { stdio: 'pipe' });
-    }
-
     const entry = JSON.parse(readFileSync('dist/pagefind/pagefind-entry.json', 'utf8')) as {
       languages: Record<string, { hash: string }>;
     };

@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "pretest": "npm run build",
     "test": "vitest run --passWithNoTests",
     "test:e2e": "playwright test --pass-with-no-tests",
     "test:performance": "lhci autorun",

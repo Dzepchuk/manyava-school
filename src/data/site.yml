@@ -10,7 +10,7 @@ contactPublication:
   phones: false
   email: false
   workingHours: false
-siteUrl: http://localhost:4321
+siteUrl: https://manyava-school.if.ua
 socialLinks: []
 defaultSeo:
   title: Манявський ліцей — офіційний сайт

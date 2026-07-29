@@ -1,0 +1,539 @@
+---
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+import Container from '../components/common/Container.astro';
+import ExternalLink from '../components/common/ExternalLink.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadSiteData } from '../lib/content/load-site-data';
+
+const { site } = loadSiteData();
+---
+
+<BaseLayout
+  title={`Про ліцей — ${site.shortName}`}
+  description={`Підтверджені відомості про ${site.officialName}, освітні рівні та життя шкільної спільноти.`}
+>
+  <Container class="page-shell">
+    <Breadcrumbs items={[{ label: 'Головна', href: '/' }, { label: 'Про ліцей' }]} />
+
+    <section class="hero" aria-labelledby="about-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Про нас</p>
+        <h1 id="about-title">Ліцей, що зростає разом із Манявою</h1>
+        <p class="lead">
+          Манявський ліцей — комунальний опорний заклад освіти в селі Манява. Тут поєднані
+          дошкільна, початкова, базова та профільна середня освіта.
+        </p>
+      </div>
+
+      <div class="hero-mark" aria-hidden="true">
+        <span class="hero-number">01</span>
+        <div class="landscape">
+          <span class="sun"></span>
+          <span class="ridge ridge-far"></span>
+          <span class="ridge ridge-near"></span>
+          <span class="school"></span>
+        </div>
+        <p>Манява · Карпати</p>
+      </div>
+    </section>
+
+    <section class="facts" aria-labelledby="facts-title">
+      <div class="section-intro">
+        <p class="eyebrow">Коротко про заклад</p>
+        <h2 id="facts-title">Підтверджені відомості</h2>
+        <p>
+          Дані звірено з державною інформаційною системою АІКОМ. Ми не додаємо до сторінки
+          неперевірені статистичні показники або персональні дані учнів.
+        </p>
+      </div>
+
+      <dl class="fact-grid">
+        <div>
+          <dt>Статус</dt>
+          <dd>Опорний заклад</dd>
+        </div>
+        <div>
+          <dt>Форма власності</dt>
+          <dd>Комунальна власність</dd>
+        </div>
+        <div>
+          <dt>Мова навчання</dt>
+          <dd>Українська мова навчання</dd>
+        </div>
+        <div>
+          <dt>Місцезнаходження</dt>
+          <dd>с. Манява, вул. Незалежності, 10</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="education" aria-labelledby="education-title">
+      <div class="education-heading">
+        <p class="eyebrow">Освітній шлях</p>
+        <h2 id="education-title">Від перших кроків до свідомого вибору</h2>
+      </div>
+
+      <ol class="level-list">
+        <li>
+          <span>01</span>
+          <div>
+            <h3>Дошкільне відділення</h3>
+            <p>Перший простір розвитку, спілкування та пізнання світу.</p>
+          </div>
+        </li>
+        <li>
+          <span>02</span>
+          <div>
+            <h3>Початкова школа</h3>
+            <p>Міцна основа знань, самостійності та взаємоповаги.</p>
+          </div>
+        </li>
+        <li>
+          <span>03</span>
+          <div>
+            <h3>Гімназія</h3>
+            <p>Розвиток ключових компетентностей і відповідальності за власне навчання.</p>
+          </div>
+        </li>
+        <li>
+          <span>04</span>
+          <div>
+            <h3>Ліцей</h3>
+            <p>Профільна середня освіта та підготовка до подальшого освітнього шляху.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="community" aria-labelledby="community-title">
+      <div class="community-copy">
+        <p class="eyebrow">Життя спільноти</p>
+        <h2 id="community-title">Навчання, відповідальність і зв’язок із громадою</h2>
+        <p>
+          Відкриті публікації ліцею розповідають не лише про уроки. У них помітні турбота про
+          безпечне освітнє середовище, екологічні ініціативи, громадянська освіта, культура пам’яті
+          та участь у житті Маняви.
+        </p>
+      </div>
+
+      <div class="value-grid">
+        <article>
+          <span aria-hidden="true">↗</span>
+          <h3>Пізнавати</h3>
+          <p>Розвивати допитливість, практичні вміння й готовність навчатися впродовж життя.</p>
+        </article>
+        <article>
+          <span aria-hidden="true">↗</span>
+          <h3>Піклуватися</h3>
+          <p>Будувати простір взаємоповаги, безпеки та відповідального ставлення до довкілля.</p>
+        </article>
+        <article>
+          <span aria-hidden="true">↗</span>
+          <h3>Пам’ятати</h3>
+          <p>Берегти українську ідентичність, історичну пам’ять і зв’язок поколінь.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sources" aria-labelledby="sources-title">
+      <div>
+        <p class="eyebrow">Прозорість</p>
+        <h2 id="sources-title">Звідки взята інформація</h2>
+      </div>
+      <div class="source-copy">
+        <p>
+          Фактичні відомості перевірено 29 липня 2026 року. Опис життя спільноти узагальнює теми
+          відкритих публікацій ліцею; фото й персональні дані дітей не переносилися.
+        </p>
+        <ul>
+          <li>
+            <ExternalLink
+              href="https://aikom.iea.gov.ua/zzso/view?zzsoId=10585"
+              purpose="перевірити офіційні відомості про заклад"
+            >
+              Запис ліцею в АІКОМ
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink
+              href="https://www.facebook.com/profile.php?id=100068140848284"
+              purpose="переглянути відкриті новини шкільної спільноти"
+            >
+              Публічна сторінка ліцею у Facebook
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink
+              href="https://manyavanvk.e-schools.info/"
+              purpose="переглянути попередній інформаційний сайт ліцею"
+            >
+              Попередній сайт ліцею
+            </ExternalLink>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 4rem;
+  }
+
+  .hero {
+    display: grid;
+    align-items: center;
+    gap: clamp(2rem, 7vw, 6rem);
+    min-height: 38rem;
+    padding-block: clamp(3rem, 8vw, 7rem);
+    grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+  }
+
+  h1 {
+    max-width: 11ch;
+    margin: 0;
+    font-size: clamp(3.15rem, 7.5vw, 6.5rem);
+    hyphens: auto;
+    letter-spacing: -0.055em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .lead {
+    max-width: 43rem;
+    margin: 1.6rem 0 0;
+    color: var(--color-muted);
+    font-size: clamp(1.08rem, 2vw, 1.35rem);
+  }
+
+  .hero-mark {
+    padding: clamp(1.2rem, 3vw, 2rem);
+    color: white;
+    background: var(--color-primary);
+    border-radius: 48% 52% 45% 55% / 42% 42% 58% 58%;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .hero-number {
+    color: #f3ca81;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .hero-mark > p {
+    margin: 1rem 0 0;
+    text-align: center;
+  }
+
+  .landscape {
+    position: relative;
+    min-height: 19rem;
+    overflow: hidden;
+    margin-top: 1rem;
+    background: #e5efe7;
+    border-radius: 48% 52% 45% 55% / 44% 42% 58% 56%;
+  }
+
+  .sun {
+    position: absolute;
+    top: 2.8rem;
+    right: 3.4rem;
+    width: 4.2rem;
+    height: 4.2rem;
+    background: var(--color-accent);
+    border-radius: 50%;
+  }
+
+  .ridge {
+    position: absolute;
+    right: -10%;
+    bottom: -10%;
+    left: -10%;
+    height: 70%;
+    background: #2c684b;
+    clip-path: polygon(
+      0 76%,
+      18% 35%,
+      31% 63%,
+      49% 9%,
+      68% 66%,
+      82% 32%,
+      100% 78%,
+      100% 100%,
+      0 100%
+    );
+  }
+
+  .ridge-far {
+    bottom: 17%;
+    background: #9bb9a3;
+  }
+
+  .school {
+    position: absolute;
+    z-index: 2;
+    right: 26%;
+    bottom: 13%;
+    width: 48%;
+    height: 20%;
+    background:
+      linear-gradient(
+        90deg,
+        transparent 12%,
+        #7ea08b 12% 24%,
+        transparent 24% 38%,
+        #7ea08b 38% 50%,
+        transparent 50% 64%,
+        #7ea08b 64% 76%,
+        transparent 76%
+      ),
+      #fffaf0;
+    box-shadow: 0 8px 24px rgba(14, 48, 31, 0.24);
+  }
+
+  .school::before {
+    position: absolute;
+    top: -48%;
+    left: -8%;
+    width: 116%;
+    height: 52%;
+    background: #8e4d36;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    content: '';
+  }
+
+  .facts,
+  .education,
+  .community,
+  .sources {
+    margin-top: clamp(4rem, 9vw, 8rem);
+  }
+
+  .facts {
+    display: grid;
+    gap: clamp(2rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+  }
+
+  .section-intro h2,
+  .education-heading h2,
+  .community-copy h2,
+  .sources h2 {
+    max-width: 14ch;
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  .section-intro > p:last-child,
+  .community-copy > p:last-child,
+  .source-copy > p {
+    max-width: 40rem;
+    color: var(--color-muted);
+  }
+
+  .fact-grid {
+    display: grid;
+    gap: 1px;
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-line);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fact-grid div {
+    min-width: 0;
+    padding: clamp(1.4rem, 4vw, 2.2rem);
+    background: var(--color-surface);
+  }
+
+  .fact-grid dt {
+    color: var(--color-primary);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .fact-grid dd {
+    margin: 1.2rem 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .education {
+    padding: clamp(1.5rem, 5vw, 4rem);
+    color: white;
+    background: var(--color-primary-strong);
+    border-radius: var(--radius-lg);
+  }
+
+  .education .eyebrow {
+    color: #f3ca81;
+  }
+
+  .level-list {
+    display: grid;
+    gap: 0;
+    margin: 3rem 0 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .level-list li {
+    display: grid;
+    gap: 1rem;
+    padding: 1.8rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .level-list li:nth-child(odd) {
+    padding-right: 2rem;
+  }
+
+  .level-list li:nth-child(even) {
+    padding-left: 2rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .level-list li > span {
+    color: #f3ca81;
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .level-list h3 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+  }
+
+  .level-list p {
+    max-width: 30rem;
+    margin: 0.6rem 0 0;
+    color: #dce9df;
+  }
+
+  .community {
+    display: grid;
+    gap: clamp(2rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+
+  .community-copy,
+  .value-grid {
+    min-width: 0;
+  }
+
+  .community-copy h2 {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    hyphens: auto;
+    overflow-wrap: anywhere;
+  }
+
+  .value-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .value-grid article {
+    display: grid;
+    align-items: start;
+    gap: 1rem;
+    padding: clamp(1.4rem, 4vw, 2rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    grid-template-columns: auto minmax(0, 0.45fr) minmax(0, 1fr);
+  }
+
+  .value-grid span {
+    display: grid;
+    width: 2.4rem;
+    height: 2.4rem;
+    place-items: center;
+    color: var(--color-primary);
+    background: var(--color-soft);
+    border-radius: 50%;
+  }
+
+  .value-grid h3,
+  .value-grid p {
+    margin: 0;
+  }
+
+  .value-grid h3 {
+    font-size: 1.5rem;
+  }
+
+  .value-grid p {
+    color: var(--color-muted);
+  }
+
+  .sources {
+    display: grid;
+    gap: clamp(2rem, 6vw, 5rem);
+    padding-top: 3rem;
+    border-top: 1px solid var(--color-line);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+
+  .source-copy ul {
+    display: grid;
+    gap: 0.8rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .source-copy li {
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  @media (max-width: 52rem) {
+    .hero,
+    .facts,
+    .community,
+    .sources {
+      grid-template-columns: 1fr;
+    }
+
+    .hero {
+      min-height: auto;
+    }
+
+    .hero-mark {
+      width: min(100%, 30rem);
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .fact-grid,
+    .level-list {
+      grid-template-columns: 1fr;
+    }
+
+    .level-list li:nth-child(odd),
+    .level-list li:nth-child(even) {
+      padding-inline: 0;
+      border-left: 0;
+    }
+
+    .value-grid article {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .value-grid p {
+      grid-column: 2;
+    }
+  }
+</style>

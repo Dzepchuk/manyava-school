@@ -22,3 +22,14 @@
 - Never recommend copying arbitrary internet images; require a documented
   licence or permission and avoid presenting stock imagery as documentary
   photography of the school.
+
+## Responsive typography
+
+- Test long Ukrainian words inside narrow cards at actual browser/CSS zoom, not
+  only with a narrow viewport.
+- Headings in constrained cards must use safe wrapping (`overflow-wrap`,
+  optional hyphenation, and balanced lines) so a single long word cannot cross
+  the component boundary.
+- For every large heading placed beside another column, verify its rendered
+  bounding box does not cross the sibling column; a page-level no-overflow test
+  does not detect overlap between grid children.

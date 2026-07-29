@@ -14,6 +14,12 @@ export const siteSettingsSchema = z.object({
   phones: z.array(phoneSchema),
   email: z.email(),
   workingHours: z.string().min(3),
+  contactPublication: z.object({
+    address: z.boolean(),
+    phones: z.boolean(),
+    email: z.boolean(),
+    workingHours: z.boolean(),
+  }),
   siteUrl: z.url(),
   socialLinks: z.array(safeHttpsUrlSchema).default([]),
   defaultSeo: z.object({

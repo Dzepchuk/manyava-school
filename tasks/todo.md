@@ -125,3 +125,61 @@ advice.
 - Verified Astro check, ESLint, formatting, unit-test runner, production build,
   Pagefind indexing, desktop/mobile Playwright + axe, Lighthouse gates, and a
   production-dependency audit with zero known vulnerabilities.
+
+### Speckit Implement — Contacts
+
+- Completed T027 with a standalone `/contacts/` route sourced from validated
+  `site.yml` settings and independent of maps, forms, or external services.
+- Added per-field publication flags so unverified phone, email, or office hours
+  are absent from public HTML instead of appearing as plausible placeholders.
+- Added a safe editorial state explaining that official contact details are
+  being verified.
+- Added unit coverage for contact publication rules and desktop/mobile
+  Playwright + axe coverage, including keyboard focus and 320 px reflow.
+- Left T021–T023 open because their task scope also covers pages, admission,
+  navigation depth, and the complete US1 journey beyond the contacts page.
+
+### About Page
+
+- [x] Record verified public facts and their sources.
+- [x] Add route, metadata, semantic sections, and source note for `/about/`.
+- [x] Add route, privacy, accessibility, and 200% reflow tests.
+- [x] Run formatting, checks, tests, and production build.
+- [x] Review the page in the local browser at desktop and mobile widths.
+
+#### Review
+
+- Used АІКОМ as the authoritative source for institution type, ownership,
+  language of instruction, governance, and address.
+- Used the public Facebook page and the previous school site only to identify
+  broad community themes; copied no photos or children's personal data.
+- Deliberately omitted volatile staffing figures and leadership details from
+  the about page.
+- Confirmed 320 px mobile reflow, keyboard focus, axe accessibility, the 200%
+  reflow equivalent, metadata, source links, and absence of forms, embeds, and
+  images.
+- Passed Astro check, ESLint, Vitest, production build with Pagefind, and 12
+  relevant Playwright tests across desktop and mobile projects.
+
+### About Page — Community Heading Fix
+
+- [x] Add a regression test that compares the heading and card-column bounds.
+- [x] Keep the long Ukrainian heading inside its grid column.
+- [x] Verify desktop, mobile, and 200% reflow behavior.
+
+### Homepage — School Introduction
+
+- [x] Add an end-to-end test for visitor-focused school information.
+- [x] Replace the technical-principles block with a concise school introduction.
+- [x] Link the introduction to `/about/` and verify responsive behavior.
+
+#### Review
+
+- Removed the developer-facing `Mobile-first`, accessibility, and editorial
+  workflow marketing copy from the homepage.
+- Added a verified school summary, three visitor-focused themes, and a direct
+  `/about/` link.
+- Confirmed no horizontal overflow at 375 px and visually reviewed the section
+  at 1440 px and 390 px browser widths.
+- Passed Astro check, ESLint, Vitest, production build with Pagefind, and 10
+  relevant Playwright tests across desktop and mobile projects.

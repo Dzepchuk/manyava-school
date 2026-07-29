@@ -56,16 +56,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </Container>
 
-  <Container as="section" class="principles">
-    <p class="eyebrow">Наш підхід</p>
-    <h2>Швидко. Доступно. Відповідально.</h2>
-    <div class="principle-list">
-      <p><strong>Mobile-first</strong><br />Зручно з телефона навіть за повільного інтернету.</p>
-      <p><strong>Без бар’єрів</strong><br />Клавіатура, скринрідер і масштабування 200%.</p>
+  <Container as="section" class="school-intro">
+    <div class="school-intro-heading">
+      <div>
+        <p class="eyebrow">Манявський ліцей</p>
+        <h2>Освіта, розвиток і спільнота в серці Маняви</h2>
+      </div>
       <p>
-        <strong>Перевірений зміст</strong><br />Прозора редакційна історія та відповідальні особи.
+        Комунальний опорний заклад, що об’єднує дошкільну, початкову, базову та профільну середню
+        освіту.
       </p>
     </div>
+
+    <div class="intro-points">
+      <article>
+        <span class="point-number" aria-hidden="true">01</span>
+        <h3>Освітній шлях</h3>
+        <p>Від дошкільного відділення до підготовки старшокласників до свідомого вибору.</p>
+      </article>
+      <article>
+        <span class="point-number" aria-hidden="true">02</span>
+        <h3>Безпечне середовище</h3>
+        <p>Простір взаємоповаги, відповідальності та підтримки кожного учасника спільноти.</p>
+      </article>
+      <article>
+        <span class="point-number" aria-hidden="true">03</span>
+        <h3>Разом із громадою</h3>
+        <p>Навчання, громадянські ініціативи та дбайливе ставлення до рідної Маняви.</p>
+      </article>
+    </div>
+
+    <a class="about-link" href="/about/">
+      Дізнатися більше про ліцей
+      <span aria-hidden="true">↗</span>
+    </a>
   </Container>
 </BaseLayout>
 
@@ -186,7 +210,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: 0.15rem;
   }
   .preview,
-  .principles {
+  .school-intro {
     padding-block: 4rem;
   }
   .section-heading {
@@ -197,10 +221,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     margin-bottom: 2rem;
   }
   .section-heading h2,
-  .principles h2 {
+  .school-intro h2 {
     margin: 0;
     font-size: clamp(2.2rem, 5vw, 4rem);
     letter-spacing: -0.04em;
+    text-wrap: balance;
   }
   .section-heading > p {
     max-width: 32rem;
@@ -241,32 +266,87 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 0.78rem;
     font-weight: 700;
   }
-  .principles {
+  .school-intro {
     margin-top: 3rem;
     padding-inline: clamp(1.4rem, 5vw, 4rem);
     color: white;
     background: var(--color-primary);
     border-radius: var(--radius-lg);
   }
-  .principles .eyebrow {
+
+  .school-intro .eyebrow {
     color: #f3ca81;
   }
-  .principle-list {
+
+  .school-intro-heading {
     display: grid;
-    gap: 2rem;
-    margin-top: 3rem;
-    grid-template-columns: repeat(3, 1fr);
+    align-items: end;
+    gap: clamp(2rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.65fr);
   }
-  .principle-list p {
+
+  .school-intro-heading > p {
+    max-width: 31rem;
+    margin: 0 0 0.45rem;
+    color: #d6e5db;
+    font-size: 1.05rem;
+  }
+
+  .intro-points {
+    display: grid;
+    gap: 1px;
+    margin-top: 3rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: var(--radius-md);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .intro-points article {
+    min-width: 0;
+    padding: clamp(1.4rem, 3vw, 2rem);
+    background: var(--color-primary);
+  }
+
+  .point-number {
+    color: #f3ca81;
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .intro-points h3 {
+    margin: 1.6rem 0 0.7rem;
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+    overflow-wrap: anywhere;
+  }
+
+  .intro-points p {
+    margin: 0;
     color: #d6e5db;
   }
-  .principle-list strong {
+
+  .about-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 2rem;
+    padding-bottom: 0.2rem;
     color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    font-weight: 700;
+    text-decoration: none;
   }
+
+  .about-link:hover {
+    color: #f3ca81;
+  }
+
   @media (max-width: 48rem) {
     .hero-grid,
     .cards,
-    .principle-list {
+    .school-intro-heading,
+    .intro-points {
       grid-template-columns: 1fr;
     }
     .hero-art {

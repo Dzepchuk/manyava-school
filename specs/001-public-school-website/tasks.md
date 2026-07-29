@@ -84,7 +84,7 @@
 - [ ] T024 [US1] Визначити колекцію `pages` з унікальним canonical path, review metadata і безпечним Markdown у `src/content.config.ts`
 - [ ] T025 [P] [US1] Додати затверджені placeholder-сторінки «Про ліцей», «Керівництво» і «Вступ» у `src/content/pages/`
 - [ ] T026 [P] [US1] Створити головну сторінку з основними маршрутами, контактним блоком і місцями для актуального контенту у `src/pages/index.astro`
-- [ ] T027 [P] [US1] Створити автономну контактну сторінку без форм і залежності від карти у `src/pages/contacts.astro`
+- [x] T027 [P] [US1] Створити автономну контактну сторінку без форм і залежності від карти у `src/pages/contacts.astro`
 - [ ] T028 [US1] Реалізувати генерацію стабільних сторінок із breadcrumb і review metadata у `src/pages/[...slug].astro`
 - [ ] T029 [US1] Реалізувати desktop/mobile navigation із максимум трьома рівнями у `src/components/navigation/SiteNavigation.astro`
 - [ ] T030 [US1] Створити доступну сторінку 404 з основними переходами у `src/pages/404.astro`

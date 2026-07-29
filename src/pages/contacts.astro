@@ -1,0 +1,362 @@
+---
+import Breadcrumbs from '../components/common/Breadcrumbs.astro';
+import Container from '../components/common/Container.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedContacts } from '../lib/content/contacts';
+import { loadSiteData } from '../lib/content/load-site-data';
+
+const { site } = loadSiteData();
+const contacts = getPublishedContacts(site);
+const hasPendingContacts =
+  !contacts.email || contacts.phones.length === 0 || !contacts.workingHours;
+---
+
+<BaseLayout
+  title={`Контакти — ${site.shortName}`}
+  description={`Підтверджені контактні дані та адреса ${site.officialName}.`}
+>
+  <Container class="page-shell">
+    <Breadcrumbs items={[{ label: 'Головна', href: '/' }, { label: 'Контакти' }]} />
+
+    <header class="page-heading">
+      <div>
+        <p class="eyebrow">Зв’язок із ліцеєм</p>
+        <h1>Контакти ліцею</h1>
+      </div>
+      <p class="intro">Тут публікуються лише контактні дані, які перевірив і затвердив ліцей.</p>
+    </header>
+
+    <div class="contact-layout">
+      <section class="contact-list" aria-labelledby="contact-details">
+        <h2 id="contact-details" class="sr-only">Контактні дані</h2>
+
+        {
+          contacts.address && (
+            <article class="contact-card featured">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 21s7-5.4 7-12A7 7 0 1 0 5 9c0 6.6 7 12 7 12Z" />
+                  <circle cx="12" cy="9" r="2.4" />
+                </svg>
+              </div>
+              <div>
+                <p class="label">Адреса</p>
+                <h2>{contacts.address}</h2>
+                <p class="note">
+                  Орієнтир для відвідування. Точну поштову адресу буде додано після офіційного
+                  підтвердження.
+                </p>
+              </div>
+            </article>
+          )
+        }
+
+        {
+          contacts.phones.length > 0 && (
+            <article class="contact-card">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7.2 3.5 10 8 8.2 9.8a15 15 0 0 0 6 6L16 14l4.5 2.8-.8 3.2c-.2.7-.9 1.2-1.7 1-8-1-14-7-15-15-.1-.8.3-1.5 1-1.7l3.2-.8Z" />
+                </svg>
+              </div>
+              <div>
+                <p class="label">Телефони</p>
+                {contacts.phones.map((phone) => (
+                  <p class="contact-value">
+                    <span>{phone.label}</span>
+                    <a href={`tel:${phone.value.replace(/\s/g, '')}`}>{phone.value}</a>
+                  </p>
+                ))}
+              </div>
+            </article>
+          )
+        }
+
+        {
+          contacts.email && (
+            <article class="contact-card">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m4 7 8 6 8-6" />
+                </svg>
+              </div>
+              <div>
+                <p class="label">Електронна пошта</p>
+                <a class="email" href={`mailto:${contacts.email}`}>
+                  {contacts.email}
+                </a>
+              </div>
+            </article>
+          )
+        }
+
+        {
+          contacts.workingHours && (
+            <article class="contact-card">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 2" />
+                </svg>
+              </div>
+              <div>
+                <p class="label">Години роботи</p>
+                <p class="hours">{contacts.workingHours}</p>
+              </div>
+            </article>
+          )
+        }
+      </section>
+
+      <aside class="visit-panel" aria-labelledby="visit-title">
+        <p class="panel-number" aria-hidden="true">01</p>
+        <h2 id="visit-title">Перед відвідуванням</h2>
+        <p>
+          Рекомендуємо попередньо узгодити візит через офіційний номер або email, щойно вони
+          з’являться на цій сторінці.
+        </p>
+        <div class="divider"></div>
+        <p class="privacy">Сайт не містить контактної форми й не збирає ваші персональні дані.</p>
+      </aside>
+    </div>
+
+    {
+      hasPendingContacts && (
+        <section class="pending" aria-labelledby="pending-title">
+          <span class="pending-mark" aria-hidden="true">
+            i
+          </span>
+          <div>
+            <h2 id="pending-title">Контактні дані уточнюються</h2>
+            <p>
+              Телефон, офіційна електронна адреса та години роботи будуть опубліковані після
+              перевірки директором. Не використовуйте непідтверджені контакти зі сторонніх джерел.
+            </p>
+          </div>
+        </section>
+      )
+    }
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 4rem;
+  }
+
+  .page-heading {
+    display: grid;
+    align-items: end;
+    gap: 2rem;
+    margin: clamp(3rem, 8vw, 6.5rem) 0 3rem;
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  h1 {
+    max-width: 10ch;
+    margin: 0;
+    font-size: clamp(3.2rem, 8vw, 6.4rem);
+    letter-spacing: -0.055em;
+  }
+
+  .intro {
+    max-width: 34rem;
+    margin: 0 0 0.65rem;
+    color: var(--color-muted);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+  }
+
+  .contact-layout {
+    display: grid;
+    align-items: start;
+    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1.4fr) minmax(17rem, 0.6fr);
+  }
+
+  .contact-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .contact-card {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(1.4rem, 4vw, 2rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    grid-template-columns: auto 1fr;
+  }
+
+  .contact-card.featured {
+    min-height: 15rem;
+    align-items: end;
+    background:
+      linear-gradient(135deg, rgba(35, 91, 64, 0.03), rgba(231, 166, 58, 0.1)), var(--color-surface);
+  }
+
+  .icon {
+    display: grid;
+    width: 3.2rem;
+    height: 3.2rem;
+    place-items: center;
+    color: var(--color-primary);
+    background: var(--color-soft);
+    border-radius: 50%;
+  }
+
+  .icon svg {
+    width: 1.45rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  .label {
+    margin: 0 0 0.55rem;
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .contact-card h2 {
+    max-width: 24ch;
+    margin: 0;
+    font-size: clamp(1.55rem, 3vw, 2.25rem);
+  }
+
+  .note {
+    max-width: 36rem;
+    margin: 0.9rem 0 0;
+    color: var(--color-muted);
+  }
+
+  .contact-value,
+  .hours {
+    margin: 0.25rem 0;
+  }
+
+  .contact-value {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .email {
+    overflow-wrap: anywhere;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .visit-panel {
+    position: sticky;
+    top: 1.5rem;
+    padding: clamp(1.6rem, 4vw, 2.4rem);
+    color: white;
+    background: var(--color-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .visit-panel h2 {
+    margin: 2rem 0 1rem;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    hyphens: auto;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .visit-panel p {
+    color: #e1ece4;
+  }
+
+  .panel-number {
+    margin: 0;
+    color: #f4ca7d !important;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .divider {
+    height: 1px;
+    margin-block: 2rem;
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .privacy {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
+
+  .pending {
+    display: grid;
+    align-items: start;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    padding: 1.4rem;
+    background: #fff7e8;
+    border: 1px solid #e6c789;
+    border-radius: var(--radius-md);
+    grid-template-columns: auto 1fr;
+  }
+
+  .pending-mark {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    color: #664100;
+    border: 2px solid #a46c0c;
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .pending h2 {
+    margin: 0 0 0.35rem;
+    font-size: 1.2rem;
+  }
+
+  .pending p {
+    max-width: 56rem;
+    margin: 0;
+    color: #594c36;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 48rem) {
+    .page-heading,
+    .contact-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .page-heading {
+      align-items: start;
+    }
+
+    .visit-panel {
+      position: static;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .contact-card {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

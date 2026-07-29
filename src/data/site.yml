@@ -5,6 +5,11 @@ address: с. Манява, Івано-Франківська область, У�
 phones: []
 email: school@example.invalid
 workingHours: Понеділок–п’ятниця, години уточнюються
+contactPublication:
+  address: true
+  phones: false
+  email: false
+  workingHours: false
 siteUrl: http://localhost:4321
 socialLinks: []
 defaultSeo:

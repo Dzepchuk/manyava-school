@@ -326,17 +326,19 @@ advice.
 # Sticky footer
 
 - [x] Inspect the shared page layout and existing footer styles.
-- [x] Keep the footer at the viewport bottom on short pages without overlaying content.
-- [x] Run focused browser coverage and project checks.
+- [x] Keep the footer visible while scrolling without overlaying page content.
+- [x] Re-run focused browser coverage and project checks after correcting the behavior.
 
 ## Review
 
-- The shared layout now fills the dynamic viewport height as a flex column; the
-  main region grows to keep the footer at the bottom of short pages while long
-  content continues to push it down naturally.
-- `npm run check` completed with no errors or warnings, the production build
-  generated 25 pages, and the focused Playwright suite passed 4/4 tests across
-  desktop and mobile projects.
+- The earlier normal-flow implementation did not match the requested interaction
+  because the footer disappeared while scrolling. It is now fixed to the viewport,
+  with responsive bottom spacing reserved on the document body.
+- Browser inspection confirmed that the footer retains identical viewport
+  coordinates before and after a real page scroll and that the reserved body
+  spacing exceeds the rendered footer height.
+- `npm run check` and the production build passed; the corrected focused
+  Playwright suite passed 4/4 tests across desktop and mobile projects.
 
 # Navigation accordion
 

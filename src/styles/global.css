@@ -29,6 +29,10 @@ html {
 }
 
 body {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  flex-direction: column;
   min-width: 20rem;
   margin: 0;
   line-height: 1.65;
@@ -111,7 +115,7 @@ svg {
 }
 
 main {
-  min-height: 60vh;
+  flex: 1;
 }
 
 .site-footer {

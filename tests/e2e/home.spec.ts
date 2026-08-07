@@ -22,3 +22,27 @@ test('головна розповідає про ліцей замість те�
   );
   expect(overflow).toBe(false);
 });
+
+test('підвал залишається внизу короткої сторінки без перекриття вмісту', async ({ page }) => {
+  await page.goto('/404/');
+
+  const layout = await page.evaluate(() => {
+    const main = document.querySelector('main');
+    const footer = document.querySelector('.site-footer');
+
+    if (!main || !footer) throw new Error('Не знайдено основний вміст або підвал');
+
+    const mainBounds = main.getBoundingClientRect();
+    const footerBounds = footer.getBoundingClientRect();
+
+    return {
+      footerBottom: footerBounds.bottom,
+      mainBottom: mainBounds.bottom,
+      footerTop: footerBounds.top,
+      viewportHeight: window.innerHeight,
+    };
+  });
+
+  expect(layout.footerBottom).toBeGreaterThanOrEqual(layout.viewportHeight - 1);
+  expect(layout.footerTop).toBeGreaterThanOrEqual(layout.mainBottom);
+});

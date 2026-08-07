@@ -70,6 +70,10 @@ test('навігація відкриває сторінку керівницт�
 
   if ((page.viewportSize()?.width ?? 0) <= 928) {
     await page.locator('.mobile-navigation > summary').click();
+    await page
+      .locator('.mobile-accordion > li > details > summary')
+      .filter({ hasText: 'Про ліцей' })
+      .click();
     await page.locator('.mobile-list').getByRole('link', { name: 'Керівництво' }).click();
   } else {
     await page.locator('.desktop-navigation summary').filter({ hasText: 'Про ліцей' }).click();
@@ -82,4 +86,44 @@ test('навігація відкриває сторінку керівницт�
 
   await expect(page).toHaveURL('/about/leadership/');
   await expect(page.getByRole('heading', { level: 1, name: 'Керівництво ліцею' })).toBeVisible();
+});
+
+test('desktop навігація тримає відкритим лише одне меню', async ({ page }) => {
+  test.skip((page.viewportSize()?.width ?? 0) <= 928, 'Перевірка desktop навігації');
+  await page.goto('/');
+
+  const about = page.locator('.desktop-navigation > .root-list > li > details').filter({
+    has: page.locator('summary', { hasText: 'Про ліцей' }),
+  });
+  const news = page.locator('.desktop-navigation > .root-list > li > details').filter({
+    has: page.locator('summary', { hasText: 'Новини' }),
+  });
+
+  await about.locator(':scope > summary').click();
+  await expect(about).toHaveAttribute('open', '');
+
+  await news.locator(':scope > summary').click();
+  await expect(news).toHaveAttribute('open', '');
+  await expect(about).not.toHaveAttribute('open', '');
+});
+
+test('mobile навігація використовує single-open accordion', async ({ page }) => {
+  test.skip((page.viewportSize()?.width ?? 0) > 928, 'Перевірка mobile навігації');
+  await page.goto('/');
+
+  await page.locator('.mobile-navigation > summary').click();
+  const about = page.locator('.mobile-accordion > li > details').filter({
+    has: page.locator('summary', { hasText: 'Про ліцей' }),
+  });
+  const news = page.locator('.mobile-accordion > li > details').filter({
+    has: page.locator('summary', { hasText: 'Новини' }),
+  });
+
+  await about.locator(':scope > summary').click();
+  await expect(about).toHaveAttribute('open', '');
+  await expect(about.getByRole('link', { name: 'Огляд розділу Про ліцей' })).toBeVisible();
+
+  await news.locator(':scope > summary').click();
+  await expect(news).toHaveAttribute('open', '');
+  await expect(about).not.toHaveAttribute('open', '');
 });

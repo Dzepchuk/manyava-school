@@ -322,3 +322,38 @@ advice.
   навчання директора, реальних офіційних документів, ручного screen-reader
   аудиту, незалежного backup destination/restore drill, завершення поширення TLS
   або фінального production sign-off.
+
+# Sticky footer
+
+- [x] Inspect the shared page layout and existing footer styles.
+- [x] Keep the footer at the viewport bottom on short pages without overlaying content.
+- [x] Run focused browser coverage and project checks.
+
+## Review
+
+- The shared layout now fills the dynamic viewport height as a flex column; the
+  main region grows to keep the footer at the bottom of short pages while long
+  content continues to push it down naturally.
+- `npm run check` completed with no errors or warnings, the production build
+  generated 25 pages, and the focused Playwright suite passed 4/4 tests across
+  desktop and mobile projects.
+
+# Navigation accordion
+
+- [x] Inspect the current desktop dropdown and mobile navigation structure.
+- [x] Add regression coverage for single-open desktop and mobile menu sections.
+- [x] Close an open desktop menu item when a peer item opens.
+- [x] Replace the expanded mobile navigation tree with accordion sections.
+- [x] Verify accessibility, desktop/mobile behavior, checks, and production build.
+
+## Review
+
+- Desktop dropdowns now form a native single-open disclosure group, so opening
+  a peer closes the previously expanded menu.
+- Mobile navigation uses single-open accordion sections with clear plus/minus
+  indicators and explicit overview links instead of a permanently expanded tree.
+- Updated the existing mobile journey test to open the relevant accordion
+  before selecting its child destination.
+- `npm run check` passed; the focused navigation/accessibility run passed 18/18
+  applicable tests across desktop and mobile (2 viewport-specific skips); and
+  the production build generated 25 pages with a 23-page Pagefind index.

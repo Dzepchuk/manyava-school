@@ -30,6 +30,7 @@ const isActiveBranch = (id: string) => {
             <li>
               {children.length > 0 ? (
                 <details
+                  name="desktop-primary-navigation"
                   class:list={{
                     'active-branch': isCurrent(item.path) || isActiveBranch(item.id),
                   }}
@@ -47,6 +48,7 @@ const isActiveBranch = (id: string) => {
                         <li>
                           {grandchildren.length > 0 ? (
                             <details
+                              name={`desktop-${item.id}-navigation`}
                               class:list={{
                                 'active-branch': isCurrent(child.path) || isActiveBranch(child.id),
                               }}
@@ -100,42 +102,73 @@ const isActiveBranch = (id: string) => {
 
   <details class="mobile-navigation">
     <summary>Меню</summary>
-    <ul class="mobile-list">
+    <ul class="mobile-list mobile-accordion">
       {
         roots.map((item) => {
           const children = childrenFor(item.id);
           return (
             <li>
-              <a href={item.path} aria-current={isCurrent(item.path) ? 'page' : undefined}>
-                {item.label}
-              </a>
-              {children.length > 0 && (
-                <ul>
-                  {children.map((child) => (
-                    <li>
-                      <a
-                        href={child.path}
-                        aria-current={isCurrent(child.path) ? 'page' : undefined}
-                      >
-                        {child.label}
-                      </a>
-                      {childrenFor(child.id).length > 0 && (
-                        <ul>
-                          {childrenFor(child.id).map((grandchild) => (
-                            <li>
+              {children.length > 0 ? (
+                <details
+                  name="mobile-primary-navigation"
+                  class:list={{
+                    'active-branch': isCurrent(item.path) || isActiveBranch(item.id),
+                  }}
+                >
+                  <summary>{item.label}</summary>
+                  <div class="mobile-panel">
+                    <a href={item.path} aria-current={isCurrent(item.path) ? 'page' : undefined}>
+                      Огляд розділу {item.label}
+                    </a>
+                    <ul>
+                      {children.map((child) => {
+                        const grandchildren = childrenFor(child.id);
+                        return (
+                          <li>
+                            {grandchildren.length > 0 ? (
+                              <details name={`mobile-${item.id}-navigation`}>
+                                <summary>{child.label}</summary>
+                                <div class="mobile-panel nested-panel">
+                                  <a
+                                    href={child.path}
+                                    aria-current={isCurrent(child.path) ? 'page' : undefined}
+                                  >
+                                    Огляд розділу {child.label}
+                                  </a>
+                                  <ul>
+                                    {grandchildren.map((grandchild) => (
+                                      <li>
+                                        <a
+                                          href={grandchild.path}
+                                          aria-current={
+                                            isCurrent(grandchild.path) ? 'page' : undefined
+                                          }
+                                        >
+                                          {grandchild.label}
+                                        </a>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </details>
+                            ) : (
                               <a
-                                href={grandchild.path}
-                                aria-current={isCurrent(grandchild.path) ? 'page' : undefined}
+                                href={child.path}
+                                aria-current={isCurrent(child.path) ? 'page' : undefined}
                               >
-                                {grandchild.label}
+                                {child.label}
                               </a>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </details>
+              ) : (
+                <a href={item.path} aria-current={isCurrent(item.path) ? 'page' : undefined}>
+                  {item.label}
+                </a>
               )}
             </li>
           );
@@ -249,10 +282,48 @@ const isActiveBranch = (id: string) => {
       box-shadow: var(--shadow-soft);
     }
 
-    .mobile-list ul {
-      margin-left: 0.8rem;
-      padding-left: 0.6rem;
-      border-left: 1px solid var(--color-line);
+    .mobile-accordion > li + li {
+      border-top: 1px solid var(--color-line);
+    }
+
+    .mobile-accordion > li > a,
+    .mobile-accordion > li > details > summary {
+      padding-block: 0.75rem;
+    }
+
+    .mobile-accordion details > summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .mobile-accordion details > summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .mobile-accordion details[open] > summary::after {
+      content: '−';
+    }
+
+    .mobile-panel {
+      padding: 0 0 0.7rem 0.7rem;
+      border-left: 2px solid var(--color-line);
+    }
+
+    .mobile-panel > a:first-child {
+      color: var(--color-muted);
+      font-size: 0.84rem;
+    }
+
+    .mobile-panel li + li {
+      margin-top: 0.15rem;
+    }
+
+    .nested-panel {
+      margin-left: 0.7rem;
     }
   }
 </style>

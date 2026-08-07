@@ -37,6 +37,15 @@
   when the grid has a `gap`; set grid children and controls to `min-width: 0`
   and controls to `width: 100%` before judging the visible spacing.
 
+## Sticky footer terminology
+
+- When the user asks for a sticky footer, confirm behavior through the described
+  interaction: if it must remain visible during scrolling, implement a fixed
+  viewport footer rather than only pushing a normal-flow footer to the bottom of
+  short pages.
+- Reserve document space equal to the fixed footer height and test its bounding
+  box both before and after scrolling so content is not hidden behind it.
+
 ## Netlify directory redirects
 
 - Do not add a forced `/path` to `/path/` redirect for a deployed static

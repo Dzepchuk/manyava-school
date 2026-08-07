@@ -23,26 +23,34 @@ test('головна розповідає про ліцей замість те�
   expect(overflow).toBe(false);
 });
 
-test('підвал залишається внизу короткої сторінки без перекриття вмісту', async ({ page }) => {
-  await page.goto('/404/');
+test('підвал залишається видимим під час прокручування без перекриття вмісту', async ({ page }) => {
+  await page.goto('/');
 
-  const layout = await page.evaluate(() => {
-    const main = document.querySelector('main');
+  const layout = await page.evaluate(async () => {
     const footer = document.querySelector('.site-footer');
 
-    if (!main || !footer) throw new Error('Не знайдено основний вміст або підвал');
+    if (!footer) throw new Error('Не знайдено підвал');
 
-    const mainBounds = main.getBoundingClientRect();
-    const footerBounds = footer.getBoundingClientRect();
+    const beforeScroll = footer.getBoundingClientRect();
+    window.scrollTo(0, document.documentElement.scrollHeight);
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    const afterScroll = footer.getBoundingClientRect();
 
     return {
-      footerBottom: footerBounds.bottom,
-      mainBottom: mainBounds.bottom,
-      footerTop: footerBounds.top,
+      afterBottom: afterScroll.bottom,
+      afterTop: afterScroll.top,
+      beforeBottom: beforeScroll.bottom,
+      beforeTop: beforeScroll.top,
+      bodyBottomPadding: Number.parseFloat(getComputedStyle(document.body).paddingBottom),
+      footerHeight: afterScroll.height,
+      position: getComputedStyle(footer).position,
       viewportHeight: window.innerHeight,
     };
   });
 
-  expect(layout.footerBottom).toBeGreaterThanOrEqual(layout.viewportHeight - 1);
-  expect(layout.footerTop).toBeGreaterThanOrEqual(layout.mainBottom);
+  expect(layout.position).toBe('fixed');
+  expect(layout.beforeBottom).toBeCloseTo(layout.viewportHeight, 0);
+  expect(layout.afterBottom).toBeCloseTo(layout.viewportHeight, 0);
+  expect(layout.afterTop).toBeCloseTo(layout.beforeTop, 0);
+  expect(layout.bodyBottomPadding).toBeGreaterThanOrEqual(layout.footerHeight);
 });

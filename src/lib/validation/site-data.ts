@@ -9,6 +9,12 @@ const phoneSchema = z.object({
 export const siteSettingsSchema = z.object({
   officialName: z.string().min(10),
   shortName: z.string().min(2),
+  englishName: z.string().min(10),
+  registrationCode: z.string().regex(/^\d{8}$/, 'Код ЄДРПОУ має містити 8 цифр.'),
+  institutionType: z.string().min(10),
+  ownership: z.string().min(10),
+  founder: z.string().min(10),
+  governingBody: z.string().min(10),
   tagline: z.string().min(5),
   address: z.string().min(5),
   phones: z.array(phoneSchema),

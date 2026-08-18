@@ -5,6 +5,12 @@ import type { SiteSettings } from '../../src/lib/validation/site-data';
 const site = {
   officialName: 'Манявський ліцей Солотвинської селищної ради',
   shortName: 'Манявський ліцей',
+  englishName: 'Manyavskyi lyceum of the Solotvyn Village Council',
+  registrationCode: '23805692',
+  institutionType: 'Заклад загальної середньої освіти',
+  ownership: 'Комунальна власність Солотвинської територіальної громади',
+  founder: 'Солотвинська селищна рада Івано-Франківської області',
+  governingBody: 'Управління освіти, молоді та спорту Солотвинської селищної ради',
   tagline: 'Простір знань, взаємоповаги та розвитку',
   address: 'с. Манява, Івано-Франківська область, Україна',
   phones: [{ label: 'Приймальня', value: '+380000000000' }],

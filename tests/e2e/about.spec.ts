@@ -9,9 +9,16 @@ test('сторінка про ліцей показує підтверджені
   await expect(
     page.getByRole('heading', { level: 1, name: 'Ліцей, що зростає разом із Манявою' }),
   ).toBeVisible();
-  await expect(page.getByText('Опорний заклад', { exact: true })).toBeVisible();
-  await expect(page.getByText('Комунальна власність')).toBeVisible();
+  await expect(page.getByText('23805692', { exact: true })).toBeVisible();
+  await expect(page.getByText('Заклад загальної середньої освіти', { exact: true })).toBeVisible();
+  await expect(
+    page.getByText(/Комунальна власність Солотвинської територіальної громади/),
+  ).toBeVisible();
   await expect(page.getByText('Українська мова навчання')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Статут Манявського ліцею' })).toHaveAttribute(
+    'href',
+    '/documents/statut-maniavskoho-litseiu/',
+  );
   await expect(page.getByRole('link', { name: 'Запис ліцею в АІКОМ' })).toHaveAttribute(
     'href',
     'https://aikom.iea.gov.ua/zzso/view?zzsoId=10585',

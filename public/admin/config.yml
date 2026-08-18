@@ -30,6 +30,12 @@ collections:
         fields:
           - { label: Повна назва, name: officialName, widget: string }
           - { label: Коротка назва, name: shortName, widget: string }
+          - { label: Англомовна назва, name: englishName, widget: string }
+          - { label: Код ЄДРПОУ, name: registrationCode, widget: string }
+          - { label: Тип закладу, name: institutionType, widget: string }
+          - { label: Форма власності, name: ownership, widget: string }
+          - { label: Засновник, name: founder, widget: string }
+          - { label: Уповноважений орган управління, name: governingBody, widget: string }
           - { label: Гасло, name: tagline, widget: string }
           - { label: Поштова адреса, name: address, widget: string }
           - label: Телефони

@@ -73,6 +73,12 @@ describe('контракт Decap CMS', () => {
     for (const field of [
       'officialName',
       'shortName',
+      'englishName',
+      'registrationCode',
+      'institutionType',
+      'ownership',
+      'founder',
+      'governingBody',
       'tagline',
       'address',
       'phones',

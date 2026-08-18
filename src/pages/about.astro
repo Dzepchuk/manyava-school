@@ -59,21 +59,37 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
       </div>
 
       <dl class="fact-grid">
+        <div class="fact-wide">
+          <dt>Повна назва</dt>
+          <dd>{site.officialName}</dd>
+        </div>
         <div>
-          <dt>Статус</dt>
-          <dd>Опорний заклад</dd>
+          <dt>Код ЄДРПОУ</dt>
+          <dd>{site.registrationCode}</dd>
+        </div>
+        <div>
+          <dt>Тип закладу</dt>
+          <dd>{site.institutionType}</dd>
         </div>
         <div>
           <dt>Форма власності</dt>
-          <dd>Комунальна власність</dd>
+          <dd>{site.ownership}</dd>
         </div>
         <div>
           <dt>Мова навчання</dt>
           <dd>Українська мова навчання</dd>
         </div>
-        <div>
+        <div class="fact-wide">
+          <dt>Засновник</dt>
+          <dd>{site.founder}</dd>
+        </div>
+        <div class="fact-wide">
+          <dt>Уповноважений орган управління</dt>
+          <dd>{site.governingBody}</dd>
+        </div>
+        <div class="fact-wide">
           <dt>Місцезнаходження</dt>
-          <dd>с. Манява, вул. Незалежності, 10</dd>
+          <dd>{site.address}</dd>
         </div>
       </dl>
     </section>
@@ -153,11 +169,14 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
       </div>
       <div class="source-copy">
         <p>
-          Фактичні відомості перевірено 29 липня 2026 року. Опис життя спільноти узагальнює теми
-          відкритих публікацій ліцею. На сторінці використано надане для публікації фото будівлі;
-          персональні дані та зображення дітей не переносилися.
+          Юридичні відомості перевірено 18 серпня 2026 року за чинною редакцією Статуту. Інші
+          фактичні дані звірено з державною інформаційною системою АІКОМ. На сторінці використано
+          надане для публікації фото будівлі; персональні дані та зображення дітей не переносилися.
         </p>
         <ul>
+          <li>
+            <a href="/documents/statut-maniavskoho-litseiu/">Статут Манявського ліцею</a>
+          </li>
           <li>
             <ExternalLink
               href="https://aikom.iea.gov.ua/zzso/view?zzsoId=10585"
@@ -308,6 +327,10 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
     min-width: 0;
     padding: clamp(1.4rem, 4vw, 2.2rem);
     background: var(--color-surface);
+  }
+
+  .fact-grid .fact-wide {
+    grid-column: 1 / -1;
   }
 
   .fact-grid dt {

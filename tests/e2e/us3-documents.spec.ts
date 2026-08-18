@@ -1,16 +1,24 @@
 import { expect, test } from '@playwright/test';
 
-test('каталог документів має пошук, фільтри й чесний порожній стан', async ({ page }) => {
+test('каталог документів публікує статут і підтримує пошук та фільтри', async ({ page }) => {
   await page.goto('/documents/');
 
   await expect(page.getByRole('heading', { level: 1, name: 'Офіційні документи' })).toBeVisible();
   await expect(page.getByRole('searchbox', { name: 'Назва' })).toBeVisible();
   await expect(page.getByLabel('Категорія')).toBeVisible();
   await expect(page.getByLabel('Рік')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Статут Манявського ліцею' })).toBeVisible();
+  await expect(page.getByText('Знайдено документів: 1')).toBeVisible();
+
+  await page.getByRole('link', { name: 'Статут Манявського ліцею' }).click();
   await expect(
-    page.getByRole('heading', { level: 2, name: 'Каталог готується до наповнення' }),
+    page.getByRole('heading', { level: 1, name: 'Статут Манявського ліцею' }),
   ).toBeVisible();
-  await expect(page.getByText(/не показуємо неперевірені файли/i)).toBeVisible();
+  await expect(page.getByText('23805692', { exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Завантажити документ' })).toHaveAttribute(
+    'href',
+    '/documents/statut-maniavskoho-litseiu-2026.pdf',
+  );
 });
 
 test('сторінка прозорості не подає непідтверджені вимоги як законодавчі', async ({ page }) => {
@@ -19,7 +27,14 @@ test('сторінка прозорості не подає непідтверд
   await expect(
     page.getByRole('heading', { level: 1, name: 'Прозорість та обов’язкові публікації' }),
   ).toBeVisible();
+  await expect(page.getByText('Підтверджено', { exact: true })).toBeVisible();
   await expect(
-    page.getByRole('heading', { level: 2, name: 'Нормативний реєстр очікує затвердження' }),
+    page.getByRole('heading', {
+      level: 2,
+      name: 'Прозорість та інформаційна відкритість закладу освіти',
+    }),
   ).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: '/documents/statut-maniavskoho-litseiu/' }),
+  ).toHaveAttribute('href', '/documents/statut-maniavskoho-litseiu/');
 });

@@ -1,5 +1,42 @@
 # School Website Specification Plan
 
+## Опис Маняви та регіону — 18 серпня 2026
+
+- [x] Витягти факти з наданої фотографії друкованого матеріалу.
+- [x] Перефразувати опис без копіювання захищеного тексту й без публікації скану.
+- [x] Додати регіональний блок на сторінку «Про ліцей».
+- [x] Перевірити адаптивність, доступність і production build.
+
+### Review
+
+- Додано блок «Манява і Карпати» з трьома темами: природне середовище,
+  історія та традиції, школа і громада.
+- Збережено фактичну основу наданого матеріалу, але текст повністю
+  перефразовано; фотографію друкованої сторінки не опубліковано.
+- Джерело походження опису прозоро зазначено в примітці сторінки.
+- Контентна валідація, Astro check, ESLint і production build пройшли;
+  6 цільових Playwright-тестів доступності та адаптивності успішні на desktop
+  і mobile.
+
+## Новина про правила доступу — 18 серпня 2026
+
+- [x] Перевірити наказ МОН № 243 за офіційним джерелом.
+- [x] Адаптувати допис офіційної Facebook-сторінки у формат новини сайту.
+- [x] Додати посилання на чинний нормативний документ і джерело допису.
+- [x] Оновити браузерний тест новин і перевірити збірку.
+
+### Review
+
+- Наказ МОН № 243 від 11.02.2026 підтверджено в базі Верховної Ради: чинний,
+  зареєстрований Мін’юстом за № 436/45830, набрав чинності 17.04.2026.
+- Відокремлено локальний порядок входу Манявського ліцею від загальних Типових
+  правил; уточнено вимогу документа для відвідувачів і виняток для
+  собак-поводирів.
+- Новину опубліковано без неперевіреного зображення, з посиланнями на наказ і
+  першоджерело у Facebook.
+- Контентна валідація, Astro check, ESLint, production build, 37 unit/content
+  тестів і 6 Playwright-тестів на desktop та mobile пройшли успішно.
+
 ## Публікація статуту та офіційних реквізитів — 18 серпня 2026
 
 - [x] Перевірити наданий скан статуту та виписати підтверджені реквізити.
@@ -380,3 +417,21 @@ advice.
 - `npm run check` passed; the focused navigation/accessibility run passed 18/18
   applicable tests across desktop and mobile (2 viewport-specific skips); and
   the production build generated 25 pages with a 23-page Pagefind index.
+
+# School development strategy
+
+- [x] Inspect the supplied PDF and confirm its title, approval date, and period.
+- [x] Publish the original PDF and accessible document summary.
+- [x] Add browser coverage for catalog visibility and downloading.
+- [x] Run content validation, project checks, build, and focused browser tests.
+
+## Review
+
+- Published the unchanged 34-page source PDF as an organizational document with
+  its confirmed 2022–2029 period and 31 August 2022 pedagogical-council date.
+- Added a concise accessible summary without claiming an unverified mandatory-
+  publication status.
+- Source and published SHA-256 hashes match; content validation, Astro check,
+  lint, production build, and all 37 Vitest tests passed.
+- The focused documents suite passed 6/6 across desktop and mobile; the local
+  page and PDF both return HTTP 200 with the correct PDF content type and size.

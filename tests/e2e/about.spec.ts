@@ -15,6 +15,12 @@ test('сторінка про ліцей показує підтверджені
     page.getByText(/Комунальна власність Солотвинської територіальної громади/),
   ).toBeVisible();
   await expect(page.getByText('Українська мова навчання')).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'Місце, де природа стає частиною освіти' }),
+  ).toBeVisible();
+  await expect(page.getByRole('heading', { level: 3, name: 'Природне середовище' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 3, name: 'Історія та традиції' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 3, name: 'Школа і громада' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Статут Манявського ліцею' })).toHaveAttribute(
     'href',
     '/documents/statut-maniavskoho-litseiu/',

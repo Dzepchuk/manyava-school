@@ -435,3 +435,24 @@ advice.
   lint, production build, and all 37 Vitest tests passed.
 - The focused documents suite passed 6/6 across desktop and mobile; the local
   page and PDF both return HTTP 200 with the correct PDF content type and size.
+
+# Attestation certificate and EDR extract
+
+- [x] Inspect every page and record exact document metadata.
+- [x] Publish both original PDF scans with accessible summaries.
+- [x] Mark the expired attestation certificate as archival.
+- [x] Extend desktop and mobile document coverage.
+- [x] Run content validation, checks, build, and tests.
+
+## Review
+
+- Published the unchanged one-page attestation certificate and three-page EDR
+  extract; each published SHA-256 hash matches its supplied source.
+- Identified the registry document by its printed title as an EDR extract dated
+  3 August 2026 and published it as current.
+- Clearly marked the attestation certificate as archival because its stated
+  validity ended on 10 April 2024.
+- Content validation, Astro check, lint, production build, and all 37 Vitest
+  tests passed; the documents suite passed 8/8 on desktop and mobile.
+- Both local document pages and PDF downloads return HTTP 200 with the expected
+  PDF content type and file size.

@@ -59,21 +59,37 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
       </div>
 
       <dl class="fact-grid">
+        <div class="fact-wide">
+          <dt>Повна назва</dt>
+          <dd>{site.officialName}</dd>
+        </div>
         <div>
-          <dt>Статус</dt>
-          <dd>Опорний заклад</dd>
+          <dt>Код ЄДРПОУ</dt>
+          <dd>{site.registrationCode}</dd>
+        </div>
+        <div>
+          <dt>Тип закладу</dt>
+          <dd>{site.institutionType}</dd>
         </div>
         <div>
           <dt>Форма власності</dt>
-          <dd>Комунальна власність</dd>
+          <dd>{site.ownership}</dd>
         </div>
         <div>
           <dt>Мова навчання</dt>
           <dd>Українська мова навчання</dd>
         </div>
-        <div>
+        <div class="fact-wide">
+          <dt>Засновник</dt>
+          <dd>{site.founder}</dd>
+        </div>
+        <div class="fact-wide">
+          <dt>Уповноважений орган управління</dt>
+          <dd>{site.governingBody}</dd>
+        </div>
+        <div class="fact-wide">
           <dt>Місцезнаходження</dt>
-          <dd>с. Манява, вул. Незалежності, 10</dd>
+          <dd>{site.address}</dd>
         </div>
       </dl>
     </section>
@@ -116,6 +132,45 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
       </ol>
     </section>
 
+    <section class="region" aria-labelledby="region-title">
+      <div class="region-heading">
+        <p class="eyebrow">Манява і Карпати</p>
+        <h2 id="region-title">Місце, де природа стає частиною освіти</h2>
+        <p>
+          Манява розташована серед карпатських лісів і гірських краєвидів. Водоспад, Манявський скит
+          та багата історія села формують особливе середовище, у якому учні пізнають природу,
+          культуру й свою громаду не лише з підручників.
+        </p>
+      </div>
+
+      <div class="region-grid">
+        <article>
+          <p class="region-number">01</p>
+          <h3>Природне середовище</h3>
+          <p>
+            Ліси, гірські маршрути, різноманіття рослинного і тваринного світу дають простір для
+            спостережень, досліджень, екологічних ініціатив і активного відпочинку.
+          </p>
+        </article>
+        <article>
+          <p class="region-number">02</p>
+          <h3>Історія та традиції</h3>
+          <p>
+            Багатовікова історія Маняви, місцеві свята й культурні традиції допомагають учням
+            відчувати зв’язок поколінь і краще розуміти спадщину рідного краю.
+          </p>
+        </article>
+        <article>
+          <p class="region-number">03</p>
+          <h3>Школа і громада</h3>
+          <p>
+            Учителі та учні досліджують минуле села, доповнюють матеріали шкільного музею,
+            долучаються до природоохоронних справ і пізнавальних маршрутів Манявою.
+          </p>
+        </article>
+      </div>
+    </section>
+
     <section class="community" aria-labelledby="community-title">
       <div class="community-copy">
         <p class="eyebrow">Життя спільноти</p>
@@ -153,11 +208,16 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
       </div>
       <div class="source-copy">
         <p>
-          Фактичні відомості перевірено 29 липня 2026 року. Опис життя спільноти узагальнює теми
-          відкритих публікацій ліцею. На сторінці використано надане для публікації фото будівлі;
-          персональні дані та зображення дітей не переносилися.
+          Юридичні відомості перевірено 18 серпня 2026 року за чинною редакцією Статуту. Інші
+          фактичні дані звірено з державною інформаційною системою АІКОМ. Опис Маняви узагальнено з
+          наданого для опрацювання матеріалу про модель розвитку навчального закладу. На сторінці
+          використано надане для публікації фото будівлі; скан друкованого матеріалу, персональні
+          дані та зображення дітей не публікувалися.
         </p>
         <ul>
+          <li>
+            <a href="/documents/statut-maniavskoho-litseiu/">Статут Манявського ліцею</a>
+          </li>
           <li>
             <ExternalLink
               href="https://aikom.iea.gov.ua/zzso/view?zzsoId=10585"
@@ -264,6 +324,7 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
 
   .facts,
   .education,
+  .region,
   .community,
   .sources {
     margin-top: clamp(4rem, 9vw, 8rem);
@@ -277,6 +338,7 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
 
   .section-intro h2,
   .education-heading h2,
+  .region-heading h2,
   .community-copy h2,
   .sources h2 {
     max-width: 14ch;
@@ -287,6 +349,7 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
   }
 
   .section-intro > p:last-child,
+  .region-heading > p:last-child,
   .community-copy > p:last-child,
   .source-copy > p {
     max-width: 40rem;
@@ -308,6 +371,10 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
     min-width: 0;
     padding: clamp(1.4rem, 4vw, 2.2rem);
     background: var(--color-surface);
+  }
+
+  .fact-grid .fact-wide {
+    grid-column: 1 / -1;
   }
 
   .fact-grid dt {
@@ -378,6 +445,44 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
     max-width: 30rem;
     margin: 0.6rem 0 0;
     color: #dce9df;
+  }
+
+  .region {
+    display: grid;
+    gap: clamp(2rem, 6vw, 5rem);
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  }
+
+  .region-heading h2 {
+    max-width: 13ch;
+  }
+
+  .region-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .region-grid article {
+    padding: clamp(1.4rem, 4vw, 2rem);
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+
+  .region-grid h3 {
+    margin: 0.45rem 0 0.7rem;
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+  }
+
+  .region-grid p:last-child {
+    margin-bottom: 0;
+    color: var(--color-muted);
+  }
+
+  .region-number {
+    margin: 0;
+    color: var(--color-primary);
+    font-family: var(--font-display);
+    font-weight: 800;
   }
 
   .community {
@@ -470,6 +575,7 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
   @media (max-width: 52rem) {
     .hero,
     .facts,
+    .region,
     .community,
     .sources {
       grid-template-columns: 1fr;

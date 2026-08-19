@@ -46,11 +46,17 @@ test('сторінки вступу й керівництва мають breadcr
   }
 });
 
-test('сторінка керівництва показує підтверджену директорку', async ({ page }) => {
+test('сторінка керівництва показує директорку та заступниць', async ({ page }) => {
   await page.goto('/about/leadership/');
 
-  await expect(page.getByRole('heading', { level: 2, name: 'Директор' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'Директор', exact: true }),
+  ).toBeVisible();
   await expect(page.getByText('Мельник Наталія Володимирівна')).toBeVisible();
+  await expect(page.getByRole('heading', { level: 2, name: 'Заступники директора' })).toBeVisible();
+  await expect(page.getByText('Варварук Галина Василівна')).toBeVisible();
+  await expect(page.getByText('Гаванюк Наталія Романівна')).toBeVisible();
+  await expect(page.getByText(/заступник директора з навчально-виховної роботи/i)).toHaveCount(2);
 });
 
 test('невідомий маршрут показує доступні наступні кроки', async ({ page }) => {

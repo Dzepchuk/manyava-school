@@ -14,6 +14,24 @@ test('новина доступна зі списку та має окрему �
   await expect(page.getByRole('img', { name: 'Будівля Манявського ліцею' })).toBeVisible();
 });
 
+test('новина про правила доступу містить перевірене нормативне джерело', async ({ page }) => {
+  await page.goto('/news/');
+
+  const link = page.getByRole('link', {
+    name: 'Нові правила доступу до закладів освіти: що важливо знати',
+  });
+  await expect(link).toBeVisible();
+  await link.click();
+
+  await expect(page).toHaveURL('/news/novi-pravyla-dostupu-do-litseiu/');
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'Як організовано вхід до ліцею' }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'базі законодавства Верховної Ради України' }),
+  ).toHaveAttribute('href', 'https://zakon.rada.gov.ua/laws/show/z0436-26#Text');
+});
+
 test('календар подій має актуальний список та архів', async ({ page }) => {
   await page.goto('/events/');
   await expect(page.getByRole('heading', { level: 1, name: 'Події ліцею' })).toBeVisible();

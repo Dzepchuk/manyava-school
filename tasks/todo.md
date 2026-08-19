@@ -1,5 +1,63 @@
 # School Website Specification Plan
 
+## Опис Маняви та регіону — 18 серпня 2026
+
+- [x] Витягти факти з наданої фотографії друкованого матеріалу.
+- [x] Перефразувати опис без копіювання захищеного тексту й без публікації скану.
+- [x] Додати регіональний блок на сторінку «Про ліцей».
+- [x] Перевірити адаптивність, доступність і production build.
+
+### Review
+
+- Додано блок «Манява і Карпати» з трьома темами: природне середовище,
+  історія та традиції, школа і громада.
+- Збережено фактичну основу наданого матеріалу, але текст повністю
+  перефразовано; фотографію друкованої сторінки не опубліковано.
+- Джерело походження опису прозоро зазначено в примітці сторінки.
+- Контентна валідація, Astro check, ESLint і production build пройшли;
+  6 цільових Playwright-тестів доступності та адаптивності успішні на desktop
+  і mobile.
+
+## Новина про правила доступу — 18 серпня 2026
+
+- [x] Перевірити наказ МОН № 243 за офіційним джерелом.
+- [x] Адаптувати допис офіційної Facebook-сторінки у формат новини сайту.
+- [x] Додати посилання на чинний нормативний документ і джерело допису.
+- [x] Оновити браузерний тест новин і перевірити збірку.
+
+### Review
+
+- Наказ МОН № 243 від 11.02.2026 підтверджено в базі Верховної Ради: чинний,
+  зареєстрований Мін’юстом за № 436/45830, набрав чинності 17.04.2026.
+- Відокремлено локальний порядок входу Манявського ліцею від загальних Типових
+  правил; уточнено вимогу документа для відвідувачів і виняток для
+  собак-поводирів.
+- Новину опубліковано без неперевіреного зображення, з посиланнями на наказ і
+  першоджерело у Facebook.
+- Контентна валідація, Astro check, ESLint, production build, 37 unit/content
+  тестів і 6 Playwright-тестів на desktop та mobile пройшли успішно.
+
+## Публікація статуту та офіційних реквізитів — 18 серпня 2026
+
+- [x] Перевірити наданий скан статуту та виписати підтверджені реквізити.
+- [x] Додати реквізити до валідованих налаштувань і сторінки «Про ліцей».
+- [x] Опублікувати чинну редакцію статуту в каталозі документів.
+- [x] Оновити CMS-контракт і тести каталогу документів.
+- [x] Виконати форматування, перевірки, збірку та браузерну перевірку.
+
+### Review
+
+- Переглянуто всі 21 сторінку наданого скану; підтверджено рішення
+  № 2833/53/2026 від 14.07.2026 та реквізити з пунктів 1.1–1.10.
+- На сторінку «Про ліцей» додано повну назву, ЄДРПОУ, тип закладу,
+  власність, засновника, орган управління та повну адресу.
+- Опубліковано PDF і доступний текстовий опис статуту; документ позначено
+  чинним і пов’язано з підтвердженою вимогою статті 30 Закону України
+  «Про освіту».
+- `npm run validate:content`, `npm run check`, `npm run build` і `npm test`
+  пройшли; 37 unit/content тестів та 6 цільових Playwright-тестів на desktop
+  і mobile успішні.
+
 ## Goal
 
 Create a practical, version-controlled specification for the official website of
@@ -359,3 +417,42 @@ advice.
 - `npm run check` passed; the focused navigation/accessibility run passed 18/18
   applicable tests across desktop and mobile (2 viewport-specific skips); and
   the production build generated 25 pages with a 23-page Pagefind index.
+
+# School development strategy
+
+- [x] Inspect the supplied PDF and confirm its title, approval date, and period.
+- [x] Publish the original PDF and accessible document summary.
+- [x] Add browser coverage for catalog visibility and downloading.
+- [x] Run content validation, project checks, build, and focused browser tests.
+
+## Review
+
+- Published the unchanged 34-page source PDF as an organizational document with
+  its confirmed 2022–2029 period and 31 August 2022 pedagogical-council date.
+- Added a concise accessible summary without claiming an unverified mandatory-
+  publication status.
+- Source and published SHA-256 hashes match; content validation, Astro check,
+  lint, production build, and all 37 Vitest tests passed.
+- The focused documents suite passed 6/6 across desktop and mobile; the local
+  page and PDF both return HTTP 200 with the correct PDF content type and size.
+
+# Attestation certificate and EDR extract
+
+- [x] Inspect every page and record exact document metadata.
+- [x] Publish both original PDF scans with accessible summaries.
+- [x] Mark the expired attestation certificate as archival.
+- [x] Extend desktop and mobile document coverage.
+- [x] Run content validation, checks, build, and tests.
+
+## Review
+
+- Published the unchanged one-page attestation certificate and three-page EDR
+  extract; each published SHA-256 hash matches its supplied source.
+- Identified the registry document by its printed title as an EDR extract dated
+  3 August 2026 and published it as current.
+- Clearly marked the attestation certificate as archival because its stated
+  validity ended on 10 April 2024.
+- Content validation, Astro check, lint, production build, and all 37 Vitest
+  tests passed; the documents suite passed 8/8 on desktop and mobile.
+- Both local document pages and PDF downloads return HTTP 200 with the expected
+  PDF content type and file size.

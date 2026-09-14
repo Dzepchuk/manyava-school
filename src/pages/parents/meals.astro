@@ -1,0 +1,421 @@
+---
+import { getEntry } from 'astro:content';
+import ApprovedImage from '../../components/common/ApprovedImage.astro';
+import Breadcrumbs from '../../components/common/Breadcrumbs.astro';
+import Container from '../../components/common/Container.astro';
+import ContentMeta from '../../components/common/ContentMeta.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadSiteData } from '../../lib/content/load-site-data';
+import { formatDate } from '../../lib/dates/format';
+
+const mealsEntry = await getEntry('pages', 'parents/meals');
+if (!mealsEntry) {
+  throw new Error('Не знайдено content record сторінки харчування.');
+}
+
+const { owners, site } = loadSiteData();
+const owner = owners.find(({ id }) => id === mealsEntry.data.review.ownerId);
+const schedule = [
+  { grades: '5–7 класи', time: '9:35–9:50' },
+  { grades: '1–4 класи', time: '10:25–10:40' },
+  { grades: '8–9 класи', time: '10:45–11:05' },
+  { grades: '10–11 класи', time: '11:50–12:05' },
+];
+const menuDays = [
+  {
+    day: 'День 1',
+    dishes: [
+      'Пюре картопляне',
+      'Котлета м’ясна',
+      'Салат з капусти',
+      'Чай з лимоном',
+      'Хліб житньо-пшеничний',
+      'Банан',
+    ],
+  },
+  {
+    day: 'День 2',
+    dishes: [
+      'Макарони з маслом',
+      'Нагетси курячі',
+      'Салат із томатів',
+      'Узвар із суміші сухофруктів',
+      'Хліб житній',
+      'Яблуко',
+    ],
+  },
+  {
+    day: 'День 3',
+    dishes: [
+      'Рис розсипчастий',
+      'Гуляш курячий',
+      'Салат з буряка',
+      'Узвар зі суміші сухофруктів',
+      'Хліб житній',
+      'Яблуко',
+    ],
+  },
+  {
+    day: 'День 4',
+    dishes: [
+      'Гречка розсипчаста з маслом',
+      'Риба смажена',
+      'Салат з капустою та морквою',
+      'Чай з лимоном',
+      'Хліб цільнозерновий',
+      'Банан',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`${mealsEntry.data.title} — ${site.shortName}`}
+  description={mealsEntry.data.description}
+  contentType="Сторінка"
+  contentDate={mealsEntry.data.review.updatedAt}
+  searchKeywords={mealsEntry.data.searchKeywords}
+>
+  <Container class="page-shell">
+    <Breadcrumbs
+      items={[
+        { label: 'Головна', href: '/' },
+        { label: 'Батькам', href: '/parents/' },
+        { label: mealsEntry.data.title },
+      ]}
+    />
+
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Щоденна турбота</p>
+        <h1>Харчування учнів</h1>
+        <p class="lead">
+          Актуальне меню на осінній період 2026/2027 навчального року, графік відвідування їдальні
+          та приклади готових страв.
+        </p>
+      </div>
+      <div class="hero-note">
+        <strong>4 дні</strong>
+        <span>Після четвертого дня меню знову починається з першого.</span>
+      </div>
+    </header>
+
+    <div class="meals-content">
+      <section class="menu-section" aria-labelledby="menu-title">
+        <div class="section-heading">
+          <p class="eyebrow">Осінній період</p>
+          <h2 id="menu-title">Меню на 4 дні</h2>
+          <p>Порції відрізняються за віком учнів відповідно до затвердженого меню.</p>
+        </div>
+
+        <ol class="menu-grid" aria-label="Чотириденне ротаційне меню">
+          {
+            menuDays.map(({ day, dishes }) => (
+              <li class="menu-card">
+                <div class="menu-card-heading">
+                  <strong>{day}</strong>
+                </div>
+                <ul>
+                  {dishes.map((dish) => (
+                    <li>{dish}</li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ol>
+
+        <a class="document-link" href="/documents/four-week-autumn-menu-2026-2027.pdf">
+          <span>
+            <strong>Переглянути документ-джерело</strong>
+            <small>Повне осіннє меню · PDF · 12 сторінок</small>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </section>
+
+      <section class="schedule-section" aria-labelledby="schedule-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Розклад їдальні</p>
+          <h2 id="schedule-title">Графік харчування</h2>
+          <p>Для кожної групи передбачено 5 хвилин на протирання столів.</p>
+        </div>
+
+        <div class="schedule-list">
+          {
+            schedule.map(({ grades, time }) => (
+              <div>
+                <span>{grades}</span>
+                <time>{time}</time>
+              </div>
+            ))
+          }
+        </div>
+
+        <a class="text-link" href="/documents/student-meal-schedule.pdf">
+          Завантажити затверджений графік (PDF, 1 сторінка)
+        </a>
+      </section>
+
+      <section class="gallery-section" aria-labelledby="gallery-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Як це виглядає</p>
+          <h2 id="gallery-title">Страви в ліцеї</h2>
+          <p>Фотографії показують приклади готових порцій, які подають учням.</p>
+        </div>
+
+        <div class="gallery">
+          <ApprovedImage
+            src="/media/student-meal-buckwheat.webp"
+            width={900}
+            height={1195}
+            alt="Порції гречки з котлетою, хлібом, салатом, фруктами та напоєм на столі"
+            caption="Один із варіантів шкільного обіду"
+            sizes="(max-width: 48rem) 100vw, 50vw"
+          />
+          <ApprovedImage
+            src="/media/student-meal-potato.webp"
+            width={900}
+            height={1195}
+            alt="Порції картопляного пюре з відбивною, овочами, хлібом, бананами та напоєм"
+            caption="Ще один приклад страв із меню ліцею"
+            sizes="(max-width: 48rem) 100vw, 50vw"
+          />
+        </div>
+      </section>
+    </div>
+
+    <footer class="review-meta" aria-label="Відомості про актуальність сторінки">
+      <ContentMeta label="Відповідальний за зміст" value={owner?.displayName ?? 'Не визначено'} />
+      <ContentMeta
+        label="Перевірено"
+        value={formatDate(mealsEntry.data.review.reviewedAt)}
+        datetime={mealsEntry.data.review.reviewedAt.toISOString()}
+      />
+      <ContentMeta
+        label="Наступна перевірка"
+        value={formatDate(mealsEntry.data.review.reviewDueAt)}
+        datetime={mealsEntry.data.review.reviewDueAt.toISOString()}
+      />
+    </footer>
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 4rem;
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.38fr);
+    align-items: end;
+    gap: clamp(2rem, 8vw, 7rem);
+    padding-block: clamp(3rem, 8vw, 7rem);
+  }
+  h1 {
+    max-width: 12ch;
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+  h2 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+  .lead {
+    max-width: 45rem;
+    margin: 1.5rem 0 0;
+    color: var(--color-muted);
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+  }
+  .hero-note {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background: var(--color-accent);
+    color: var(--color-ink);
+    border-radius: var(--radius-lg);
+  }
+  .hero-note strong {
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    line-height: 1;
+  }
+  .hero-note span {
+    max-width: 18rem;
+  }
+  .meals-content {
+    display: grid;
+    gap: clamp(4rem, 10vw, 8rem);
+  }
+  section {
+    min-width: 0;
+  }
+  .menu-section,
+  .schedule-section {
+    padding: clamp(1.5rem, 5vw, 3.5rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+  }
+  .section-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: 0.65rem clamp(2rem, 8vw, 7rem);
+  }
+  .section-heading .eyebrow {
+    grid-column: 1 / -1;
+  }
+  .section-heading p:last-child {
+    margin: 0;
+    color: var(--color-muted);
+  }
+  .section-heading.compact {
+    max-width: 65rem;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+    margin: 2.5rem 0;
+    padding: 0;
+    list-style: none;
+  }
+  .menu-card {
+    display: grid;
+    align-content: start;
+    gap: 1.1rem;
+    min-width: 0;
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+  .menu-card-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .menu-card-heading strong {
+    font-size: 1.35rem;
+  }
+  .menu-card-heading span {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+  .menu-card ul {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  .menu-card li::marker {
+    color: var(--color-ink);
+  }
+  .document-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.2rem 1.4rem;
+    color: white;
+    background: var(--color-ink);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+  }
+  .document-link span:first-child {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .document-link small {
+    color: rgba(255, 255, 255, 0.74);
+  }
+  .document-link span:last-child {
+    font-size: 1.8rem;
+  }
+  .schedule-section {
+    display: grid;
+    gap: 2rem;
+  }
+  .schedule-list {
+    border-top: 1px solid var(--color-line);
+  }
+  .schedule-list div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .schedule-list time {
+    flex: none;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+  .text-link {
+    width: fit-content;
+    font-weight: 800;
+  }
+  .gallery-section {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .gallery :global(figure) {
+    overflow: hidden;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+  }
+  .gallery :global(img) {
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+  .gallery :global(figcaption) {
+    padding: 1rem 1.2rem 1.2rem;
+    color: var(--color-muted);
+  }
+  .review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 2rem;
+    margin-top: clamp(4rem, 10vw, 8rem);
+    padding: 1.2rem 1.4rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+  @media (max-width: 48rem) {
+    .hero,
+    .section-heading {
+      grid-template-columns: 1fr;
+    }
+    .hero {
+      align-items: stretch;
+    }
+    .menu-grid {
+      grid-template-columns: 1fr;
+    }
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 24rem) {
+    .menu-grid {
+      grid-template-columns: 1fr;
+    }
+    .schedule-list div {
+      display: grid;
+      gap: 0.25rem;
+    }
+  }
+</style>

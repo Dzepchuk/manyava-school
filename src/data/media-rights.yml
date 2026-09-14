@@ -42,3 +42,33 @@ media:
     bytes: 35688
     approvedBy: technical-administrator
     approvedAt: 2026-07-29
+  - id: student-meal-buckwheat
+    path: /media/student-meal-buckwheat.webp
+    alt: Порції гречки з котлетою, хлібом, салатом, фруктами та напоєм на столі
+    sourceDescription: Фотографію шкільного харчування надав власник сайту для публікації.
+    license: Дозвіл на публікацію від надавача фотографії
+    licenseProof: Підтвердження користувача в робочому листуванні проєкту від 2026-09-14
+    depictsSchoolReality: true
+    containsChildren: false
+    width: 900
+    height: 1195
+    mimeType: image/webp
+    bytes: 185810
+    approvedBy: technical-administrator
+    approvedAt: 2026-09-14
+    caption: Один із варіантів шкільного обіду
+  - id: student-meal-potato
+    path: /media/student-meal-potato.webp
+    alt: Порції картопляного пюре з відбивною, овочами, хлібом, бананами та напоєм
+    sourceDescription: Фотографію шкільного харчування надав власник сайту для публікації.
+    license: Дозвіл на публікацію від надавача фотографії
+    licenseProof: Підтвердження користувача в робочому листуванні проєкту від 2026-09-14
+    depictsSchoolReality: true
+    containsChildren: false
+    width: 900
+    height: 1195
+    mimeType: image/webp
+    bytes: 142444
+    approvedBy: technical-administrator
+    approvedAt: 2026-09-14
+    caption: Ще один приклад страв із меню ліцею

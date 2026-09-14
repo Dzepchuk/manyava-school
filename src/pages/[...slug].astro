@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   pages.forEach(({ body }) => assertSafeMarkdown(body ?? ''));
 
   return pages
-    .filter(({ data }) => data.path !== '/about/')
+    .filter(({ data }) => !['/about/', '/parents/meals/'].includes(data.path))
     .map((entry) => ({
       params: { slug: entry.data.path.replace(/^\/|\/$/g, '') },
       props: { entry },

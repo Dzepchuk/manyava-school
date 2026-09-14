@@ -22,6 +22,14 @@
 - Never recommend copying arbitrary internet images; require a documented
   licence or permission and avoid presenting stock imagery as documentary
   photography of the school.
+- When the user explains how a local operational document is applied in
+  practice, treat that explanation as authoritative. Do not infer the rotation
+  period from the document title alone; distinguish the document's formal
+  period from the school's day-to-day cycle.
+- When a source menu omits a normally expected item, do not invent it and do
+  not add an editorial warning unless the user asks for one.
+- Treat the school's explicit correction of an omitted menu item as the
+  authoritative operational value, even when it is not legible in the scan.
 
 ## Responsive typography
 

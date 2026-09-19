@@ -72,3 +72,34 @@ media:
     approvedBy: technical-administrator
     approvedAt: 2026-09-14
     caption: Ще один приклад страв із меню ліцею
+  - id: student-meal-rice
+    path: /media/student-meal-rice.webp
+    alt: Порції рису з куркою та хлібом, салат із буряка, фрукти й напої на столі
+    sourceDescription: Фотографію шкільного харчування надав власник сайту для публікації.
+    license: Дозвіл на публікацію від надавача фотографії
+    licenseProof: Підтвердження користувача в робочому листуванні проєкту від 2026-09-19
+    depictsSchoolReality: true
+    containsChildren: false
+    width: 900
+    height: 1195
+    mimeType: image/webp
+    bytes: 163072
+    approvedBy: technical-administrator
+    approvedAt: 2026-09-19
+    caption: Рис із куркою, салат і фрукти на обід
+  - id: students-dining
+    path: /media/students-dining.webp
+    alt: Учні обідають за столами в шкільній їдальні
+    sourceDescription: Фотографію учнів під час обіду надав власник сайту для публікації.
+    license: Дозвіл на публікацію від надавача фотографії
+    licenseProof: Підтвердження користувача в робочому листуванні проєкту від 2026-09-19
+    depictsSchoolReality: true
+    containsChildren: true
+    publicationBasis: За повідомленням користувача від 2026-09-19, директор підтвердив наявність згоди батьків.
+    width: 874
+    height: 1200
+    mimeType: image/webp
+    bytes: 118000
+    approvedBy: technical-administrator
+    approvedAt: 2026-09-19
+    caption: Обід учнів у їдальні ліцею

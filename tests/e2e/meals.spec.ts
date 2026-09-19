@@ -28,7 +28,7 @@ test.describe('Сторінка харчування', () => {
     await expect(
       page.getByRole('link', { name: /Завантажити затверджений графік/ }),
     ).toHaveAttribute('href', '/documents/student-meal-schedule.pdf');
-    await expect(page.locator('.gallery img')).toHaveCount(2);
+    await expect(page.locator('.gallery img')).toHaveCount(4);
   });
 
   test('не має критичних порушень доступності або горизонтального переповнення', async ({

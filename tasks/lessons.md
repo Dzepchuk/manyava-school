@@ -1,5 +1,10 @@
 # Lessons
 
+## Фото з повідомлення
+
+- Якщо зображення видно в чаті, але його немає у робочій папці, перевірити
+  `~/Downloads` перед висновком, що вихідний файл недоступний.
+
 ## Specification language
 
 - Confirm the working language before drafting project documentation.

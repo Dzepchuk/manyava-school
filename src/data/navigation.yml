@@ -97,18 +97,25 @@
   order: 1
   audiences: [students]
   visible: true
+- id: students-clubs
+  label: Гуртки
+  path: /students/clubs/
+  parentId: students
+  order: 2
+  audiences: [students, parents]
+  visible: true
 - id: students-support
   label: Підтримка
   path: /students/support/
   parentId: students
-  order: 2
+  order: 3
   audiences: [students]
   visible: true
 - id: bullying-prevention
   label: Протидія булінгу
   path: /bullying-prevention/
   parentId: students
-  order: 3
+  order: 4
   audiences: [all]
   visible: true
 - id: contacts

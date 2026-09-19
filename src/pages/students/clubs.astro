@@ -1,0 +1,312 @@
+---
+import { getEntry } from 'astro:content';
+import Breadcrumbs from '../../components/common/Breadcrumbs.astro';
+import Container from '../../components/common/Container.astro';
+import ContentMeta from '../../components/common/ContentMeta.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadSiteData } from '../../lib/content/load-site-data';
+import { formatDate } from '../../lib/dates/format';
+
+const entry = await getEntry('pages', 'students/clubs');
+if (!entry) throw new Error('Не знайдено сторінку гуртків.');
+
+const { owners, site } = loadSiteData();
+const owner = owners.find(({ id }) => id === entry.data.review.ownerId);
+
+const schoolClubs = [
+  {
+    name: 'Вокальне мистецтво',
+    grades: '4 клас',
+    sessions: ['Середа · 13:45–14:45'],
+    teacher: 'Гринішак Ольга Богданівна',
+  },
+  {
+    name: 'Майбутній журналіст',
+    grades: '4 клас',
+    sessions: ['Понеділок · 14:35–15:35'],
+    teacher: 'Білусяк Любов Степанівна',
+  },
+  {
+    name: 'Історичне краєзнавство',
+    grades: '5 клас',
+    sessions: ['Середа · 15:25–16:25'],
+    teacher: 'Паранюк Марія Василівна',
+  },
+  {
+    name: 'Лісова школа',
+    grades: '5 клас',
+    sessions: ['П’ятниця · 14:35–15:35'],
+    teacher: 'Монастирецька Наталія Романівна',
+  },
+  {
+    name: 'Школа безпеки',
+    grades: '10 клас',
+    sessions: ['П’ятниця · 16:15–17:15'],
+    teacher: 'Струтинський Роман Романович',
+  },
+  {
+    name: 'Юні знавці Біблії',
+    grades: '3 клас',
+    sessions: ['Понеділок · 13:45–14:45'],
+    teacher: 'Гаванюк Наталія Романівна',
+  },
+  {
+    name: 'Основи програмування: CODE CLUB',
+    grades: '7–8 класи',
+    sessions: ['Четвер · 16:15–18:15'],
+    teacher: 'Дзепчук Назар Михайлович',
+  },
+  {
+    name: 'Юний стрілець',
+    grades: '10 клас',
+    sessions: ['Вівторок · 16:15–17:15', 'Четвер · 16:15–18:15'],
+    teacher: 'Добровольський Василь Дмитрович',
+  },
+  {
+    name: 'Джура',
+    grades: '10–11 класи',
+    sessions: ['Понеділок · 16:15–18:15'],
+    teacher: 'Гаванюк Анатолій Романович',
+  },
+  {
+    name: 'Волейбол (хлопчики)',
+    grades: '8–11 класи',
+    sessions: ['Середа · 16:15–18:15', 'П’ятниця · 16:15–18:15'],
+    teacher: 'Гаванюк Анатолій Романович',
+  },
+];
+
+const extracurricularClubs = [
+  {
+    name: 'Історичне краєзнавство',
+    grades: '8–11 класи',
+    sessions: [
+      'Понеділок · 16:30–17:15',
+      'Субота · практичні заняття, екскурсії та походи; час не зазначено',
+    ],
+  },
+  {
+    name: 'Бойківщинознавство',
+    grades: '5–7 класи',
+    sessions: [
+      'П’ятниця · 16:30–18:05',
+      'Субота · практичні заняття, екскурсії та походи; час не зазначено',
+    ],
+  },
+];
+
+const extracurricularProvider =
+  'Івано-Франківський обласний державний центр туризму і краєзнавства учнівської молоді';
+---
+
+<BaseLayout
+  title={`${entry.data.title} — ${site.shortName}`}
+  description={entry.data.description}
+  contentType="Сторінка"
+  contentDate={entry.data.review.updatedAt}
+  searchKeywords={entry.data.searchKeywords}
+>
+  <Container class="page-shell">
+    <Breadcrumbs
+      items={[
+        { label: 'Головна', href: '/' },
+        { label: 'Учням', href: '/students/' },
+        { label: entry.data.title },
+      ]}
+    />
+
+    <header class="page-heading">
+      <p class="eyebrow">2026/2027 навчальний рік</p>
+      <h1>Гуртки та позашкільні заняття</h1>
+      <p>Розклад гуртків ліцею й занять позашкільної освіти за затвердженими документами.</p>
+    </header>
+
+    <section aria-labelledby="school-clubs-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">У ліцеї</p>
+          <h2 id="school-clubs-title">Гуртки ліцею</h2>
+        </div>
+        <p>У розкладі зазначено клас, день, час занять і керівника кожного гуртка.</p>
+      </div>
+      <ul class="club-grid">
+        {
+          schoolClubs.map((club) => (
+            <li class="club-card">
+              <div class="club-heading">
+                <h3>{club.name}</h3>
+                <span>{club.grades}</span>
+              </div>
+              <ul class="sessions">
+                {club.sessions.map((session) => (
+                  <li>{session}</li>
+                ))}
+              </ul>
+              <p class="teacher">Керівник: {club.teacher}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="document-link" href="/documents/clubs-schedule-2026-2027.pdf">
+        Завантажити затверджений розклад гуртків ліцею (PDF, 1 сторінка)
+      </a>
+    </section>
+
+    <section aria-labelledby="extracurricular-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Позашкільна освіта</p>
+          <h2 id="extracurricular-title">Гуртки позашкільної освіти</h2>
+        </div>
+        <p>Заняття проводить {extracurricularProvider}.</p>
+      </div>
+      <ul class="club-grid">
+        {
+          extracurricularClubs.map((club) => (
+            <li class="club-card">
+              <div class="club-heading">
+                <h3>{club.name}</h3>
+                <span>{club.grades}</span>
+              </div>
+              <ul class="sessions">
+                {club.sessions.map((session) => (
+                  <li>{session}</li>
+                ))}
+              </ul>
+              <p class="teacher">Керівник: Паранюк Марія Василівна</p>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="document-link" href="/documents/extracurricular-clubs-schedule-2026-2027.pdf">
+        Завантажити затверджений розклад позашкільних гуртків (PDF, 1 сторінка)
+      </a>
+    </section>
+
+    <footer class="review-meta" aria-label="Відомості про актуальність сторінки">
+      <ContentMeta label="Відповідальний за зміст" value={owner?.displayName ?? 'Не визначено'} />
+      <ContentMeta
+        label="Перевірено"
+        value={formatDate(entry.data.review.reviewedAt)}
+        datetime={entry.data.review.reviewedAt.toISOString()}
+      />
+      <ContentMeta
+        label="Наступна перевірка"
+        value={formatDate(entry.data.review.reviewDueAt)}
+        datetime={entry.data.review.reviewDueAt.toISOString()}
+      />
+    </footer>
+  </Container>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    padding-block: 2rem 4rem;
+  }
+  .page-heading {
+    max-width: 62rem;
+    margin: clamp(3rem, 8vw, 6rem) 0 clamp(4rem, 8vw, 7rem);
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+  .page-heading > p:last-child {
+    max-width: 48rem;
+    color: var(--color-muted);
+    font-size: 1.2rem;
+  }
+  section + section {
+    margin-top: clamp(5rem, 10vw, 8rem);
+  }
+  .section-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: 1rem 3rem;
+    align-items: end;
+    margin-bottom: 2rem;
+  }
+  h2 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    overflow-wrap: anywhere;
+  }
+  .section-heading > p {
+    margin: 0;
+    color: var(--color-muted);
+  }
+  .club-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+  .club-card {
+    display: grid;
+    align-content: start;
+    gap: 1.2rem;
+    min-width: 0;
+    padding: clamp(1.3rem, 3vw, 2rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+  }
+  .club-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+  }
+  h3 {
+    min-width: 0;
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 1.35rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+  .club-heading span {
+    color: var(--color-muted);
+    font-weight: 700;
+  }
+  .sessions {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  .teacher {
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line);
+    color: var(--color-muted);
+  }
+  .document-link {
+    display: inline-block;
+    font-weight: 700;
+  }
+  .review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 2rem;
+    margin-top: clamp(4rem, 10vw, 8rem);
+    padding: 1.2rem 1.4rem;
+    background: var(--color-soft);
+    border-radius: var(--radius-md);
+  }
+  @media (max-width: 48rem) {
+    .section-heading,
+    .club-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

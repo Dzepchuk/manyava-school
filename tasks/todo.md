@@ -3,12 +3,16 @@
 ## Публікація фото харчування та гуртків — 20 вересня 2026
 
 - [x] Перевірити чистоту Git, локальну збірку та цільові тести.
-- [ ] Надіслати коміти в GitHub і дочекатися production deploy.
-- [ ] Перевірити публічні сторінки, PDF і `/admin/` на production.
+- [x] Надіслати коміти в GitHub і дочекатися production deploy.
+- [x] Перевірити публічні сторінки, PDF і `/admin/` на production.
 
 ### Review
 
-Очікує публікації.
+Pull request №9 пройшов quality, browser і Netlify preview; об’єднано в
+`main` через rebase. Netlify опублікував production deploy для коміту
+`8080477`. На `https://manyava-school.if.ua` сторінки гуртків і харчування,
+обидва PDF, обидва фото та `/admin/` повернули HTTP 200; `/admin` повернув
+один редирект на `/admin/`. Production CI для `main` також пройшов.
 
 ## Гуртки та позашкільна освіта — 19 вересня 2026
 

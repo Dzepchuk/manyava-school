@@ -489,6 +489,21 @@ advice.
 - `npm run check` and the production build passed; the corrected focused
   Playwright suite passed 4/4 tests across desktop and mobile projects.
 
+# Mobile footer viewport space
+
+- [x] Inspect the fixed-footer styles and existing browser coverage.
+- [x] Return the footer to normal document flow at the phone breakpoint.
+- [x] Verify desktop fixed behavior and mobile scrolling behavior.
+
+## Review
+
+- At widths up to 40rem, the footer now follows the page content and the body no
+  longer reserves space for a fixed footer. Larger screens retain the existing
+  fixed footer behavior.
+- Astro check, ESLint, the production build, formatting, and diff validation
+  passed. The focused Playwright suite passed 4/4 tests across desktop and
+  mobile projects.
+
 # Navigation accordion
 
 - [x] Inspect the current desktop dropdown and mobile navigation structure.

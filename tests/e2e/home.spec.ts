@@ -23,7 +23,9 @@ test('головна розповідає про ліцей замість те�
   expect(overflow).toBe(false);
 });
 
-test('підвал залишається видимим під час прокручування без перекриття вмісту', async ({ page }) => {
+test('підвал фіксується на desktop і прокручується разом зі сторінкою на телефоні', async ({
+  page,
+}) => {
   await page.goto('/');
 
   const layout = await page.evaluate(async () => {
@@ -32,6 +34,7 @@ test('підвал залишається видимим під час прок�
     if (!footer) throw new Error('Не знайдено підвал');
 
     const beforeScroll = footer.getBoundingClientRect();
+    document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo(0, document.documentElement.scrollHeight);
     await new Promise((resolve) => requestAnimationFrame(resolve));
     const afterScroll = footer.getBoundingClientRect();
@@ -45,8 +48,18 @@ test('підвал залишається видимим під час прок�
       footerHeight: afterScroll.height,
       position: getComputedStyle(footer).position,
       viewportHeight: window.innerHeight,
+      viewportWidth: window.innerWidth,
     };
   });
+
+  if (layout.viewportWidth <= 640) {
+    expect(layout.position).toBe('static');
+    expect(layout.bodyBottomPadding).toBe(0);
+    expect(layout.beforeBottom).toBeGreaterThan(layout.viewportHeight);
+    expect(layout.afterBottom).toBeCloseTo(layout.viewportHeight, 0);
+    expect(layout.afterTop).toBeLessThan(layout.beforeTop);
+    return;
+  }
 
   expect(layout.position).toBe('fixed');
   expect(layout.beforeBottom).toBeCloseTo(layout.viewportHeight, 0);

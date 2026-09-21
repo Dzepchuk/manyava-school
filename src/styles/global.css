@@ -166,8 +166,8 @@ h3 {
 }
 
 @media (max-width: 40rem) {
-  :root {
-    --footer-reserved-space: 10rem;
+  body {
+    padding-bottom: 0;
   }
 
   .brand span:last-child {
@@ -180,6 +180,7 @@ h3 {
   }
 
   .site-footer {
+    position: static;
     padding: 1.25rem 0 calc(1.25rem + env(safe-area-inset-bottom));
   }
 }

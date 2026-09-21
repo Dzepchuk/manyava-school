@@ -58,6 +58,9 @@
   short pages.
 - Reserve document space equal to the fixed footer height and test its bounding
   box both before and after scrolling so content is not hidden behind it.
+- A fixed footer consumes too much of a phone viewport. Keep the fixed behavior
+  for larger screens, but return the footer to normal document flow at the phone
+  breakpoint and remove the reserved body space there.
 
 ## Netlify directory redirects
 

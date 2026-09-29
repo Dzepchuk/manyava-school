@@ -103,3 +103,18 @@ media:
     approvedBy: technical-administrator
     approvedAt: 2026-09-19
     caption: Обід учнів у їдальні ліцею
+  - id: pravyla-dostupu-mon-243
+    path: /media/pravyla-dostupu-mon-243.jpg
+    alt: Інфографіка про доступ і перебування в закладі освіти згідно з наказом МОН № 243
+    sourceUrl: https://drive.google.com/file/d/1qYAZOjFVVslPcADW9i3UvWsENISVVaCs/view
+    sourceDescription: Ілюстровану інфографіку надав власник сайту через спільну папку Google Drive.
+    license: Дозвіл користувача на публікацію на сайті ліцею
+    licenseProof: Запит користувача в робочому листуванні проєкту від 2026-09-29
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1091
+    height: 1200
+    mimeType: image/jpeg
+    bytes: 278629
+    approvedBy: technical-administrator
+    approvedAt: 2026-09-29

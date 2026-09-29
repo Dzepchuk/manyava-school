@@ -567,6 +567,7 @@ advice.
   tests passed; the documents suite passed 8/8 on desktop and mobile.
 - Both local document pages and PDF downloads return HTTP 200 with the expected
   PDF content type and file size.
+
 # Об'єднання освітньої програми — 29 вересня 2026
 
 - [x] Завантажити два PDF та перевірити порядок і кількість сторінок.

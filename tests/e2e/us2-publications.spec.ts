@@ -14,7 +14,10 @@ test('новина доступна зі списку та має окрему �
   await expect(page.getByRole('img', { name: 'Будівля Манявського ліцею' })).toBeVisible();
 });
 
-test('новина про правила доступу містить перевірене нормативне джерело', async ({ page }) => {
+test('новина про правила доступу містить інфографіку та нормативне джерело', async ({
+  page,
+  request,
+}) => {
   await page.goto('/news/');
 
   const link = page.getByRole('link', {
@@ -30,6 +33,33 @@ test('новина про правила доступу містить пере�
   await expect(
     page.getByRole('link', { name: 'базі законодавства Верховної Ради України' }),
   ).toHaveAttribute('href', 'https://zakon.rada.gov.ua/laws/show/z0436-26#Text');
+
+  const infographic = page.getByRole('img', { name: /Інфографіка про безпеку/ });
+  await expect(infographic).toHaveAttribute('src', '/media/pravyla-dostupu-mon-243.jpg');
+  await expect(infographic).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Відкрити інфографіку в повному розмірі' }),
+  ).toHaveAttribute('href', '/media/pravyla-dostupu-mon-243.jpg');
+
+  const imageSize = await infographic.evaluate((image: HTMLImageElement) => {
+    const rect = image.getBoundingClientRect();
+    return {
+      naturalWidth: image.naturalWidth,
+      naturalHeight: image.naturalHeight,
+      ratio: rect.width / rect.height,
+      viewportWidth: window.innerWidth,
+      renderedWidth: rect.width,
+    };
+  });
+  expect(imageSize.naturalWidth).toBe(1091);
+  expect(imageSize.naturalHeight).toBe(1200);
+  expect(imageSize.renderedWidth).toBeLessThanOrEqual(imageSize.viewportWidth);
+  expect(Math.abs(imageSize.ratio - 1091 / 1200)).toBeLessThan(0.01);
+
+  const response = await request.get('/media/pravyla-dostupu-mon-243.jpg');
+  expect(response.ok()).toBeTruthy();
+  expect(response.headers()['content-type']).toContain('image/jpeg');
+  expect((await response.body()).length).toBe(278629);
 });
 
 test('календар подій має актуальний список та архів', async ({ page }) => {

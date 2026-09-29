@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('каталог документів публікує чотири офіційні документи', async ({ page }) => {
+test('каталог документів публікує п’ять офіційних документів', async ({ page }) => {
   await page.goto('/documents/');
 
   await expect(page.getByRole('heading', { level: 1, name: 'Офіційні документи' })).toBeVisible();
@@ -12,6 +12,11 @@ test('каталог документів публікує чотири офіц
     page.getByRole('link', { name: 'Стратегія розвитку Манявського ліцею на 2022–2029 роки' }),
   ).toBeVisible();
   await expect(
+    page.getByRole('link', {
+      name: 'Освітня програма Манявського ліцею на 2026–2027 навчальний рік',
+    }),
+  ).toBeVisible();
+  await expect(
     page.getByRole('link', { name: 'Виписка з Єдиного державного реєстру від 3 серпня 2026 року' }),
   ).toBeVisible();
   await expect(
@@ -19,7 +24,7 @@ test('каталог документів публікує чотири офіц
       name: 'Свідоцтво про атестацію Манявського навчально-виховного комплексу',
     }),
   ).toBeVisible();
-  await expect(page.getByText('Знайдено документів: 4')).toBeVisible();
+  await expect(page.getByText('Знайдено документів: 5')).toBeVisible();
 
   await page.getByRole('link', { name: 'Статут Манявського ліцею' }).click();
   await expect(
@@ -30,6 +35,27 @@ test('каталог документів публікує чотири офіц
     'href',
     '/documents/statut-maniavskoho-litseiu-2026.pdf',
   );
+});
+
+test('освітня програма має опис і доступний PDF', async ({ page, request }) => {
+  await page.goto('/documents/osvitnia-prohrama-2026-2027/');
+
+  await expect(
+    page.getByRole('heading', {
+      level: 1,
+      name: 'Освітня програма Манявського ліцею на 2026–2027 навчальний рік',
+    }),
+  ).toBeVisible();
+  await expect(page.getByText('31 серпня 2026 р.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Завантажити документ' })).toHaveAttribute(
+    'href',
+    '/documents/osvitnia-prohrama-2026-2027.pdf',
+  );
+
+  const response = await request.get('/documents/osvitnia-prohrama-2026-2027.pdf');
+  expect(response.ok()).toBeTruthy();
+  expect(response.headers()['content-type']).toContain('application/pdf');
+  expect((await response.body()).length).toBe(390488);
 });
 
 test('виписка з ЄДР і архівне свідоцтво мають правильні статуси та файли', async ({ page }) => {

@@ -1,4 +1,21 @@
 media:
+  - id: bezpeka-i-zakon
+    path: /media/bezpeka-i-zakon.jpg
+    alt: Колаж із фото учнів під час бесід «Безпека і закон» у класах та плаката про безпечну поведінку
+    sourceUrl: https://drive.google.com/file/d/1BUmh6Ip9I773HAWrkVSDsZV4xFndndq-/view
+    sourceDescription: Фото заходу надав користувач у папці Google Drive для новини про профілактичні бесіди.
+    license: Дозвіл користувача на публікацію на сайті ліцею
+    licenseProof: Запит користувача про додавання фото до новини та уточнення папки Google Drive від 2026-10-05
+    depictsSchoolReality: true
+    containsChildren: true
+    publicationBasis: Користувач надав фото заходу для публікації у новині 2026-10-05; окремі документи згоди не перевірялися.
+    width: 1600
+    height: 1067
+    mimeType: image/jpeg
+    bytes: 232030
+    approvedBy: technical-administrator
+    approvedAt: 2026-10-05
+    caption: Профілактичні бесіди «Безпека і закон» у Манявському ліцеї
   - id: manyava-lyceum-building
     path: /media/manyava-lyceum-building.webp
     alt: Будівля Манявського ліцею

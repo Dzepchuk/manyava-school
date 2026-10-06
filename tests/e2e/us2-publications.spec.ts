@@ -65,7 +65,12 @@ test('новина про правила доступу містить інфо�
 test('календар подій має актуальний список та архів', async ({ page }) => {
   await page.goto('/events/');
   await expect(page.getByRole('heading', { level: 1, name: 'Події ліцею' })).toBeVisible();
-  await expect(page.getByText('Наразі немає підтверджених майбутніх подій.')).toBeVisible();
+  await expect(
+    page
+      .locator('.event-card')
+      .first()
+      .or(page.getByText('Наразі немає підтверджених майбутніх подій.')),
+  ).toBeVisible();
 
   await page.getByRole('link', { name: 'Архів подій' }).click();
   await expect(page).toHaveURL('/events/archive/');

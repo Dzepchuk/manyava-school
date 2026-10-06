@@ -4,7 +4,7 @@ import Container from '../../components/common/Container.astro';
 import ContentMeta from '../../components/common/ContentMeta.astro';
 import PublicationPageHeader from '../../components/content/PublicationPageHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatDateTime } from '../../lib/dates/format';
+import { formatDate, formatDateTime } from '../../lib/dates/format';
 import { assertUniquePublicationSlugs } from '../../lib/validation/publications';
 
 export async function getStaticPaths() {
@@ -41,7 +41,7 @@ const { Content } = await render(entry);
       <ContentMeta
         label="Початок"
         value={entry.data.timeStatus === 'to-be-confirmed'
-          ? 'Час буде уточнено'
+          ? `${formatDate(entry.data.startsAt)} · Час буде уточнено`
           : formatDateTime(entry.data.startsAt)}
         datetime={entry.data.timeStatus === 'confirmed'
           ? entry.data.startsAt.toISOString()
@@ -71,5 +71,12 @@ const { Content } = await render(entry);
     padding: 1.2rem 1.4rem;
     background: var(--color-soft);
     border-radius: var(--radius-md);
+  }
+  .detail :global(img) {
+    display: block;
+    width: 100%;
+    max-width: 28rem;
+    height: auto;
+    margin-inline: auto;
   }
 </style>

@@ -166,13 +166,10 @@ const years = [...new Set(documents.map(({ data }) => data.documentDate.getFullY
   }
   .page-heading {
     max-width: 58rem;
-    margin: clamp(3rem, 8vw, 6rem) 0 2rem;
+    margin: var(--page-heading-gap) 0 2rem;
   }
   h1 {
     margin: 0;
-    font-size: clamp(3rem, 7vw, 6rem);
-    letter-spacing: -0.05em;
-    overflow-wrap: anywhere;
   }
   .page-heading > p:last-child {
     color: var(--color-muted);

@@ -13,6 +13,7 @@
   --radius-md: 1rem;
   --radius-lg: 1.6rem;
   --container: 74rem;
+  --page-heading-gap: clamp(1.5rem, 3vw, 2rem);
   --footer-reserved-space: 8rem;
   --font-body: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-display: Georgia, 'Times New Roman', serif;
@@ -155,6 +156,15 @@ h2,
 h3 {
   font-family: var(--font-display);
   line-height: 1.08;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 @media (max-width: 58rem) {

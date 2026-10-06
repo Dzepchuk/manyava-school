@@ -226,16 +226,10 @@ const menuDays = [
     grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.38fr);
     align-items: end;
     gap: clamp(2rem, 8vw, 7rem);
-    padding-block: clamp(3rem, 8vw, 7rem);
+    padding-block: var(--page-heading-gap);
   }
   h1 {
-    max-width: 12ch;
     margin: 0;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    line-height: 0.94;
-    letter-spacing: -0.055em;
-    overflow-wrap: anywhere;
-    text-wrap: balance;
   }
   h2 {
     margin: 0;

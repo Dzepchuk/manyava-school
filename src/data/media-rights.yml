@@ -1,4 +1,19 @@
 media:
+  - id: blahodiina-yarmarka-2026
+    path: /media/blahodiina-yarmarka-2026.jpg
+    alt: Афіша благодійної ярмарки «З турботою про захисників» 9 жовтня для учнів 1–6 класів
+    sourceDescription: Афішу відтворено через ImageGen за вкладенням користувача; перевірено написи, дату та класи. Це ілюстрація, не документальне фото.
+    license: Дозвіл користувача на використання наданої афіші для події на сайті
+    licenseProof: Запит користувача від 2026-10-06 та уточнення «Use this» після повідомлення про відсутність окремого файлу
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1024
+    height: 1536
+    mimeType: image/jpeg
+    bytes: 561803
+    approvedBy: technical-administrator
+    approvedAt: 2026-10-06
+    caption: Благодійна ярмарка «З турботою про захисників» · 9 жовтня · 1–6 класи
   - id: bezpeka-i-zakon
     path: /media/bezpeka-i-zakon.jpg
     alt: Колаж із фото учнів під час бесід «Безпека і закон» у класах та плаката про безпечну поведінку

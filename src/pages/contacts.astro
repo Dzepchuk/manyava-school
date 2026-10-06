@@ -148,15 +148,12 @@ const hasPendingContacts = !contacts.workingHours;
     display: grid;
     align-items: end;
     gap: 2rem;
-    margin: clamp(3rem, 8vw, 6.5rem) 0 3rem;
+    margin: var(--page-heading-gap) 0 3rem;
     grid-template-columns: 1.15fr 0.85fr;
   }
 
   h1 {
-    max-width: 10ch;
     margin: 0;
-    font-size: clamp(3.2rem, 8vw, 6.4rem);
-    letter-spacing: -0.055em;
   }
 
   .intro {

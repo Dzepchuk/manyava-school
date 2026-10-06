@@ -274,19 +274,12 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
     display: grid;
     align-items: center;
     gap: clamp(2rem, 7vw, 6rem);
-    min-height: 38rem;
-    padding-block: clamp(3rem, 8vw, 7rem);
+    padding-block: var(--page-heading-gap);
     grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
   }
 
   h1 {
-    max-width: 11ch;
     margin: 0;
-    font-size: clamp(3.15rem, 7.5vw, 6.5rem);
-    hyphens: auto;
-    letter-spacing: -0.055em;
-    overflow-wrap: anywhere;
-    text-wrap: balance;
   }
 
   .lead {
@@ -579,10 +572,6 @@ const contentOwner = owners.find(({ id }) => id === aboutEntry.data.review.owner
     .community,
     .sources {
       grid-template-columns: 1fr;
-    }
-
-    .hero {
-      min-height: auto;
     }
 
     .hero-photo {

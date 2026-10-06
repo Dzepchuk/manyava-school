@@ -88,13 +88,10 @@ const confirmed = legalPublications.filter(({ status }) => status === 'confirmed
   }
   .page-heading {
     max-width: 62rem;
-    margin: clamp(3rem, 8vw, 6rem) 0 2rem;
+    margin: var(--page-heading-gap) 0 2rem;
   }
   h1 {
     margin: 0;
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    letter-spacing: -0.05em;
-    overflow-wrap: anywhere;
   }
   .publication-list {
     display: grid;

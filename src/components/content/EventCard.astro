@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { formatDateTime } from '../../lib/dates/format';
+import { formatDate, formatDateTime } from '../../lib/dates/format';
 
 interface Props {
   entry: CollectionEntry<'events'>;
@@ -12,7 +12,12 @@ const { entry } = Astro.props;
   <p class="date">
     {
       entry.data.timeStatus === 'to-be-confirmed' ? (
-        <>Час буде уточнено</>
+        <>
+          <time datetime={entry.data.startsAt.toISOString()}>
+            {formatDate(entry.data.startsAt)}
+          </time>
+          {' · Час буде уточнено'}
+        </>
       ) : (
         <time datetime={entry.data.startsAt.toISOString()}>
           {formatDateTime(entry.data.startsAt)}

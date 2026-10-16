@@ -164,3 +164,65 @@ media:
     bytes: 212576
     approvedBy: technical-administrator
     approvedAt: 2026-10-16
+  - id: 'healthy-eating-week-school'
+    path: '/media/healthy-eating-week-school.webp'
+    alt: 'Учні та медична працівниця з роботами про корисну їжу біля дошки в класі'
+    sourceUrl: 'https://drive.google.com/file/d/1jr5msLg6IaCL0PJSeQKzrzxzaLJzXMK2/view'
+    sourceDescription: 'Фото 24187.jpg з папки Google Drive, наданої користувачем для новини про Тиждень здорового харчування.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-10-16: вибрати фото з наданої папки та додати новину на сайт.'
+    depictsSchoolReality: true
+    containsChildren: true
+    publicationBasis: 'Користувач надав фото заходу для публікації у новині 2026-10-16; окремі документи згоди не перевірялися.'
+    width: 1400
+    height: 1050
+    mimeType: 'image/webp'
+    bytes: 122826
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-10-16'
+  - id: 'healthy-eating-week-drawings'
+    path: '/media/healthy-eating-week-drawings.webp'
+    alt: 'Дитячі малюнки на дошці з написом «Здорове харчування очима дітей»'
+    sourceUrl: 'https://drive.google.com/file/d/12-VDw5OMA66HJ8sxIuDraehNB7QhMO0g/view'
+    sourceDescription: 'Фото 179204839814871.jpg з папки Google Drive, наданої користувачем для новини про Тиждень здорового харчування.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-10-16: вибрати фото з наданої папки та додати новину на сайт.'
+    depictsSchoolReality: true
+    containsChildren: false
+    width: 1400
+    height: 919
+    mimeType: 'image/webp'
+    bytes: 122280
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-10-16'
+  - id: 'healthy-eating-week-preschool'
+    path: '/media/healthy-eating-week-preschool.webp'
+    alt: 'Дошкільнята разом із вихователькою виконують завдання про продукти харчування'
+    sourceUrl: 'https://drive.google.com/file/d/1U23UJDWv0Rg9PJaXdJ5C5jFL-PeHigRr/view'
+    sourceDescription: 'Фото 36746.jpg з папки Google Drive, наданої користувачем для новини про Тиждень здорового харчування.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-10-16: вибрати фото з наданої папки та додати новину на сайт.'
+    depictsSchoolReality: true
+    containsChildren: true
+    publicationBasis: 'Користувач надав фото заходу для публікації у новині 2026-10-16; окремі документи згоди не перевірялися.'
+    width: 1400
+    height: 1050
+    mimeType: 'image/webp'
+    bytes: 197460
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-10-16'
+  - id: 'healthy-eating-week-plates'
+    path: '/media/healthy-eating-week-plates.webp'
+    alt: 'Дитячі роботи із зображеннями продуктів і тарілок здорового харчування'
+    sourceUrl: 'https://drive.google.com/file/d/1yN49uVwpBqKaPf9eGKSm8UjVCY5ckzQv/view'
+    sourceDescription: 'Фото 99294.jpg з папки Google Drive, наданої користувачем для новини про Тиждень здорового харчування.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-10-16: вибрати фото з наданої папки та додати новину на сайт.'
+    depictsSchoolReality: true
+    containsChildren: false
+    width: 825
+    height: 1100
+    mimeType: 'image/webp'
+    bytes: 148778
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-10-16'

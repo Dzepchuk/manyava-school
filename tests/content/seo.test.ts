@@ -10,6 +10,19 @@ function htmlFiles(directory: string): string[] {
 }
 
 describe('SEO output', () => {
+  it('виконувані скрипти публічних сторінок сумісні з CSP без unsafe-inline', () => {
+    for (const file of htmlFiles('dist').filter((file) => !file.includes('/admin/'))) {
+      const html = readFileSync(file, 'utf8');
+      for (const [, attributes, content] of html.matchAll(
+        /<script\b([^>]*)>([\s\S]*?)<\/script>/g,
+      )) {
+        if (/type=["']application\/(?:ld\+)?json["']/.test(attributes)) continue;
+        expect(attributes, file).toMatch(/\bsrc=["']\/[^"']+\.js["']/);
+        expect(content.trim(), file).toBe('');
+      }
+    }
+  });
+
   it('має унікальні title, description і canonical для indexable routes', () => {
     const records = htmlFiles('dist')
       .filter((file) => !file.includes('/admin/'))

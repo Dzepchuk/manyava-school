@@ -150,3 +150,17 @@ media:
     bytes: 278629
     approvedBy: technical-administrator
     approvedAt: 2026-09-29
+  - id: brama-proty-shakhraiv
+    path: /media/brama-proty-shakhraiv.jpg
+    alt: 'Афіша «Брама»: захистись від шахраїв разом із нами. Кіберполіція України'
+    sourceDescription: Афішу надав користувач у робочому листуванні проєкту для публікації на сайті.
+    license: Дозвіл користувача на публікацію на сайті ліцею
+    licenseProof: Запит користувача в робочому листуванні проєкту від 2026-10-16
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 980
+    height: 775
+    mimeType: image/jpeg
+    bytes: 212576
+    approvedBy: technical-administrator
+    approvedAt: 2026-10-16

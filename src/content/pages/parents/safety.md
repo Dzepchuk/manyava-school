@@ -42,3 +42,5 @@ searchKeywords: [безпека, батькам, освітнє середови
 
 Про поширені схеми онлайн-шахрайства читайте на офіційному порталі
 [«Кібер Брама»](https://stopfraud.gov.ua/cybersecurity-in-life/shahrajski-shemy).
+
+[![Афіша «Брама»: захистись від шахраїв разом із нами. Кіберполіція України](/media/brama-proty-shakhraiv.jpg)](https://stopfraud.gov.ua/cybersecurity-in-life/shahrajski-shemy)

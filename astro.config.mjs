@@ -12,6 +12,10 @@ export default defineConfig({
     responsiveStyles: true,
   },
   vite: {
+    build: {
+      // Public pages allow scripts only from 'self', so keep JavaScript in files.
+      assetsInlineLimit: (filePath) => (filePath.endsWith('.js') ? false : undefined),
+    },
     server: {
       fs: {
         strict: true,

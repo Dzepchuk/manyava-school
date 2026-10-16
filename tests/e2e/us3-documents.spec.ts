@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 
-test('каталог документів публікує п’ять офіційних документів', async ({ page }) => {
+test('каталог документів публікує дванадцять офіційних документів', async ({ page }) => {
   await page.goto('/documents/');
 
   await expect(page.getByRole('heading', { level: 1, name: 'Офіційні документи' })).toBeVisible();
@@ -24,7 +26,7 @@ test('каталог документів публікує п’ять офіц�
       name: 'Свідоцтво про атестацію Манявського навчально-виховного комплексу',
     }),
   ).toBeVisible();
-  await expect(page.getByText('Знайдено документів: 5')).toBeVisible();
+  await expect(page.getByText('Знайдено документів: 12')).toBeVisible();
 
   await page.getByRole('link', { name: 'Статут Манявського ліцею' }).click();
   await expect(
@@ -36,6 +38,40 @@ test('каталог документів публікує п’ять офіц�
     '/documents/statut-maniavskoho-litseiu-2026.pdf',
   );
 });
+
+for (const slug of [
+  'pravyla-dostupu-do-litseiu',
+  'pravyla-vnutrishnoho-trudovoho-rozporiadku',
+  'polozhennia-pro-vebsait',
+  'polozhennia-pro-indyvidualnu-formu-osvity',
+  'polozhennia-pro-rozghliad-vypadkiv-bulinhu',
+  'polozhennia-pro-zapobihannia-nasylstvu',
+  'polozhennia-pro-doshkilnyi-pidrozdil',
+]) {
+  test(`${slug}: документ має доступний опис і повний PDF`, async ({ page, request }) => {
+    await page.goto(`/documents/${slug}/`);
+
+    const heading = page.getByRole('heading', { level: 1 });
+    await expect(heading).toBeVisible();
+    await expect(heading).not.toBeEmpty();
+    await expect(page.getByRole('heading', { level: 2, name: 'Доступний опис' })).toBeVisible();
+    await expect(page.locator('article .summary')).toBeVisible();
+    await expect(page.locator('article .summary')).not.toBeEmpty();
+
+    const download = page.getByRole('link', { name: 'Завантажити документ' });
+    await expect(download).toBeVisible();
+    await expect(download).toHaveAttribute('download', '');
+    await expect(download).toHaveAttribute('href', /^\/documents\/[^/]+\.pdf$/);
+    const filePath = (await download.getAttribute('href'))!;
+    const response = await request.get(filePath);
+    expect(response.ok()).toBeTruthy();
+    expect(response.headers()['content-type']).toContain('application/pdf');
+
+    const body = await response.body();
+    expect(body.subarray(0, 5).toString()).toBe('%PDF-');
+    expect(body).toEqual(await readFile(resolve('public', `.${filePath}`)));
+  });
+}
 
 test('освітня програма має опис і доступний PDF', async ({ page, request }) => {
   await page.goto('/documents/osvitnia-prohrama-2026-2027/');

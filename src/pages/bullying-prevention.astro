@@ -20,6 +20,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </p>
     </header>
     <SafeguardingContacts />
+    <section class="document-links" aria-labelledby="safety-documents-heading">
+      <h2 id="safety-documents-heading">Документи ліцею</h2>
+      <ul>
+        <li>
+          <a href="/documents/polozhennia-pro-rozghliad-vypadkiv-bulinhu/">
+            Положення про порядок розгляду випадків булінгу
+          </a>
+        </li>
+        <li>
+          <a href="/documents/polozhennia-pro-zapobihannia-nasylstvu/">
+            Положення про запобігання та протидію насильству та жорстокому поводженню з дітьми
+          </a>
+        </li>
+      </ul>
+    </section>
   </Container>
 </BaseLayout>
 
@@ -37,5 +52,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .page-heading > p:last-child {
     color: var(--color-muted);
     font-size: 1.15rem;
+  }
+  .document-links {
+    margin-top: 2rem;
+    max-width: 58rem;
   }
 </style>

@@ -6,8 +6,8 @@ section: safety
 review:
   ownerId: director
   createdAt: 2026-07-29
-  updatedAt: 2026-10-05
-  reviewedAt: 2026-10-05
+  updatedAt: 2026-10-16
+  reviewedAt: 2026-10-16
   reviewDueAt: 2026-11-05
   status: published
 showInNavigation: true
@@ -22,6 +22,12 @@ searchKeywords: [безпека, батькам, освітнє середови
 Про ситуацію, яка потребує уваги закладу, повідомте через
 [офіційні контакти](/contacts/). Для повідомлення про булінг скористайтеся
 [безпечними способами звернення](/bullying-prevention/).
+
+## Правила та положення ліцею
+
+- [Правила доступу і перебування в ліцеї](/documents/pravyla-dostupu-do-litseiu/).
+- [Положення про порядок розгляду випадків булінгу](/documents/polozhennia-pro-rozghliad-vypadkiv-bulinhu/).
+- [Положення про запобігання та протидію насильству та жорстокому поводженню з дітьми](/documents/polozhennia-pro-zapobihannia-nasylstvu/).
 
 ## Безпека в інтернеті
 

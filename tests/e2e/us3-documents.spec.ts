@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-test('каталог документів публікує дванадцять офіційних документів', async ({ page }) => {
+test('каталог документів публікує тринадцять офіційних документів', async ({ page }) => {
   await page.goto('/documents/');
 
   await expect(page.getByRole('heading', { level: 1, name: 'Офіційні документи' })).toBeVisible();
@@ -26,7 +26,10 @@ test('каталог документів публікує дванадцять 
       name: 'Свідоцтво про атестацію Манявського навчально-виховного комплексу',
     }),
   ).toBeVisible();
-  await expect(page.getByText('Знайдено документів: 12')).toBeVisible();
+  await expect(
+    page.locator('a[href="/documents/nakaz-120-orhanizatsiia-osvitnoho-protsesu/"]'),
+  ).toBeVisible();
+  await expect(page.getByText('Знайдено документів: 13')).toBeVisible();
 
   await page.getByRole('link', { name: 'Статут Манявського ліцею' }).click();
   await expect(
@@ -40,6 +43,7 @@ test('каталог документів публікує дванадцять 
 });
 
 for (const slug of [
+  'nakaz-120-orhanizatsiia-osvitnoho-protsesu',
   'pravyla-dostupu-do-litseiu',
   'pravyla-vnutrishnoho-trudovoho-rozporiadku',
   'polozhennia-pro-vebsait',
@@ -54,6 +58,9 @@ for (const slug of [
     const heading = page.getByRole('heading', { level: 1 });
     await expect(heading).toBeVisible();
     await expect(heading).not.toBeEmpty();
+    if (slug === 'nakaz-120-orhanizatsiia-osvitnoho-protsesu') {
+      await expect(heading).toContainText(/Наказ № 120 про організацію освітнього процесу/);
+    }
     await expect(page.getByRole('heading', { level: 2, name: 'Доступний опис' })).toBeVisible();
     await expect(page.locator('article .summary')).toBeVisible();
     await expect(page.locator('article .summary')).not.toBeEmpty();
@@ -70,6 +77,9 @@ for (const slug of [
     const body = await response.body();
     expect(body.subarray(0, 5).toString()).toBe('%PDF-');
     expect(body).toEqual(await readFile(resolve('public', `.${filePath}`)));
+    if (slug === 'nakaz-120-orhanizatsiia-osvitnoho-protsesu') {
+      expect(body.length).toBe(1313659);
+    }
   });
 }
 

@@ -51,3 +51,48 @@ test('на сторінці безпеки доступні презентаці
   expect(response.headers()['content-type']).toContain('application/pdf');
   expect((await response.body()).length).toBe(5360967);
 });
+
+test('на сторінці безпеки доступні наказ № 120 і пам’ятка про повітряну тривогу', async ({
+  page,
+  request,
+}) => {
+  await page.goto('/parents/safety/');
+
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'Дії під час повітряної тривоги' }),
+  ).toBeVisible();
+  await expect(
+    page.locator('a[href="/documents/nakaz-120-orhanizatsiia-osvitnoho-protsesu/"]'),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Відкрити пам’ятку в повному розмірі' }),
+  ).toHaveAttribute('href', '/media/povitriana-tryvoha-pamiatka.jpg');
+
+  const image = page.locator('img[src="/media/povitriana-tryvoha-pamiatka.jpg"]');
+  await expect(image).toBeVisible();
+  await expect(image).toHaveAttribute('alt', /.+/);
+  await expect
+    .poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth))
+    .toBe(1067);
+  const dimensions = await image.evaluate((element) => {
+    const image = element as HTMLImageElement;
+    const bounds = image.getBoundingClientRect();
+    return {
+      naturalHeight: image.naturalHeight,
+      width: bounds.width,
+      height: bounds.height,
+      left: bounds.left,
+      right: bounds.right,
+      viewportWidth: document.documentElement.clientWidth,
+    };
+  });
+  expect(dimensions.naturalHeight).toBe(1600);
+  expect(dimensions.width / dimensions.height).toBeCloseTo(1067 / 1600, 2);
+  expect(dimensions.left).toBeGreaterThanOrEqual(0);
+  expect(dimensions.right).toBeLessThanOrEqual(dimensions.viewportWidth);
+
+  const response = await request.get('/media/povitriana-tryvoha-pamiatka.jpg');
+  expect(response.ok()).toBeTruthy();
+  expect(response.headers()['content-type']).toContain('image/jpeg');
+  expect((await response.body()).length).toBe(238480);
+});

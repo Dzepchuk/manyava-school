@@ -241,3 +241,123 @@ media:
     bytes: 238480
     approvedBy: technical-administrator
     approvedAt: 2026-10-23
+  - id: 'road-safety-doroha-ne-probachaie-neuvazhnosti'
+    path: '/media/road-safety-doroha-ne-probachaie-neuvazhnosti.jpg'
+    alt: 'Дорога не пробачає неуважності — Тиждень безпеки дорожнього руху'
+    sourceDescription: 'Ілюстративний плакат Служби освітньої безпеки, наданий користувачем у вкладенні 0-02-05-23a1a5c480b44acd472768d7aefbf4988110035d0bd4e8d995ee5652975ce5e7_22a63cd0a7d.jpg.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-10: завантажити правила безпеки для учнів із наданими зображеннями.'
+    depictsSchoolReality: false
+    containsChildren: true
+    publicationBasis: 'Користувач надав ілюстративні плакати із зображеннями дітей для публікації правил безпеки 2026-11-10.'
+    width: 1600
+    height: 1600
+    mimeType: 'image/jpeg'
+    bytes: 255704
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-10'
+  - id: 'road-safety-pered-vykhodom-iz-domu'
+    path: '/media/road-safety-pered-vykhodom-iz-domu.jpg'
+    alt: 'Перед виходом із дому: бачити дорогу, бути помітним і не поспішати'
+    sourceDescription: 'Ілюстративний плакат Служби освітньої безпеки, наданий користувачем у вкладенні 0-02-05-6a7e858f9703b3661e29be37bc556dff6f5c6335d998754126806c07506e19bf_22a63cea4db.jpg.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-10: завантажити правила безпеки для учнів із наданими зображеннями.'
+    depictsSchoolReality: false
+    containsChildren: true
+    publicationBasis: 'Користувач надав ілюстративні плакати із зображеннями дітей для публікації правил безпеки 2026-11-10.'
+    width: 1600
+    height: 1600
+    mimeType: 'image/jpeg'
+    bytes: 236627
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-10'
+  - id: 'road-safety-zupynysia-pered-perekhodom'
+    path: '/media/road-safety-zupynysia-pered-perekhodom.jpg'
+    alt: 'Зупинися перед переходом: подивися в обидва боки та переконайся, що переходити безпечно'
+    sourceDescription: 'Ілюстративний плакат Служби освітньої безпеки, наданий користувачем у вкладенні 0-02-05-bc67e1d0f45f6969e12bca44dadfca956f5b02d3129591a14bc910196669c9cb_22a63cd1ad5.jpg.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-10: завантажити правила безпеки для учнів із наданими зображеннями.'
+    depictsSchoolReality: false
+    containsChildren: true
+    publicationBasis: 'Користувач надав ілюстративні плакати із зображеннями дітей для публікації правил безпеки 2026-11-10.'
+    width: 1600
+    height: 1600
+    mimeType: 'image/jpeg'
+    bytes: 248149
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-10'
+  - id: 'road-safety-telefon-zachekaie'
+    path: '/media/road-safety-telefon-zachekaie.jpg'
+    alt: 'Телефон зачекає: перед переходом сховай телефон і зніми навушники'
+    sourceDescription: 'Ілюстративний плакат Служби освітньої безпеки, наданий користувачем у вкладенні 0-02-05-595a63c86224e9752043b8f9e1cdbb1aa80274e04e21dba7d6e11cd0afe6d654_22a63cdee19.jpg.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-10: завантажити правила безпеки для учнів із наданими зображеннями.'
+    depictsSchoolReality: false
+    containsChildren: true
+    publicationBasis: 'Користувач надав ілюстративні плакати із зображеннями дітей для публікації правил безпеки 2026-11-10.'
+    width: 1600
+    height: 1600
+    mimeType: 'image/jpeg'
+    bytes: 239830
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-10'
+  - id: 'road-safety-u-temriavi-bud-pomitnym'
+    path: '/media/road-safety-u-temriavi-bud-pomitnym.jpg'
+    alt: 'У темряві будь помітним: прикріпи світлоповертальний елемент на куртку, рюкзак чи сумку'
+    sourceDescription: 'Ілюстративний плакат Служби освітньої безпеки, наданий користувачем у вкладенні 0-02-05-ff91e95f2ce6afb816c99f5a0e1b2fca83caa280cd5d15c14e7b6f836fbba1f8_22a63cefa9c.jpg.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-10: завантажити правила безпеки для учнів із наданими зображеннями.'
+    depictsSchoolReality: false
+    containsChildren: true
+    publicationBasis: 'Користувач надав ілюстративні плакати із зображеннями дітей для публікації правил безпеки 2026-11-10.'
+    width: 1600
+    height: 1600
+    mimeType: 'image/jpeg'
+    bytes: 232545
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-10'
+  - id: 'road-safety-velosyped-i-samokat'
+    path: '/media/road-safety-velosyped-i-samokat.jpg'
+    alt: 'Велосипед і самокат: перевір гальма та колеса, зменшуй швидкість поблизу людей'
+    sourceDescription: 'Ілюстративний плакат Служби освітньої безпеки, наданий користувачем у вкладенні 0-02-05-39c84c99a227cf2d86a347d7597360940b325f291f85fa847f7a5a6c416dd9d8_22a63cef5f9.jpg.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-10: завантажити правила безпеки для учнів із наданими зображеннями.'
+    depictsSchoolReality: false
+    containsChildren: true
+    publicationBasis: 'Користувач надав ілюстративні плакати із зображеннями дітей для публікації правил безпеки 2026-11-10.'
+    width: 1600
+    height: 1600
+    mimeType: 'image/jpeg'
+    bytes: 244322
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-10'
+  - id: 'road-safety-prystibaisia-shchorazu'
+    path: '/media/road-safety-prystibaisia-shchorazu.jpg'
+    alt: 'Пристібайся щоразу, навіть якщо поїздка триватиме лише кілька хвилин'
+    sourceDescription: 'Ілюстративний плакат Служби освітньої безпеки, наданий користувачем у вкладенні 0-02-05-0df17a9e43c0e77b8cd30a98bd4610b2161ffd004af96ddce3337eabb0b216a8_22a63ced59e.jpg.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-10: завантажити правила безпеки для учнів із наданими зображеннями.'
+    depictsSchoolReality: false
+    containsChildren: true
+    publicationBasis: 'Користувач надав ілюстративні плакати із зображеннями дітей для публікації правил безпеки 2026-11-10.'
+    width: 1600
+    height: 1600
+    mimeType: 'image/jpeg'
+    bytes: 251033
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-10'
+  - id: 'road-safety-pryparkovane-avto-zakryvaie-ohliad'
+    path: '/media/road-safety-pryparkovane-avto-zakryvaie-ohliad.jpg'
+    alt: 'Припарковане авто закриває огляд: пройди тротуаром до переходу, де добре видно дорогу'
+    sourceDescription: 'Ілюстративний плакат Служби освітньої безпеки, наданий користувачем у вкладенні 0-02-05-f6c5dd28d7eb1bd702217e7ba5b33ff1bf5144782e3285b43e074b1bac0bb95b_22a63cec5e7.jpg.'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-10: завантажити правила безпеки для учнів із наданими зображеннями.'
+    depictsSchoolReality: false
+    containsChildren: true
+    publicationBasis: 'Користувач надав ілюстративні плакати із зображеннями дітей для публікації правил безпеки 2026-11-10.'
+    width: 1600
+    height: 1600
+    mimeType: 'image/jpeg'
+    bytes: 237222
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-10'

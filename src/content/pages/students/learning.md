@@ -6,13 +6,17 @@ section: students
 review:
   ownerId: director
   createdAt: 2026-07-29
-  updatedAt: 2026-10-16
-  reviewedAt: 2026-10-16
-  reviewDueAt: 2026-10-29
+  updatedAt: 2026-11-12
+  reviewedAt: 2026-11-12
+  reviewDueAt: 2027-02-12
   status: published
 showInNavigation: true
 searchKeywords: [навчання, учням, події]
 ---
+
+## Критерії оцінювання
+
+[Загальні критерії оцінювання учнів, рівні навчальних досягнень, PDF та інфографіки](/students/assessment/).
 
 ## Навчальний рік і канікули
 

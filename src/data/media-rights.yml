@@ -361,3 +361,157 @@ media:
     bytes: 237222
     approvedBy: 'technical-administrator'
     approvedAt: '2026-11-10'
+  - id: 'assessment-shkala'
+    path: '/media/assessment-shkala.jpg'
+    alt: 'Шкала та загальні критерії оцінювання'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/179OSOmBYLVqiI7J_6K56a5ZZFp5xgoZF/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 337015
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-vysokyi-riven'
+    path: '/media/assessment-vysokyi-riven.jpg'
+    alt: 'Високий рівень: 10–12 балів'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/1X5U6nwASpISYS5HHsSYqEOM0TaoZn-TE/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 405826
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-dostatnii-riven'
+    path: '/media/assessment-dostatnii-riven.jpg'
+    alt: 'Достатній рівень: 7–9 балів'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/1eg0xLBNny4TiAXKnsya2jC-0obJWiR6O/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 389327
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-serednii-riven'
+    path: '/media/assessment-serednii-riven.jpg'
+    alt: 'Середній рівень: 4–6 балів'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/169_JO7psCRKcRSb7i3y4VEp4sZNF46e6/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 374024
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-pochatkovyi-riven'
+    path: '/media/assessment-pochatkovyi-riven.jpg'
+    alt: 'Початковий рівень: 1–3 бали'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/1nPGg7m8ArkDYjyPi_HlBtH8uzOFS_T1F/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 380770
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-zastosuvannia-shkal'
+    path: '/media/assessment-zastosuvannia-shkal.jpg'
+    alt: 'Застосування шкал за роками навчання'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/1aR5fgbUBNZIRarmHOOO5UXyZ9znjdlTF/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 313763
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-orhanizatsiia'
+    path: '/media/assessment-orhanizatsiia.jpg'
+    alt: 'Організація та форми оцінювання'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/1davMySlx-RQubV8HSURhYy63pItMUu88/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 305536
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-pryntsypy'
+    path: '/media/assessment-pryntsypy.jpg'
+    alt: 'Принципи оцінювання'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/12fLodnaUAEQCQHlg00atsAf9Amfir0Pn/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 413113
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-funktsii'
+    path: '/media/assessment-funktsii.jpg'
+    alt: 'Функції оцінювання'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/1l1YQ9zqJG7bgw21BmIEMRSbBf_UB5OWM/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 253906
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-metody'
+    path: '/media/assessment-metody.jpg'
+    alt: 'Методи, інструменти та шкали оцінювання'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/1yKfole2sc0pggHhJANwi_txxOpjjmRE1/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 401463
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'
+  - id: 'assessment-protsedury'
+    path: '/media/assessment-protsedury.jpg'
+    alt: 'Процедури оцінювання та академічна доброчесність'
+    sourceDescription: 'Інфографіка Центрального міжрегіонального управління Державної служби якості освіти з наданої користувачем папки: https://drive.google.com/file/d/1xORYGj2HmnW1WgwsUYdgOKCVOGT6HaZx/view'
+    license: 'Дозвіл користувача на публікацію на сайті ліцею'
+    licenseProof: 'Запит користувача від 2026-11-12: додати критерії оцінювання з наданої папки Google Drive.'
+    depictsSchoolReality: false
+    containsChildren: false
+    width: 1080
+    height: 608
+    mimeType: 'image/jpeg'
+    bytes: 366762
+    approvedBy: 'technical-administrator'
+    approvedAt: '2026-11-12'

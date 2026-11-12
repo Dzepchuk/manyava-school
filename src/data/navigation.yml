@@ -97,6 +97,13 @@
   order: 1
   audiences: [students]
   visible: true
+- id: students-assessment
+  label: Критерії оцінювання
+  path: /students/assessment/
+  parentId: students
+  order: 5
+  audiences: [students, parents]
+  visible: true
 - id: students-clubs
   label: Гуртки
   path: /students/clubs/

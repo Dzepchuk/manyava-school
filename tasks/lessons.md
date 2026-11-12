@@ -115,3 +115,9 @@
 - Validate the deployed CMS boot sequence, not only whether `/admin/` returns
   HTML. Decap CMS currently requires `'unsafe-eval'`; if used, scope that CSP
   exception to `/admin/*` and never add it to the public-site policy.
+
+## Посилання на тимчасові джерела матеріалів
+
+- Не додавати публічний блок із посиланням на робочу папку Google Drive,
+  якщо матеріали вже збережено на сайті та користувач не просив такого посилання.
+- Зберігати дані про походження файлів у внутрішньому реєстрі медіаправ.

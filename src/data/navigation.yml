@@ -125,6 +125,13 @@
   order: 4
   audiences: [all]
   visible: true
+- id: students-childrens-rights
+  label: Права дитини
+  path: /students/childrens-rights/
+  parentId: students
+  order: 6
+  audiences: [students]
+  visible: true
 - id: contacts
   label: Контакти
   path: /contacts/
